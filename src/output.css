@@ -492,6 +492,9 @@
       max-width: 96rem !important;
     }
   }
+  .m-2 {
+    margin: calc(var(--spacing) * 2);
+  }
   .m-3 {
     margin: calc(var(--spacing) * 3);
   }
@@ -666,6 +669,9 @@
   }
   .h-1\/2 {
     height: calc(1/2 * 100%);
+  }
+  .h-6 {
+    height: calc(var(--spacing) * 6);
   }
   .h-9 {
     height: calc(var(--spacing) * 9);
