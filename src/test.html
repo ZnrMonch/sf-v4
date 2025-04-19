@@ -1,3 +1,13 @@
+<?php
+    if (!isset($_COOKIE['role']) || $_COOKIE['role'] == "regular" ) {
+        header("Location: index.html");
+        exit();
+    }
+
+    session_start();
+    require_once 'config.php';
+    require_once 'data.php';
+?>
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
@@ -7,7 +17,7 @@
     <link rel="shortcut icon" href="resources/sf-logo.svg" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
     <link href="./output.css" rel="stylesheet">
 </head>
 <body class="bg-[url('resources/lib-bg.jpg')] font-nunito text-white flex">
@@ -51,7 +61,7 @@
             </ul>
         </nav>
         <menu class="flex flex-col gap-2">
-            <li><a href="bookmarks.html" class="flex items-center gap-8 pl-5 py-2 hover:opacity-60 duration-200 ease-linear">
+            <li><a href="bookmarks.php" class="flex items-center gap-8 pl-5 py-2 hover:opacity-60 duration-200 ease-linear">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="min-w-8 w-8">
                     <path fill-rule="evenodd" d="M7.502 6h7.128A3.375 3.375 0 0 1 18 9.375v9.375a3 3 0 0 0 3-3V6.108c0-1.505-1.125-2.811-2.664-2.94a48.972 48.972 0 0 0-.673-.05A3 3 0 0 0 15 1.5h-1.5a3 3 0 0 0-2.663 1.618c-.225.015-.45.032-.673.05C8.662 3.295 7.554 4.542 7.502 6ZM13.5 3A1.5 1.5 0 0 0 12 4.5h4.5A1.5 1.5 0 0 0 15 3h-1.5Z" clip-rule="evenodd" />
                     <path fill-rule="evenodd" d="M3 9.375C3 8.339 3.84 7.5 4.875 7.5h9.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-9.75A1.875 1.875 0 0 1 3 20.625V9.375ZM6 12a.75.75 0 0 1 .75-.75h.008a.75.75 0 0 1 .75.75v.008a.75.75 0 0 1-.75.75H6.75a.75.75 0 0 1-.75-.75V12Zm2.25 0a.75.75 0 0 1 .75-.75h3.75a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75ZM6 15a.75.75 0 0 1 .75-.75h.008a.75.75 0 0 1 .75.75v.008a.75.75 0 0 1-.75.75H6.75a.75.75 0 0 1-.75-.75V15Zm2.25 0a.75.75 0 0 1 .75-.75h3.75a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75ZM6 18a.75.75 0 0 1 .75-.75h.008a.75.75 0 0 1 .75.75v.008a.75.75 0 0 1-.75.75H6.75a.75.75 0 0 1-.75-.75V18Zm2.25 0a.75.75 0 0 1 .75-.75h3.75a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd" />
@@ -65,12 +75,7 @@
                 <p class="text-lg overflow-hidden text-clip">Profile</p>
             </a></li>
             <li><a href="admin.php" class="flex items-center gap-8 pl-5 py-2 hover:opacity-60 duration-200 ease-linear">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="min-w-8 w-8">
-                    <path d="M21 6.375c0 2.692-4.03 4.875-9 4.875S3 9.067 3 6.375 7.03 1.5 12 1.5s9 2.183 9 4.875Z" />
-                    <path d="M12 12.75c2.685 0 5.19-.586 7.078-1.609a8.283 8.283 0 0 0 1.897-1.384c.016.121.025.244.025.368C21 12.817 16.97 15 12 15s-9-2.183-9-4.875c0-.124.009-.247.025-.368a8.285 8.285 0 0 0 1.897 1.384C6.809 12.164 9.315 12.75 12 12.75Z" />
-                    <path d="M12 16.5c2.685 0 5.19-.586 7.078-1.609a8.282 8.282 0 0 0 1.897-1.384c.016.121.025.244.025.368 0 2.692-4.03 4.875-9 4.875s-9-2.183-9-4.875c0-.124.009-.247.025-.368a8.284 8.284 0 0 0 1.897 1.384C6.809 15.914 9.315 16.5 12 16.5Z" />
-                    <path d="M12 20.25c2.685 0 5.19-.586 7.078-1.609a8.282 8.282 0 0 0 1.897-1.384c.016.121.025.244.025.368 0 2.692-4.03 4.875-9 4.875s-9-2.183-9-4.875c0-.124.009-.247.025-.368a8.284 8.284 0 0 0 1.897 1.384C6.809 19.664 9.315 20.25 12 20.25Z" />
-                  </svg>                  
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor" class="min-w-8 w-8"><path d="M680-80q-83 0-141.5-58.5T480-280q0-83 58.5-141.5T680-480q83 0 141.5 58.5T880-280q0 83-58.5 141.5T680-80Zm-200 0q-139-35-229.5-159.5T160-516v-244l320-120 320 120v227q-26-13-58.5-20t-61.5-7q-116 0-198 82t-82 198q0 62 23.5 112T483-81q-1 0-1.5.5t-1.5.5Zm200-200q25 0 42.5-17.5T740-340q0-25-17.5-42.5T680-400q-25 0-42.5 17.5T620-340q0 25 17.5 42.5T680-280Zm0 120q31 0 57-14.5t42-38.5q-22-13-47-20t-52-7q-27 0-52 7t-47 20q16 24 42 38.5t57 14.5Z"/></svg>
                 <p class="text-lg overflow-hidden text-clip">Admin</p>
             </a></li>
         </menu>
@@ -102,14 +107,14 @@
             <hr class="my-5 w-full opacity-30 *:active:bg-neutral-300">
             <div class="w-full *:px-7.5 *:py-1 *:flex *:items-center *:gap-2 *:active:bg-neutral-300">
                 <a href="library.php" class="block w-full"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5"> <path d="M10.75 16.82A7.462 7.462 0 0 1 15 15.5c.71 0 1.396.098 2.046.282A.75.75 0 0 0 18 15.06v-11a.75.75 0 0 0-.546-.721A9.006 9.006 0 0 0 15 3a8.963 8.963 0 0 0-4.25 1.065V16.82ZM9.25 4.065A8.963 8.963 0 0 0 5 3c-.85 0-1.673.118-2.454.339A.75.75 0 0 0 2 4.06v11a.75.75 0 0 0 .954.721A7.506 7.506 0 0 1 5 15.5c1.579 0 3.042.487 4.25 1.32V4.065Z" /> </svg>Library</a>
-                <a href="bookmarks.html" class="block w-full"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5"> <path fill-rule="evenodd" d="M10 2c-1.716 0-3.408.106-5.07.31C3.806 2.45 3 3.414 3 4.517V17.25a.75.75 0 0 0 1.075.676L10 15.082l5.925 2.844A.75.75 0 0 0 17 17.25V4.517c0-1.103-.806-2.068-1.93-2.207A41.403 41.403 0 0 0 10 2Z" clip-rule="evenodd" /> </svg>Bookmarks</a>
+                <a href="bookmarks.php" class="block w-full"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5"> <path fill-rule="evenodd" d="M10 2c-1.716 0-3.408.106-5.07.31C3.806 2.45 3 3.414 3 4.517V17.25a.75.75 0 0 0 1.075.676L10 15.082l5.925 2.844A.75.75 0 0 0 17 17.25V4.517c0-1.103-.806-2.068-1.93-2.207A41.403 41.403 0 0 0 10 2Z" clip-rule="evenodd" /> </svg>Bookmarks</a>
                 <a href="profile.php" class="block w-full"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5"> <path fill-rule="evenodd" d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-5.5-2.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0ZM10 12a5.99 5.99 0 0 0-4.793 2.39A6.483 6.483 0 0 0 10 16.5a6.483 6.483 0 0 0 4.793-2.11A5.99 5.99 0 0 0 10 12Z" clip-rule="evenodd" /> </svg>Profile</a>
                
             </div>
             <hr class="my-5 w-full opacity-30 *:active:bg-neutral-300">
             <div class="w-full *:px-7.5 *:py-1 *:flex *:items-center *:gap-2 *:active:bg-neutral-300">
-                <a href="" class="block w-full text-red-700"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5"> <path fill-rule="evenodd" d="M3 4.25A2.25 2.25 0 0 1 5.25 2h5.5A2.25 2.25 0 0 1 13 4.25v2a.75.75 0 0 1-1.5 0v-2a.75.75 0 0 0-.75-.75h-5.5a.75.75 0 0 0-.75.75v11.5c0 .414.336.75.75.75h5.5a.75.75 0 0 0 .75-.75v-2a.75.75 0 0 1 1.5 0v2A2.25 2.25 0 0 1 10.75 18h-5.5A2.25 2.25 0 0 1 3 15.75V4.25Z" clip-rule="evenodd" /> <path fill-rule="evenodd" d="M6 10a.75.75 0 0 1 .75-.75h9.546l-1.048-.943a.75.75 0 1 1 1.004-1.114l2.5 2.25a.75.75 0 0 1 0 1.114l-2.5 2.25a.75.75 0 1 1-1.004-1.114l1.048-.943H6.75A.75.75 0 0 1 6 10Z" clip-rule="evenodd" /> </svg>Logout</a>
-                <a href="admin.php" class="block w-full"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5"> <path fill-rule="evenodd" d="M10 1c3.866 0 7 1.79 7 4s-3.134 4-7 4-7-1.79-7-4 3.134-4 7-4Zm5.694 8.13c.464-.264.91-.583 1.306-.952V10c0 2.21-3.134 4-7 4s-7-1.79-7-4V8.178c.396.37.842.688 1.306.953C5.838 10.006 7.854 10.5 10 10.5s4.162-.494 5.694-1.37ZM3 13.179V15c0 2.21 3.134 4 7 4s7-1.79 7-4v-1.822c-.396.37-.842.688-1.306.953-1.532.875-3.548 1.369-5.694 1.369s-4.162-.494-5.694-1.37A7.009 7.009 0 0 1 3 13.179Z" clip-rule="evenodd" /> </svg>Admin</a>
+                <a onclick="logOut()" class="block w-full text-red-700"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5"> <path fill-rule="evenodd" d="M3 4.25A2.25 2.25 0 0 1 5.25 2h5.5A2.25 2.25 0 0 1 13 4.25v2a.75.75 0 0 1-1.5 0v-2a.75.75 0 0 0-.75-.75h-5.5a.75.75 0 0 0-.75.75v11.5c0 .414.336.75.75.75h5.5a.75.75 0 0 0 .75-.75v-2a.75.75 0 0 1 1.5 0v2A2.25 2.25 0 0 1 10.75 18h-5.5A2.25 2.25 0 0 1 3 15.75V4.25Z" clip-rule="evenodd" /> <path fill-rule="evenodd" d="M6 10a.75.75 0 0 1 .75-.75h9.546l-1.048-.943a.75.75 0 1 1 1.004-1.114l2.5 2.25a.75.75 0 0 1 0 1.114l-2.5 2.25a.75.75 0 1 1-1.004-1.114l1.048-.943H6.75A.75.75 0 0 1 6 10Z" clip-rule="evenodd" /> </svg>Logout</a>
+                <a href="admin.php" class="block w-full"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor" class="size-5"><path d="M680-80q-83 0-141.5-58.5T480-280q0-83 58.5-141.5T680-480q83 0 141.5 58.5T880-280q0 83-58.5 141.5T680-80Zm-200 0q-139-35-229.5-159.5T160-516v-244l320-120 320 120v227q-26-13-58.5-20t-61.5-7q-116 0-198 82t-82 198q0 62 23.5 112T483-81q-1 0-1.5.5t-1.5.5Zm200-200q25 0 42.5-17.5T740-340q0-25-17.5-42.5T680-400q-25 0-42.5 17.5T620-340q0 25 17.5 42.5T680-280Zm0 120q31 0 57-14.5t42-38.5q-22-13-47-20t-52-7q-27 0-52 7t-47 20q16 24 42 38.5t57 14.5Z"/></svg>Admin</a>
             </div>
         </div>
         <!-- SCRIPT -->
@@ -122,433 +127,657 @@
                 mobNav.classList.toggle("flex");
                 overlay.classList.toggle("hidden");
             }
+
+            function logOut() {
+                document.cookie = "id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                document.cookie = "personalization=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                document.cookie = "role=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                window.location.href= "index.html";
+            }
         </script> 
     </nav>
     <!-- ================================================== MAIN ================================================== -->
-    <main class="ml-25 m-5 p-15 w-[calc(100vw-135px)] min-h-[calc(100vh-40px)] h-auto rounded-4xl flex flex-col bg-[#eeeeee] text-dirty-brown z-2 drag-none
-        max-tablet:m-0 max-tablet:p-0 max-tablet:size-full max-tablet:rounded-none">
-        <div class="relative w-full h-130 rounded-t-3xl max-tablet:rounded-none bg-[url(resources/umak-pic.jpg)] bg-center flex flex-col items-center justify-center text-white">
-            <div class="absolute w-full h-full rounded-t-3xl max-tablet:rounded-none bg-black/40 z-3"></div>
-            <div class="flex flex-col items-center gap-2.5 z-4 animate-blur-up">
-                <h1 class="font-bold text-center text-5xl max-tablet:text-4xl max-big-phone:text-2xl text-shadow">About the Scholar Finds</h1>
-                <p class="w-3/4 max-big-phone:px-5 max-big-phone:w-full text-center text-xl max-tablet:text-lg max-big-phone:text-sm max-big-phone:leading-4 leading-6 text-shadow">The Scholar Finds brings valuable improvements to the thesis process, benefiting students, faculty, and administrators alike. By promoting efficiency, security, organization, and user-centric design, it empowers academic institutions to manage thesis submissions more effectively while providing a smoother, more productive experience for all users.</p>
+    <main class="ml-25 m-5 p-15 w-[calc(100vw-80px)] min-h-[calc(100vh-40px)] h-auto rounded-4xl bg-off-white z-2 text-black drag-none
+        max-tablet:m-0 max-tablet:p-5 max-tablet:min-h-screen max-tablet:size-full max-tablet:rounded-none">
+        <h1 class="mb-3 text-3xl font-bold text-dirty-brown select-none">Admin</h1>
+        <div class="relative">      
+            <input type="radio" name="tb" id="thesestb" checked class="peer/thesestb" hidden>
+            <label for="thesestb" class="absolute text-dirty-brown font-bold text-xl opacity-60 peer-checked/thesestb:opacity-100 peer-checked/thesestb:underline peer-checked/thesestb:decoration-3 peer-checked/thesestb:underline-offset-6 duration-300 select-none cursor-pointer z-5">Theses</label>
+            <input type="radio" name="tb" id="userstb" class="peer/userstb" hidden>
+            <label for="userstb" class="absolute left-19 text-dirty-brown font-bold text-xl opacity-60 peer-checked/userstb:opacity-100 peer-checked/userstb:underline peer-checked/userstb:decoration-3 peer-checked/userstb:underline-offset-6 duration-300 select-none cursor-pointer z-5 <?php echo $_COOKIE["role"] !== "superadmin" ? "hidden" : ""; ?>">Users</label>
+
+            <!-- ================================================== THESES TABLE ================================================== -->
+            <div id="all-ths" class="relative w-full h-160 hidden flex-col gap-2.5 peer-checked/thesestb:flex">
+                <!-- CONTROLS -->
+                <div class="mt-10 flex max-tablet:flex-col-reverse max-tablet:items-end justify-end gap-5 max-tablet:gap-1 text-sm max-tablet:text-xs">
+                    <div class="flex items-center italic opacity-80 select-none">
+                        <p>Showing table with <span id="tpage-info"></span> results</p>
+                    </div>
+                    <div class="px-2.5 py-1.5 rounded-md flex items-center gap-3 max-big-phone:gap-2 bg-lgreen">
+                        <input type="text" placeholder="Search" id="tsearch-box" class="px-4 max-tablet:px-2 w-50 max-tablet:w-40 max-big-phone:w-30 rounded-md bg-slgreen outline-none">
+                        <select id="tsearch-category" class="px-4 max-tablet:px-2 w-30 max-tablet:w-25 rounded-md bg-slgreen select-none outline-none">
+                            <option value="title" selected disabled>Search by</option>
+                            <option value="title">Title</option>
+                            <option value="published_date">Date</option>
+                            <option value="course">Course</option>
+                            <option value="authors">Authors</option>
+                            <option value="keywords">Keywords</option>
+                        </select>
+                        <span class="flex items-center gap-2 max-big-phone:gap-1">
+                            <input type="checkbox" id="tarchive-mode" class="peer">
+                            <label for="tarchive-mode" class="opacity-50 peer-checked:opacity-100 select-none cursor-pointer"><span class="max-big-phone:hidden">Archived Data</span><span class="big-phone:hidden"><svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor"><path d="m480-240 160-160-56-56-64 64v-168h-80v168l-64-64-56 56 160 160ZM200-640v440h560v-440H200Zm0 520q-33 0-56.5-23.5T120-200v-499q0-14 4.5-27t13.5-24l50-61q11-14 27.5-21.5T250-840h460q18 0 34.5 7.5T772-811l50 61q9 11 13.5 24t4.5 27v499q0 33-23.5 56.5T760-120H200Zm16-600h528l-34-40H250l-34 40Zm264 300Z"/></svg></span></label>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- CREATOR -->
+                <div class="flex justify-end">
+                    <button onclick="openTCreator()" class="px-5 py-0.5 rounded-md bg-lgreen text-sm max-tablet:text-xs hover:opacity-80 active:scale-95 duration-50 cursor-pointer select-none">Append Data</button>
+                    <a onclick="openTCreator()" id="tcreator-backdrop" class="fixed top-0 left-0 w-screen h-screen bg-black opacity-40 hidden peer-checked:block z-4"></a>
+
+                    <div id="tcreator" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-10 w-200 h-150 bg-off-white rounded-3xl shadow-2xl shadow-black/70 hidden peer-checked:block z-5">
+                        <div class="relative w-full h-full flex flex-col gap-5">
+                            <button onclick="openTCreator()" class="absolute -top-5 -right-5 p-2 cursor-pointer">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
+                            </button>
+                            <span class="py-5 flex flex-col gap-2 select-none">
+                                <h1 class="text-2xl font-bold text-center select-none">Append Thesis Data</h1>
+                                <!--
+                                <p class="text-justify text-sm leading-none"><b>Note:</b> Use a <b>plus (+)</b> for authors and a <b>comma (,)</b> for keywords to separate data properly.</p>
+                                -->
+                            </span>
+                            
+                            <form action="cms.php" method="post" class="flex-1 w-full grid grid-cols-2 grid-rows-[1fr_auto] gap-5">
+                                <!-- LEFT COLUMN -->
+                                <div class="*:relative *:flex *:flex-col flex flex-col gap-4">
+                                    <span class="flex-row! gap-2 *:relative *:w-1/2 *:flex *:flex-col">
+                                        <span>
+                                            <select name="course" id="course" required class="px-2 py-1.5 w-full rounded-md border-2 border-dirty-brown text-sm outline-none text-[#464644] valid:text-black">
+                                                <option value="" disabled selected>Select here</option>
+                                                <option class="text-black" value="BSIT-NS">BSIT-NS</option>
+                                                <option class="text-black" value="BSCS-AD">BSCS-AD</option>
+                                            </select>
+                                            <label for="course" class="absolute top-2.5 left-2 px-1 bg-slgreen leading-none select-none -translate-y-4 text-xs font-semibold">Course</label>
+                                        </span>
+                                        <span>
+                                            <input type="month" name="pdate" id="pdate" required class="px-2 py-1.5 w-full rounded-md border-2 border-dirty-brown text-sm outline-none text-[#464644] valid:text-black">
+                                            <label for="pdate" class="absolute top-2.5 left-2 px-1 bg-slgreen leading-none select-none -translate-y-4 text-xs font-semibold">Published Date</label>
+                                        </span>
+                                    </span>
+                                    <span>
+                                        <textarea name="title" id="title" required class="peer resize-none px-2 py-1.5 w-full h-16 rounded-md border-2 border-dirty-brown text-sm outline-none leading-4"></textarea>
+                                        <label for="title" class="absolute top-2.5 left-2 px-1 bg-slgreen leading-none select-none opacity-70 peer-valid:-translate-y-4 peer-valid:text-xs peer-valid:opacity-100 peer-valid:font-semibold peer-focus:font-semibold peer-focus:-translate-y-4 peer-focus:text-xs peer-focus:opacity-100 duration-200">Title</label>
+                                    </span>
+                                    <div class="flex-1 flex flex-row! gap-2.5">
+                                        <div class="flex-1 flex flex-col">
+                                            <span>
+                                                <input type="text" name="authors" id="authors" required class="peer px-2 py-1.5 w-full rounded-md border-2 border-dirty-brown text-sm outline-none">
+                                                <label for="authors" class="absolute top-2.5 left-2 px-1 bg-slgreen leading-none select-none opacity-70 peer-valid:-translate-y-4 peer-valid:text-xs peer-valid:opacity-100 peer-valid:font-semibold peer-focus:font-semibold peer-focus:-translate-y-4 peer-focus:text-xs peer-focus:opacity-100 duration-200">Author/s</label>
+                                            </span>
+                                        </div>
+                                        <div class="flex flex-col gap-1">
+                                            <button type="button" class="p-1.5 rounded-md bg-dirty-brown text-off-white shadow-md cursor-pointer outline-none hover:opacity-85 active:scale-95 duration-200">
+                                                <svg class="p-0.5 size-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor"><path d="M720-400v-120H600v-80h120v-120h80v120h120v80H800v120h-80Zm-360-80q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM40-160v-112q0-34 17.5-62.5T104-378q62-31 126-46.5T360-440q66 0 130 15.5T616-378q29 15 46.5 43.5T680-272v112H40Zm80-80h480v-32q0-11-5.5-20T580-306q-54-27-109-40.5T360-360q-56 0-111 13.5T140-306q-9 5-14.5 14t-5.5 20v32Zm240-320q33 0 56.5-23.5T440-640q0-33-23.5-56.5T360-720q-33 0-56.5 23.5T280-640q0 33 23.5 56.5T360-560Zm0-80Zm0 400Z"/></svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <!-- RIGHT COLUMN -->
+                                <div class="*:relative *:flex *:flex-col flex flex-col gap-4">
+                                    <span class="flex-1">
+                                        <textarea name="abstract" id="abstract" required class="peer resize-none px-2 py-2 w-full h-full rounded-md border-2 border-dirty-brown text-sm outline-none leading-4"></textarea>
+                                        <label for="abstract" class="absolute top-2.5 left-2 px-1 py-0.5 bg-slgreen leading-none select-none opacity-70 peer-valid:-translate-y-4 peer-valid:text-xs peer-valid:opacity-100 peer-valid:font-semibold peer-focus:font-semibold peer-focus:-translate-y-4 peer-focus:text-xs peer-focus:opacity-100 duration-200">Abstract</label>
+                                    </span>
+                                    <span>
+                                        <textarea name="keywords" id="keywords" required class="peer resize-none px-2 py-1.5 w-full h-16 rounded-md border-2 border-dirty-brown text-sm outline-none leading-4"></textarea>
+                                        <label for="keywords" class="absolute top-2.5 left-2 px-1 bg-slgreen leading-none select-none opacity-70 peer-valid:-translate-y-4 peer-valid:text-xs peer-valid:opacity-100 peer-valid:font-semibold peer-focus:font-semibold peer-focus:-translate-y-4 peer-focus:text-xs peer-focus:opacity-100 duration-200">Keywords</label>
+                                    </span>
+                                </div>
+                               
+                                <span class="col-span-2 flex flex-col items-center justify-center gap-1 select-none">
+                                    <input type="text" name="thesis-id" id="thesis-id" hidden>
+                                    <i class="text-sm">You are currently assigning new data with an ID of <b id="ths-id"></b>.</i>
+                                    <button type="submit" name="new-thesis" class="px-8 py-1 rounded-md bg-dirty-brown text-off-white text-sm font-semibold hover:opacity-90 active:scale-95 duration-100 cursor-pointer">Submit</button>
+                                </span>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TABLE -->
+                <div class="w-full overflow-x-auto">
+                    <table class="w-full border-separate border-spacing-1 table-fixed text-sm max-[1440px]:text-xs">
+                        <thead>
+                            <tr class="*:rounded-md *:bg-lgreen *:py-0.5 *:whitespace-nowrap *:select-none">
+                                <th class="w-25">Modify</th>
+                                <th class="w-10">ID</th>
+                                <th class="w-15">Pub Date</th>
+                                <th class="w-20">Course</th>
+                                <th class="w-30">Title</th>
+                                <th class="w-40">Authors</th>
+                                <th class="w-50">Abstract</th>
+                                <th class="w-30">Keywords</th>
+                            </tr>
+                        </thead>
+                        <tbody id="theses-container">
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- PAGINATION -->
+                <div class="absolute bottom-0 w-full *:w-min-30">
+                    <div class="relative w-full flex max-tablet:flex-col items-center justify-between gap-2 max-big-phone:gap-1 text-sm max-tablet:text-xs">
+                        <div class="flex items-center *:flex *:items-center *:gap-2 select-none">
+                            <span>
+                                <input type="checkbox" id="ta-select-all">
+                                <label for="ta-select-all">Select All</label>
+                            </span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button id="tretrieve" onclick="toggleThesesBulkAction('retrieve')" class="px-5 py-0.5 w-30 max-tablet:w-25 rounded-md bg-lgreen text-center disabled:opacity-70 disabled:cursor-not-allowed enabled:hover:opacity-80 enabled:active:scale-95 duration-50 enabled:cursor-pointer hidden">Retrieve</button>
+                            <button id="tarchive" onclick="toggleThesesBulkAction('archive')" class="px-5 py-0.5 w-30 max-tablet:w-25 rounded-md bg-lgreen text-center disabled:opacity-70 disabled:cursor-not-allowed enabled:hover:opacity-80 enabled:active:scale-95 duration-50 enabled:cursor-pointer">Archive</button>
+                            <button id="tdelete" onclick="toggleThesesBulkAction('delete')" class="px-5 py-0.5 w-30 max-tablet:w-25 rounded-md bg-lred text-center disabled:opacity-70 disabled:cursor-not-allowed enabled:hover:opacity-80 enabled:active:scale-95 duration-50 enabled:cursor-pointer hidden">Delete</button>
+                        </div>
+                        <div class="max-tablet:static absolute left-1/2 tablet:-translate-x-1/2 px-5 py-1 rounded-md flex items-center justify-center gap-2 bg-lgreen">
+                            <button class="cursor-pointer" onclick="firstTSet()"><svg class="size-5 max-tablet:size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#464644"><path d="M440-240 200-480l240-240 56 56-183 184 183 184-56 56Zm264 0L464-480l240-240 56 56-183 184 183 184-56 56Z"/></svg></button>
+                            <button class="cursor-pointer" onclick="previousTSet()"><svg class="size-5 max-tablet:size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#464644"><path d="M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z"/></svg></button>
+                            <select id="tsets-per-page" class="px-4 w-auto rounded-md bg-slgreen max-tablet:text-xs select-none outline-none">
+                                <option value="1">1</option>
+                            </select>
+                            <button class="cursor-pointer" onclick="nextTSet()"><svg class="size-5 max-tablet:size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#464644"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg></button>
+                            <button class="cursor-pointer" onclick="lastTSet()"><svg class="size-5 max-tablet:size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#464644"><path d="M383-480 200-664l56-56 240 240-240 240-56-56 183-184Zm264 0L464-664l56-56 240 240-240 240-56-56 183-184Z"/></svg></button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="mt-2.5 max-big-phone:px-5 flex justify-center flex-wrap gap-2.5 max-big-phone:gap-1 *:px-5 *:py-0.5 *:rounded-md max-tablet:*:text-sm *:flex *:items-center *:gap-1 *:bg-dirty-brown *:text-white *:hover:opacity-85 *:active:scale-95 *:duration-100 *:cursor-pointer select-none z-4 animate-blur-up">
-                <button>
-                    <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#e8eaed"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"/></svg>
-                    View Research Paper
-                </button>
-                <button>
-                    <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#e8eaed"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"/></svg>
-                    View Documentation
-                </button>
-                <button>
-                    <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#e8eaed"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"/></svg>
-                    View Manual
-                </button>
+
+            <!-- ================================================== USERS TABLE ================================================== -->
+            <div id="all-usr" class="w-full h-160 hidden flex-col gap-2.5 peer-checked/userstb:flex">
+                <!-- CONTROLS -->
+                <div class="mt-10 flex max-tablet:flex-col-reverse max-tablet:items-end justify-end gap-5 max-tablet:gap-2.5 text-sm max-tablet:text-xs">
+                    <div class="flex items-center italic opacity-80 select-none">
+                        <p>Showing table with <span id="upage-info"></span> of results</p>
+                    </div>
+                    <div class="px-2.5 py-1.5 rounded-md flex items-center gap-3 max-big-phone:gap-2 bg-lgreen">
+                        <input type="text" placeholder="Search" id="usearch-box" class="px-4 max-tablet:px-2 w-50 max-tablet:w-40 rounded-md bg-slgreen outline-none">
+                        <select name="" id="usearch-category" class="px-4 max-tablet:px-2 w-30 max-tablet:w-25 rounded-md bg-slgreen select-none outline-none">
+                            <option value="username" selected disabled>Search by</option>
+                            <option value="role">Role</option>
+                            <option value="username">Username</option>
+                            <option value="name">Name</option>
+                            <option value="email">Email</option>
+                        </select>
+                        <span class="flex items-center gap-2 max-big-phone:gap-1">
+                            <input type="checkbox" id="uarchive-mode" class="peer">
+                            <label for="uarchive-mode" class="opacity-50 peer-checked:opacity-100 select-none cursor-pointer"><span class="max-big-phone:hidden">Archived Data</span><span class="big-phone:hidden"><svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor"><path d="m480-240 160-160-56-56-64 64v-168h-80v168l-64-64-56 56 160 160ZM200-640v440h560v-440H200Zm0 520q-33 0-56.5-23.5T120-200v-499q0-14 4.5-27t13.5-24l50-61q11-14 27.5-21.5T250-840h460q18 0 34.5 7.5T772-811l50 61q9 11 13.5 24t4.5 27v499q0 33-23.5 56.5T760-120H200Zm16-600h528l-34-40H250l-34 40Zm264 300Z"/></svg></span></label>
+                    </div>
+                </div>
+
+                <!-- CREATOR -->
+                <div class="flex justify-end">
+                    <input type="checkbox" id="ucreator" hidden class="peer">
+                    <label for="ucreator" class="px-5 py-0.5 rounded-md bg-lgreen text-sm max-tablet:text-xs hover:opacity-80 active:scale-95 duration-50 cursor-pointer select-none">Append Data</label>
+                    <label for="ucreator" class="fixed top-0 left-0 w-screen h-screen bg-black opacity-40 hidden peer-checked:block z-4"></label>
+                    <div class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-10 w-120 bg-off-white rounded-3xl shadow-2xl shadow-black/70 hidden peer-checked:block z-5">
+                        <div class="relative w-full h-full flex flex-col justify-between">
+                            <label for="ucreator" class="absolute -top-5 -right-5 p-2 cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
+                            </label>
+                            <h1 class="py-5 text-2xl font-extrabold text-center select-none">Append User Data</h1>
+                            <form action="" class="w-full flex flex-col *:relative *:flex *:flex-col gap-2.5">
+                                <span>
+                                    <input type="text" name="username" id="username" required class="peer px-2 py-1.5 w-full rounded-md border-2 border-dirty-brown text-sm outline-none">
+                                    <label for="username" class="absolute top-2.5 left-2 px-1 bg-slgreen leading-none select-none opacity-70 peer-valid:-translate-y-4 peer-valid:text-xs peer-valid:opacity-100 peer-focus:-translate-y-4 peer-focus:text-xs peer-focus:opacity-100 duration-200">Username</label>
+                                </span>
+                                <span>
+                                    <input type="text" name="name" id="name" required class="peer px-2 py-1.5 w-full rounded-md border-2 border-dirty-brown text-sm outline-none">
+                                    <label for="name" class="absolute top-2.5 left-2 px-1 bg-slgreen leading-none select-none opacity-70 peer-valid:-translate-y-4 peer-valid:text-xs peer-valid:opacity-100 peer-focus:-translate-y-4 peer-focus:text-xs peer-focus:opacity-100 duration-200">Name</label>
+                                </span>
+                                <span>
+                                    <input type="text" name="email" id="email" required class="peer px-2 py-1.5 w-full rounded-md border-2 border-dirty-brown text-sm outline-none">
+                                    <label for="email" class="absolute top-2.5 left-2 px-1 py-0.5 bg-slgreen leading-none select-none opacity-70 peer-valid:-translate-y-4 peer-valid:text-xs peer-valid:opacity-100 peer-focus:-translate-y-4 peer-focus:text-xs peer-focus:opacity-100 duration-200">UMak Email Address</label>
+                                </span>
+                                <span>
+                                    <input type="text" name="password" id="password" required class="peer px-2 py-1.5 w-full rounded-md border-2 border-dirty-brown text-sm outline-none">
+                                    <label for="password" class="absolute top-2.5 left-2 px-1 bg-slgreen leading-none select-none opacity-70 peer-valid:-translate-y-4 peer-valid:text-xs peer-valid:opacity-100 peer-focus:-translate-y-4 peer-focus:text-xs peer-focus:opacity-100 duration-200">Password</label>
+                                </span>
+                                <span>
+                                    <select name="membership" id="membership" required class="px-2 py-1.5 w-full rounded-md border-2 border-dirty-brown text-sm outline-none text-[#464644] valid:text-black">
+                                        <option value="" disabled selected>Select here</option>
+                                        <option class="text-black" value="student">Student</option>
+                                        <option class="text-black" value="faculty">Faculty</option>
+                                        <option class="text-black" value="alumni">Alumni</option>
+                                        <option class="text-black" value="outsider">Outsider</option>
+                                    </select>
+                                    <label for="membership" class="absolute top-2.5 left-2 px-1 bg-slgreen leading-none select-none -translate-y-4 text-xs">Membership</label>
+                                </span>
+                                <div class="flex flex-row! items-center gap-2.5 *:relative *:flex-1">
+                                    <span>
+                                        <select name="college" id="college" required class="px-2 py-1.5 w-full rounded-md border-2 border-dirty-brown text-sm outline-none text-[#464644] valid:text-black">
+                                            <option value="" disabled selected>Select here</option>
+                                            <option class="text-black" value="CCIS">CCIS</option>
+                                            <option class="text-black" value="HSU">HSU</option>
+                                        </select>
+                                        <label for="college" class="absolute top-2.5 left-2 px-1 bg-slgreen leading-none select-none -translate-y-4 text-xs">College</label>
+                                    </span>
+                                    <span>
+                                        <input type="text" name="yearsec" id="yearsec" required class="peer px-2 py-1.5 w-full rounded-md border-2 border-dirty-brown text-sm outline-none">
+                                        <label for="yearsec" class="absolute top-2.5 left-2 px-1 bg-slgreen leading-none select-none opacity-70 peer-valid:-translate-y-4 peer-valid:text-xs peer-valid:opacity-100 peer-focus:-translate-y-4 peer-focus:text-xs peer-focus:opacity-100 duration-200">Year and Section</label>
+                                    </span>
+                                </div>
+                                <span>
+                                    <select name="role" id="role" required class="px-2 py-1.5 w-full rounded-md border-2 border-dirty-brown text-sm outline-none text-[#464644] valid:text-black">
+                                        <option value="" disabled selected>Select here</option>
+                                        <option class="text-black" value="regular">Regular</option>
+                                        <option class="text-black" value="admin">Admin</option>
+                                        <option class="text-black" value="superadmin">Super Admin</option>
+                                    </select>
+                                    <label for="role" class="absolute top-2.5 left-2 px-1 bg-slgreen leading-none select-none -translate-y-4 text-xs">Role</label>
+                                </span>
+                                <span class="text-sm select-none">
+                                    <b>The user can:</b>
+                                    <ul class="pl-5 list-disc">
+                                        <li class="text-[#464644] line-through" id="ua1">View Library</li>
+                                        <li class="text-[#464644] line-through" id="ua2">View and Edit "Theses" Table</li>
+                                        <li class="text-[#464644] line-through" id="ua3">View and Edit "Users" Table</li>
+                                    </ul>
+                                </span>
+                                <span class="py-5 flex flex-col items-center justify-center gap-1 select-none">
+                                    <i class="text-sm">You are currently assigning new data with an ID of <b id="new-usr-id"></b>.</i>
+                                    <button type="submit" name="new-user" class="px-8 py-1 rounded-md bg-lgreen text-sm font-semibold hover:opacity-90 active:scale-95 duration-100 cursor-pointer">Submit</button>
+                                </span>
+                            </form>
+                            <script>
+                                document.getElementById('role').addEventListener('change', function() {
+                                    const roles = {
+                                        regular: ["ua2, ua3"],
+                                        admin: ["ua3"],
+                                        superadmin: []
+                                    };
+                                    document.querySelectorAll("#ua1, #ua2, #ua3, #ua4").forEach(el => el.className = '');
+                                    roles[this.value].forEach(id => document.getElementById(id).className = "text-[#464644] line-through");
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TABLE -->
+                <div class="w-full overflow-x-auto">
+                    <table class="w-full border-separate border-spacing-1 table-fixed text-sm max-[1440px]:text-xs">
+                        <thead>
+                            <tr class="*:rounded-md *:bg-lgreen *:py-0.5 *:whitespace-nowrap *:select-none">
+                                <th class="w-25">Modify</th>
+                                <th class="w-10">ID</th>
+                                <th class="w-20">Date Joined</th>
+                                <th class="w-20">Role</th>
+                                <th class="w-20">Membership</th>
+                                <th class="w-20">Username</th>
+                                <th class="w-25">Name</th>
+                                <th class="w-30">Email</th>
+                                <th class="w-20">Password</th>
+                                <th class="w-15">College</th>
+                                <th class="w-25">YearSec</th>
+                            </tr>
+                        </thead>
+                        <tbody id="users-container">
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- PAGINATION -->
+                <div class="absolute bottom-0 w-full *:w-min-30">
+                    <div class="relative w-full flex max-tablet:flex-col items-center justify-between gap-2 max-big-phone:gap-1 text-sm max-tablet:text-xs">
+                        <div class="flex items-center *:flex *:items-center *:gap-2 select-none">
+                            <span>
+                                <input type="checkbox" id="ua-select-all">
+                                <label for="ua-select-all">Select All</label>
+                            </span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button id="uretrieve" onclick="toggleUsersBulkAction('retrieve')" class="px-5 py-0.5 w-30 max-tablet:w-25 rounded-md bg-lgreen text-center disabled:opacity-70 disabled:cursor-not-allowed enabled:hover:opacity-80 enabled:active:scale-95 duration-50 enabled:cursor-pointer hidden">Retrieve</button>
+                            <button id="uarchive" onclick="toggleUsersBulkAction('archive')" class="px-5 py-0.5 w-30 max-tablet:w-25 rounded-md bg-lgreen text-center disabled:opacity-70 disabled:cursor-not-allowed enabled:hover:opacity-80 enabled:active:scale-95 duration-50 enabled:cursor-pointer">Archive</button>
+                            <button id="udelete" onclick="toggleUsersBulkAction('delete')" class="px-5 py-0.5 w-30 max-tablet:w-25 rounded-md bg-lred text-center disabled:opacity-70 disabled:cursor-not-allowed enabled:hover:opacity-80 enabled:active:scale-95 duration-50 enabled:cursor-pointer hidden">Delete</button>
+                        </div>
+                        <div class="max-tablet:static absolute left-1/2 tablet:-translate-x-1/2 px-5 py-1 rounded-md flex items-center justify-center gap-2 bg-lgreen">
+                            <button class="cursor-pointer" onclick="firstUSet()"><svg class="size-5 max-tablet:size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#464644"><path d="M440-240 200-480l240-240 56 56-183 184 183 184-56 56Zm264 0L464-480l240-240 56 56-183 184 183 184-56 56Z"/></svg></button>
+                            <button class="cursor-pointer" onclick="previousUSet()"><svg class="size-5 max-tablet:size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#464644"><path d="M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z"/></svg></button>
+                            <select id="usets-per-page" class="px-4 w-auto rounded-md bg-slgreen select-none outline-none">
+                                <option value="1">1</option>
+                            </select>
+                            <button class="cursor-pointer" onclick="nextUSet()"><svg class="size-5 max-tablet:size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#464644"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg></button>
+                            <button class="cursor-pointer" onclick="lastUSet()"><svg class="size-5 max-tablet:size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#464644"><path d="M383-480 200-664l56-56 240 240-240 240-56-56 183-184Zm264 0L464-664l56-56 240 240-240 240-56-56 183-184Z"/></svg></button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <p class="mt-2 select-none z-4 max-tablet:*:text-sm animate-blur-up">
-                <a href="#abt-college" class="underline underline-offset-2">College</a>
-                <span class="mx-2">•</span>
-                <a href="#abt-devs" class="underline underline-offset-2">Developers</a>
-            </p>
-            <a href="#abt-sf" class="absolute left-1/2 bottom-5 -translate-x-1/2 p-2 rounded-full bg-dirty-brown drop-shadow-2xl animate-bounce z-4 hover:cursor-pointer">
-                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M440-800v487L216-537l-56 57 320 320 320-320-56-57-224 224v-487h-80Z"/></svg>
-            </a>
         </div>
-        <section id="abt-use" class="px-15 max-big-phone:px-5 h-120 max-tablet:h-100 max-big-phone:h-140 flex max-big-phone:flex-col max-big-phone:justify-center items-center gap-15 max-tablet:gap-10 bg-zinc-300">
-            <div>
-                <iframe class="w-120 h-75 max-tablet:w-80 max-tablet:h-50 rounded-2xl drop-shadow-xl select-none" src="https://drive.google.com/file/d/1e8FS_tYJRt6zQ_tMnRYs777x_tTM87kN/preview" allow="autoplay" ></iframe>
+
+        <!-- ================================================== ACTION BOX ================================================== -->
+        <div id="taction-box" class="absolute top-0 left-0 hidden">
+            <div onclick="toggleThesisAction()" class="w-screen h-screen bg-black/40 z-15"></div>
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-10 w-100 h-50 rounded-2xl flex bg-off-white shadow-2xl text-black z-16 select-none">
+                <form action="cms.php" method="post" class="relative w-full h-full flex flex-col items-center justify-center gap-">
+                    <span class="mb-10 flex flex-col items-center *:leading-none">
+                        <p id="ta-msg"></p>
+                        <p id="ta-warning-msg" class="text-xs text-red-500"></p>
+                    </span>
+                    <input type="text" name="a-data" id="a-data" hidden>
+                    <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full flex justify-center gap-5">
+                        <button type="button" onclick="toggleThesisAction()" class="px-5 py-0.5 rounded-md bg-lred text-sm hover:opacity-80 active:scale-95 duration-50 cursor-pointer">Cancel</button>
+                        <button type="submit" id="t-act" name="t-act" value="" class="px-5 py-0.5 rounded-md bg-lgreen text-sm hover:opacity-80 active:scale-95 duration-50 cursor-pointer">Proceed</button>
+                    </span>
+                </form>
             </div>
-            <div class="flex flex-col max-big-phone:items-center">
-                <h2 class="max-big-phone:mb-1 text-3xl max-tablet:text-2xl max-big-phone:leading-6 text-center font-bold leading-8">A Quick Start with Scholar Finds</h2>
-                <p class="text-xl max-tablet:text-base leading-6 max-tablet:leading-5 text-justify">
-                    Get started with Scholar Finds in this brief video guide! Learn to search, save resources, create citations, and organize research efficiently. Perfect for students and researchers looking to streamline their academic work.
-                </p>
-                <div class="my-2">
-                    <button class="px-5 py-0.5 rounded-md bg-dirty-brown flex items-center gap-2 max-tablet:text-sm text-off-white select-none cursor-pointer hover:opacity-80 active:scale-95 duration-100">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#e8eaed"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"/></svg>
-                        View Full Manual
-                    </button>
-                </div>
+        </div>
+
+        <div id="uaction-box" class="absolute top-0 left-0 hidden">
+            <div onclick="toggleUserAction()" class="w-screen h-screen bg-black/40 z-15"></div>
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-10 w-100 h-50 rounded-2xl flex bg-off-white shadow-2xl text-black z-16 select-none">
+                <form action="cms.php" method="post" class="relative w-full h-full flex flex-col items-center justify-center gap-">
+                    <span class="mb-10 flex flex-col items-center *:leading-none">
+                        <p id="ua-msg"></p>
+                        <p id="ua-warning-msg" class="text-xs text-red-500"></p>
+                    </span>
+                    <input type="text" name="ua-data" id="ua-data" hidden>
+                    <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full flex justify-center gap-5">
+                        <button type="button" onclick="toggleUserAction()" class="px-5 py-0.5 rounded-md bg-lred text-sm hover:opacity-80 active:scale-95 duration-50 cursor-pointer">Cancel</button>
+                        <button type="submit" id="a-act" name="a-act" value="" class="px-5 py-0.5 rounded-md bg-lgreen text-sm hover:opacity-80 active:scale-95 duration-50 cursor-pointer">Proceed</button>
+                    </span>
+                </form>
             </div>
-        </section>
-        <section id="abt-sf" class="mt-10 h-100 max-big-phone:h-200 grid grid-cols-2 max-big-phone:flex max-big-phone:flex-col *:flex-col *:items-center">
-            <div class="flex">
-                <svg class="mt-20 size-20 max-tablet:size-12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><!-- Icon from BoxIcons by Atisa - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m21.948 11.684l-2-6A1 1 0 0 0 19 5h-3v2h2.279l1.334 4H15c-1.103 0-2 .897-2 2h-2c0-1.103-.897-2-2-2H4.387l1.334-4H8V5H5a1 1 0 0 0-.948.684l-2 6l.012.004A.9.9 0 0 0 2 12v4c0 1.654 1.346 3 3 3h3c1.654 0 3-1.346 3-3v-1h2v1c0 1.654 1.346 3 3 3h3c1.654 0 3-1.346 3-3v-4a1 1 0 0 0-.063-.313zM9 16c0 .551-.448 1-1 1H5c-.552 0-1-.449-1-1v-3h5zm11 0c0 .551-.448 1-1 1h-3c-.552 0-1-.449-1-1v-3h5z"/></svg>
-                <h2 class="text-2xl font-extrabold">OUR VISION</h2>
-                <br>
-                <p class="w-100 max-tablet:w-80 text-justify text-xl max-tablet:text-base max-tablet:leading-5 leading-6">Scholar Finds envisions to provide a centralized platform that offers quick and easy access to a vast collection of theses and abstracts, striving to make research more accessible and less burdensome for the CCIS students.</p>
+        </div>
+
+        <!-- ================================================== BULK ACTION BOX ================================================== -->
+        <div id="tbulk-action-box" class="absolute top-0 left-0 hidden">
+            <div onclick="toggleThesesBulkAction()" class="w-screen h-screen bg-black/40 z-15"></div>
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-10 w-120 h-70 rounded-2xl bg-off-white shadow-2xl text-black z-16 select-none">
+                <form action="cms.php" method="post" class="relative w-full h-full flex flex-col items-center justify-between">
+                    <span class="flex flex-col items-center *:leading-none">
+                        <p id="tba-msg"></p>
+                        <p id="tba-warning-msg" class="text-xs text-red-500"></p>
+                    </span>
+                    <span id="tba-selection" class="p-2.5 w-full h-30 rounded-xl flex items-center justify-center bg-zinc-200 border-1 border-zinc-300 select-text overflow-hidden text-ellipsis text-xs text-center">
+                    </span>
+                    <input type="text" name="ba-data" id="ba-data" hidden>
+                    <span class="flex items-center gap-5">
+                        <button type="button" onclick="toggleThesesBulkAction()" class="px-5 py-0.5 rounded-md bg-lred text-sm hover:opacity-80 active:scale-95 duration-50 cursor-pointer">Cancel</button>
+                        <button type="submit" id="t-bulk" name="t-bulk" value="" class="px-5 py-0.5 rounded-md bg-lgreen text-sm hover:opacity-80 active:scale-95 duration-50 cursor-pointer">Proceed</button>
+                    </span>
+                </form>
             </div>
-            <div class="flex">
-                <svg class="mt-20 size-20 max-tablet:size-12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><!-- Icon from BoxIcons by Atisa - https://creativecommons.org/licenses/by/4.0/ --><path d="M14.303 6l-3-2H6V2H4v20h2v-8h4.697l3 2H20V6z" fill="currentColor"/></svg>
-                <h2 class="text-2xl font-extrabold">OUR MISSION</h2>
-                <br>
-                <p class="w-100 max-tablet:w-80 text-justify text-xl max-tablet:text-base max-tablet:leading-5 leading-6">To optimize the thesis management and enhance the research experience of  the CCIS students at the University of Makati by providing a centralized digital platform that will make finding theses and abstracts effortless, allowing students to save time and effort.</p>
+        </div>
+
+        <div id="ubulk-action-box" class="absolute top-0 left-0 hidden">
+            <div onclick="toggleUsersBulkAction()" class="w-screen h-screen bg-black/40 z-15"></div>
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-10 w-120 h-70 rounded-2xl bg-off-white shadow-2xl text-black z-16 select-none">
+                <form action="cms.php" method="post" class="relative w-full h-full flex flex-col items-center justify-between">
+                    <span class="flex flex-col items-center *:leading-none">
+                        <p id="uba-msg"></p>
+                        <p id="uba-warning-msg" class="text-xs text-red-500"></p>
+                    </span>
+                    <span id="uba-selection" class="p-2.5 w-full h-30 rounded-xl flex items-center justify-center bg-zinc-200 border-1 border-zinc-300 select-text overflow-hidden text-ellipsis text-xs text-center">
+                    </span>
+                    <input type="text" name="uba-data" id="uba-data" hidden>
+                    <span class="flex items-center gap-5">
+                        <button type="button" onclick="toggleUsersBulkAction()" class="px-5 py-0.5 rounded-md bg-lred text-sm hover:opacity-80 active:scale-95 duration-50 cursor-pointer">Cancel</button>
+                        <button type="submit" id="u-bulk" name="u-bulk" value="" class="px-5 py-0.5 rounded-md bg-lgreen text-sm hover:opacity-80 active:scale-95 duration-50 cursor-pointer">Proceed</button>
+                    </span>
+                </form>
             </div>
-            <div class="fixed bottom-5 right-10 rounded-2xl flex z-5">
-                <input type="checkbox" id="vid" hidden checked class="peer">
-                <div class="relative hidden peer-checked:block">
-                    <label for="vid" class="absolute top-2.5 right-2.5 cursor-pointer">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed">
-                            <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/>
-                        </svg>
-                    </label>
-                    <iframe
-                        id="ccis-vid"
-                        class="hidden rounded-xl z-5"
-                        width="320"
-                        height="180"
-                        src="https://www.youtube.com/embed/wE-Lh7fkoQo?rel=0&controls=0&start=7"
-                        title="About College of Computing and Information Sciences | University of Makati"
-                        frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; web-share"
-                        referrerpolicy="strict-origin-when-cross-origin">
-                    </iframe>
-                </div>
-            </div>
-            <script>
-                const video = document.getElementById('ccis-vid');
-                let shownOnce = true;
+        </div>
+
+        <!-- ================================================== ALERTS ================================================== -->
+        <?php
+            $success = $_SESSION['success'] ?? '';
+            $error = $_SESSION['error'] ?? '';
             
-                window.addEventListener('scroll', () => {
-                    if (window.scrollY > 1000 && !shownOnce) {
-                        shownOnce = true;
-                        video.src += "&autoplay=1";
-                        video.classList.remove('hidden');
-                    }
-                });
+            if ($success) {
+                echo "<div class='absolute top-10 left-1/2 -translate-x-1/2 p-2 px-5 w-100 rounded-xl border-2 bg-[#d9ead3] border-[#b6d7a8] text-[#274e13] select-none leading-none z-5 animate-downfadeinout delay-200'>" . $success . "</div>";  
+            } else if ($error) {
+                echo "<div class='absolute top-10 left-1/2 -translate-x-1/2 p-2 px-5 w-100 rounded-xl border-2 bg-[#e6b8af] border-[#dd7e6b] text-[#5b0f00] select-none leading-none z-5 animate-downfadeinout delay-200'>" . $error . "</div>";
+            } 
 
-                document.getElementById('vid').addEventListener('change', () => {
-                    if (!document.getElementById('vid').checked) {
-                        video.src += "&mute=1";
-                    }
-                });
-            </script> 
-        </section>
-        <section id="abt-college" class="relative h-130 max-tablet:h-100 max-big-phone:h-150 flex max-big-phone:flex-col max-big-phone:justify-center items-center gap-10 max-tablet:gap-5">
-            <div class="absolute top-1/2 -left-15 -translate-y-1/2 w-[calc(100%+120px)] max-tablet:w-[calc(100%+60px)] h-75 max-tablet:h-65 max-big-phone:h-full bg-lgreen"></div>
-            <img src="resources/ccis.svg" alt="ccis" class="pl-5 w-100 max-tablet:w-60 z-2 drop-shadow-xl select-none">
-            <div class="pr-5 max-big-phone:px-5 flex flex-col max-big-phone:items-center z-2">
-                <h2 class="mb-1 max-big-phone:text-center text-2xl max-tablet:text-xl leading-6 font-bold">College of Computing and Information Sciences</h2>
-                <p class="text-justify text-xl max-tablet:text-base max-tablet:leading-5 leading-6">The College provides access to new trends and ideas in information systems/technology to keep pace with the innovations and meet the demands of a fast-changing business and technology environment. It aims to develop globally competitive IT graduates who are God-fearing and morally upright from among the marginalized population of the City of Makati.</p>
-                <div class="mt-3">
-                    <button class="px-5 py-0.5 rounded-md flex items-center gap-1 bg-dirty-brown text-white max-tablet:text-sm hover:opacity-85 active:scale-95 duration-100 cursor-pointer select-none" onclick="window.open('https://www.umak.edu.ph/academics/college/ccis/')">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#e8eaed"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"/></svg>
-                        Visit in UMak Website
-                    </button>
-                </div>
-            </div>
-        </section>
-        <section id="abt-ccis" class="mb-30 max-tablet:mb-20 h-100 max-big-phone:h-150 grid grid-cols-2 max-big-phone:flex max-big-phone:flex-col *:flex *:flex-col *:items-center">
-            <div>
-                <svg class="mt-20 size-20 max-tablet:size-12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><!-- Icon from BoxIcons by Atisa - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m21.948 11.684l-2-6A1 1 0 0 0 19 5h-3v2h2.279l1.334 4H15c-1.103 0-2 .897-2 2h-2c0-1.103-.897-2-2-2H4.387l1.334-4H8V5H5a1 1 0 0 0-.948.684l-2 6l.012.004A.9.9 0 0 0 2 12v4c0 1.654 1.346 3 3 3h3c1.654 0 3-1.346 3-3v-1h2v1c0 1.654 1.346 3 3 3h3c1.654 0 3-1.346 3-3v-4a1 1 0 0 0-.063-.313zM9 16c0 .551-.448 1-1 1H5c-.552 0-1-.449-1-1v-3h5zm11 0c0 .551-.448 1-1 1h-3c-.552 0-1-.449-1-1v-3h5z"/></svg>
-                <h2 class="text-2xl font-extrabold">COLLEGE'S VISION</h2>
-                <br>
-                <p class="w-100 max-tablet:w-80 text-justify text-xl max-tablet:text-base max-tablet:leading-5 leading-6">The college envisions leading in the development of excellent professionals and champions of social equity in the global field of computing and information sciences.</p>
-            </div>
-            <div>
-                <svg class="mt-20 size-20 max-tablet:size-12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><!-- Icon from BoxIcons by Atisa - https://creativecommons.org/licenses/by/4.0/ --><path d="M14.303 6l-3-2H6V2H4v20h2v-8h4.697l3 2H20V6z" fill="currentColor"/></svg>
-                <h2 class="text-2xl font-extrabold">COLLEGE'S MISSION</h2>
-                <br>
-                <p class="w-100 max-tablet:w-80 text-justify text-xl max-tablet:text-base max-tablet:leading-5 leading-6">Guided by its vision, the college produces practitioners and leaders in computing and information sciences who are resilient, industry-ready, and socially responsible through innovative curriculum design and dynamic delivery systems.</p>
-            </div>
-        </section>
-        <section id="abt-al" class="relative py-15 min-h-180 max-tablet:min-h-160 flex flex-col justify-center">
-            <div class="absolute top-0 -left-15 h-full w-[calc(100%+120px)] max-tablet:w-[calc(100%+60px)] bg-lgreen"></div>
-            <h1 class="my-5 text-3xl font-bold text-center z-2">Academic Leadership</h1>
-            <div class="flex gap-10 max-tablet:gap-5 justify-center flex-wrap">                               
-                <!-- ============================ COLLEGE DEAN ============================ -->
-                <label for="dean" class="group relative size-50 min-w-50 max-tablet:size-40 max-tablet:min-w-40 rounded-2xl bg-[url(resources/dp/backdrop.svg)] bg-cover shadow-xl text-white cursor-help">
-                    <input type="checkbox" id="dean" class="peer" hidden>
-                    <label for="dean" class="fixed top-0 left-0 size-full hidden peer-checked:block z-5"></label>
-                    <img src="resources/dp/dean.svg" alt="dean" class="absolute left-1/2 bottom-0 -translate-x-1/2 size-full rounded-2xl drop-shadow-lg duration-500 select-none group-hover:-translate-y-4">
-                    <div class="absolute bottom-0 w-full h-1/2 rounded-b-2xl bg-linear-to-b from-transparent to-off-white/50 select-none">
-                        <div class="px-2 pb-1 size-full flex items-end">
-                            <h2 class="font-bold text-shadow">College Dean</h2>
-                        </div>
-                    </div>
-                    <div class="absolute bottom-1/2 -right-105 max-tablet:left-0 max-tablet:-bottom-80 tablet:translate-y-1/2 p-5 w-100 h-75 max-tablet:w-80 rounded-2xl border-2 border-zinc-800 bg-ash/70 backdrop-blur-sm z-5 cursor-auto animate-fadeIn hidden peer-checked:block">
-                        <div class="size-full text-left leading-5 overflow-y-scroll *:cursor-text select-text flex flex-col gap-4 font-light">
-                            <span>
-                                <h2 class="font-semibold text-xl max-tablet:text-lg leading-none">Professor Joel B. Mangaba, DT</h2>
-                                <i>College Dean</i>
-                            </span>
-                            <hr>
-                            <div class="pr-3 size-full text-left max-tablet:text-sm max-tablet:leading-4 leading-5 overflow-y-scroll *:cursor-text select-text flex flex-col gap-4 font-light">
-                                <p><span class="font-semibold">Professor Joel Mangaba</span> is the Dean of the College of Computing and Information Sciences at the University of Makati, Philippines. He has been in the academe since 2001 and has handled various administrative and professorial positions from different Higher Education Institutions from undergraduate to graduate programs. His certifications and training focused on Software Development, Network Security, Database, Cybersecurity, Cybercrime, Robotic Process Automation, Data Analytics, Datamining, Machine Learning, Cloud, and Programming.</p>
-                                <p>Prof. Mangaba is currently the Vice President of the Council of Deans for IT Education – National Capital Region, he’s also the Director of Professional Development of Multimedia Arts Association of the Philippines, the Director for Academic Affairs of Cybersecurity of the Philippines, an Accreditor member of Regional Quality Assessment Team (RQAT) of the ICT Programs of the Commission on Higher Education – National Capital Region, and an IT Consultant of Erovoutika Robotics and Automation International.</p>
-                                <p>As a researcher, Prof. Mangaba has presented and published numerous research papers locally and abroad with the Scopus index and has been a member of the Editorial Board of various Journal publishers like International Journal in Information Technology in Governance, Education, and Business, International Journal of Computing Sciences Research, and International Journal of Advanced Science and Convergence.</p>
-                            </div>
-                        </div>
-                    </div>
-                </label>
-                <!-- ============================ COLLEGE SECRETARY ============================ -->
-                <label for="secretary" class="group relative size-50 min-w-50 max-tablet:size-40 max-tablet:min-w-40 rounded-2xl bg-[url(resources/dp/backdrop.svg)] bg-cover shadow-xl text-white cursor-help">
-                    <input type="checkbox" id="secretary" class="peer" hidden>
-                    <label for="secretary" class="fixed top-0 left-0 size-full hidden peer-checked:block z-5"></label>
-                    <img src="resources/dp/secretary.svg" alt="secretary" class="absolute left-1/2 bottom-0 -translate-x-1/2 size-full rounded-2xl drop-shadow-lg duration-500 select-none group-hover:-translate-y-4">
-                    <div class="absolute bottom-0 w-full h-1/2 rounded-b-2xl bg-linear-to-b from-transparent to-off-white/50 select-none">
-                        <div class="px-2 pb-1 size-full flex items-end">
-                            <h2 class="font-bold text-shadow">College Secretary</h2>
-                        </div>
-                    </div>
-                    <div class="absolute bottom-1/2 -right-105 max-tablet:right-0 max-tablet:-bottom-80 tablet:translate-y-1/2 p-5 w-100 h-75 max-tablet:w-80 rounded-2xl border-2 border-zinc-800 bg-ash/70 backdrop-blur-sm z-5 cursor-auto animate-fadeIn hidden peer-checked:block">
-                        <div class="size-full text-left leading-5 overflow-y-scroll *:cursor-text select-text flex flex-col gap-4 font-light">
-                            <span>
-                                <h2 class="font-semibold text-xl max-tablet:text-lg leading-none">Associate Professor Janice Pola D. Congzon, MIT</h2>
-                                <i>College Secretary</i>
-                            </span>
-                            <hr>
-                            <div class="pr-3 size-full text-left max-tablet:text-sm max-tablet:leading-4 leading-5 overflow-y-scroll *:cursor-text select-text flex flex-col gap-4 font-light">
-                                <p><span class="font-semibold">Associate Professor Janice Pola D. Congzon</span> holds a Master’s degree in Information Technology from the Technological University of the Philippines Manila, equipping her with a strong foundation in IT principles and practices. She is the College Secretary of the College of Computing and Information Sciences at the University of Makati and an accomplished educator and administrative leader with general experience in information technology and academic administration.</p>
-                                <p>With over a decade of teaching experience, Assoc. Prof. Congzon has expertly guided students in key areas such as computer programming, database management, and research methodologies. From 2017 up to the present, she played a pivotal role in supporting various academic programs, demonstrating exceptional leadership, organization, and a deep commitment to institutional success. Her efforts in this capacity have significantly contributed to the smooth functioning of academic and administrative operations.</p>
-                                <p>Assoc. Prof. Congzon’s expertise is further recognized through her Professional Civil Service Eligibility and IT certifications, underscoring her technical competence and commitment to continuous professional development. Beyond her formal responsibilities, she is an active contributor to the university, serving as a committee member in various university-wide initiatives, coordinating college budgeting and procurement, facilitating linkages and networking, and volunteering in community outreach programs. Her dedication to service and excellence was acknowledged when she received the Pinaka Masipag na Kawani Award (2014) and was nominated for the Pinaka may Malasakit at Kusa na Kawani Award (2015) by UMak.</p>
-                            </div>
-                        </div>
-                    </div>
-                </label>
-                <!-- ============================ CHAIR DIPLOMA ============================ -->
-                <label for="chairdip" class="group relative size-50 min-w-50 max-tablet:size-40 max-tablet:min-w-40 rounded-2xl bg-[url(resources/dp/backdrop.svg)] bg-cover shadow-xl text-white cursor-help">
-                    <input type="checkbox" id="chairdip" class="peer" hidden>
-                    <label for="chairdip" class="fixed top-0 left-0 size-full hidden peer-checked:block z-5"></label>
-                    <img src="resources/dp/chair-dip.svg" alt="chairdip" class="absolute left-1/2 bottom-0 -translate-x-1/2 size-full rounded-2xl drop-shadow-lg duration-500 select-none group-hover:-translate-y-4">
-                    <div class="absolute bottom-0 w-full h-1/2 rounded-b-2xl bg-linear-to-b from-transparent to-off-white/50 select-none">
-                        <div class="px-2 pb-1 size-full flex items-end">
-                            <h2 class="font-bold text-shadow">Chair, Diploma</h2>
-                        </div>
-                    </div>
-                    <div class="absolute bottom-1/2 -right-105 max-tablet:left-0 max-tablet:-bottom-80 tablet:translate-y-1/2 p-5 w-100 h-75 max-tablet:w-80 rounded-2xl border-2 border-zinc-800 bg-ash/70 backdrop-blur-sm z-5 cursor-auto animate-fadeIn hidden peer-checked:block">
-                        <div class="size-full text-left leading-5 overflow-y-scroll *:cursor-text select-text flex flex-col gap-4 font-light">
-                            <span>
-                                <h2 class="font-semibold text-xl max-tablet:text-lg leading-none">Associate Professor Wilber B. Sabado, MM</h2>
-                                <i>Chair, Diploma and Service Programs</i>
-                            </span>
-                            <hr>
-                            <div class="pr-3 size-full text-left max-tablet:text-sm max-tablet:leading-4 leading-5 overflow-y-scroll *:cursor-text select-text flex flex-col gap-4 font-light">
-                                <p><span class="font-semibold">Associate Professor Wilber Sabado</span> is a graduate of Computer Engineering Technology and Bachelor of Engineering at the Technological University of the Philippines Taguig and presently finishing his dissertation for the degree PhD in Technology Management at the Technological University of the Philippines Manila. He is the Department Chair of the College of Computing and Information Sciences.</p>
-                                <p>He has obtained several certifications like Apple Certified Teacher, Google Certified Educator 1 & 2, and Microsoft Certified Professional. He is also a TOEIC and TEFL English Proficiency passer. He is also a COMPTIA-certified IT Fundamentals passer, TESDA NCII holder of Computer Systems Servicing, and a TESDA-certified trainer. Additionally, he passed the Facilitate eLearning Sessions of TESDA and also passed the Trainer Skills Assessment of Google.</p>
-                                <p>Assoc. Prof. Wilber Sabado has also presented and published research papers locally and internationally. Moreover, he is the conference chairman of the recently concluded 10th ICT Research Congress: International Edition of UMak where he is the current College Research Coordinator.</p>
-                                <p>Assoc. Prof. Wilber Sabado has conducted several seminars for the Department of Information and Communication Technology, Department of Education, Philippine Institute of Certified Public Accountants, Erovoutika, and several Higher Education Institutions. His webinar in DICT entitled Blended Learning is considered the most viewed video up until now. As a consistent Outstanding Faculty member, Assoc. Prof. Wilber Sabado has received the Most Outstanding IT Educator Award for three consecutive years.</p>
-                            </div>
-                        </div>
-                    </div>
-                </label>
-                <!-- ============================ CHAIR CS ============================ -->
-                <label for="chaircs" class="group relative size-50 min-w-50 max-tablet:size-40 max-tablet:min-w-40 rounded-2xl bg-[url(resources/dp/backdrop.svg)] bg-cover shadow-xl text-white cursor-help">
-                    <input type="checkbox" id="chaircs" class="peer" hidden>
-                    <label for="chaircs" class="fixed top-0 left-0 size-full hidden peer-checked:block z-5"></label>
-                    <img src="resources/dp/chair-cs.svg" alt="chaircs" class="absolute left-1/2 bottom-0 -translate-x-1/2 size-full rounded-2xl drop-shadow-lg duration-500 select-none group-hover:-translate-y-4">
-                    <div class="absolute bottom-0 w-full h-1/2 rounded-b-2xl bg-linear-to-b from-transparent to-off-white/50 select-none">
-                        <div class="px-2 pb-1 size-full flex items-end">
-                            <h2 class="font-bold text-shadow">Chair, CS and IS</h2>
-                        </div>
-                    </div>
-                    <div class="absolute bottom-1/2 -right-105 max-tablet:right-0 max-tablet:-bottom-80 tablet:translate-y-1/2 p-5 w-100 h-75 max-tablet:w-80 rounded-2xl border-2 border-zinc-800 bg-ash/70 backdrop-blur-sm z-5 cursor-auto animate-fadeIn hidden peer-checked:block">
-                        <div class="size-full text-left leading-5 overflow-y-scroll *:cursor-text select-text flex flex-col gap-4 font-light">
-                            <span>
-                                <h2 class="font-semibold text-xl max-tablet:text-lg leading-none">Assistant Professor Ali A. Naim, MIS</h2>
-                                <i>Chair, Computer Science and Information Systems & IT Education</i>
-                            </span>
-                            <hr>
-                            <div class="pr-3 size-full text-left max-tablet:text-sm max-tablet:leading-4 leading-5 overflow-y-scroll *:cursor-text select-text flex flex-col gap-4 font-light">
-                                <p><span class="font-semibold">Assistant Professor Ali Naim</span> is a dedicated educator and seasoned professional with a Master’s degree in Information Systems. He has taught a variety of Computer Science and Information Systems courses, including web development, database design, management information systems, and research methodologies. His engaging and enlightening teaching style empowers students to confidently navigate the complexities of information technology.</p>
-                                <p>Prior to his current position, he has made significant contributions to the academic landscape as a part-time faculty member at several universities in Metro Manila. His experience in teaching a variety of computer science and information systems courses has allowed him to share his knowledge and inspire students to pursue careers in technology.</p>
-                                <p>He is an active member of several computer organizations both locally and internationally, a testament to his passion for sharing his knowledge and advancing the field of computer science. His involvement in these organizations allows him to stay at the forefront of technological advancements and collaborate with other professionals in the industry.</p>
-                                <p>Asst. Prof. Naim has honed his skills through rigorous training and practical experience, earning a professional certification in his field. His commitment to excellence, dedication to student success, and active involvement in the computer science community make him a valuable asset to UMak and the broader field of information technology.</p>
-                            </div>
-                        </div>
-                    </div>
-                </label>
-                <!-- ============================ CHAIR IT ============================ -->
-                <label for="chairit" class="group relative size-50 min-w-50 max-tablet:size-40 max-tablet:min-w-40 rounded-2xl bg-[url(resources/dp/backdrop.svg)] bg-cover shadow-xl text-white cursor-help">
-                    <input type="checkbox" id="chairit" class="peer" hidden>
-                    <label for="chairit" class="fixed top-0 left-0 size-full hidden peer-checked:block z-5"></label>
-                    <img src="resources/dp/chair-it.svg" alt="chairit" class="absolute left-1/2 bottom-0 -translate-x-1/2 size-full rounded-2xl drop-shadow-lg duration-500 select-none group-hover:-translate-y-4">
-                    <div class="absolute bottom-0 w-full h-1/2 rounded-b-2xl bg-linear-to-b from-transparent to-off-white/50 select-none">
-                        <div class="px-2 pb-1 size-full flex items-end">
-                            <h2 class="font-bold text-shadow">Chair, IT</h2>
-                        </div>
-                    </div>
-                    <div class="absolute bottom-1/2 -right-105 max-tablet:right-0 max-big-phone:left-1/2 max-big-phone:-translate-x-1/2 max-tablet:-bottom-80 tablet:translate-y-1/2 p-5 w-100 h-75 max-tablet:w-80 rounded-2xl border-2 border-zinc-800 bg-ash/70 backdrop-blur-sm z-5 cursor-auto animate-fadeIn hidden peer-checked:block">
-                        <div class="size-full text-left leading-5 overflow-y-scroll *:cursor-text select-text flex flex-col gap-4 font-light">
-                            <span>
-                                <h2 class="font-semibold text-xl max-tablet:text-lg leading-none">Assistant Professor Edgardo T. Cruz, MIT</h2>
-                                <i>Chair, Information Technology Program</i>
-                            </span>
-                            <hr>
-                            <div class="pr-3 size-full text-left max-tablet:text-sm max-tablet:leading-4 leading-5 overflow-y-scroll *:cursor-text select-text flex flex-col gap-4 font-light">
-                                <p><span class="font-semibold">Assistant Professor Edgardo Cruz</span>, took up his Master in Information Technology at the Technological University of the Philippines, where is presently taking up his Doctor of Technology. He also holds a Bachelor of Science in Computer Engineering.</p>
-                                <p>He serves as the IT Program Director of the IT Programs of the College of Computing and Information Sciences at the University of Makati.</p>
-                                <p>As an industry practitioner, Engr. Cruz works as an IT consultant at the Philippine Public Safety College (National Police College), Emmanuel Innovations, and Brillhunt IT Solutions. He also worked as a Chief Technology Officer, System Administrator, and IC Design Engineer.</p>
-                                <p>He currently holds the position of Executive Vice-President and NCR President of the Cybersecurity Society of the Philippines and is also a member of the Information Security Officers Group. He is a Certified Ethical Hacker – a qualification given by the EC-Council and obtained by demonstrating knowledge of assessing the security of computer systems, a certified Information Technology Specialist in Network Security, a certified Incident Response Trainor (CIRT), a certified Network Security Specialist, and a Microsoft Technology Specialists (MTA) in Networking, Server Administration. Operating Systems, and Security Fundamentals.</p>
-                                <p>A highly motivated and detail-oriented cybersecurity professional with a strong foundation in information and network security, digital forensics, pen-testing, and security awareness training.</p>
-                            </div>
-                        </div>
-                    </div>
-                </label>
-            </div>
-            <br>
-            <h1 class="my-5 text-3xl font-bold text-center z-2">Academic Support Group</h1>
-            <div class="flex gap-10 max-tablet:gap-5 justify-center flex-wrap">
-                <!-- ============================ ACADEMIC SUPPORT ============================ -->
-                <div class="group relative size-50 min-w-50 max-tablet:size-40 max-tablet:min-w-40 rounded-2xl bg-[url(resources/dp/backdrop.svg)] bg-cover shadow-xl text-white ">
-                    <img src="resources/ccis.svg" alt="sup1" class="absolute left-1/2 bottom-2 max-tablet:bottom-0 -translate-x-1/2 size-45 rounded-2xl drop-shadow-lg duration-500 select-none group-hover:-translate-y-4">
-                    <div class="absolute bottom-0 w-full h-1/2 rounded-b-2xl bg-linear-to-b from-transparent to-off-white/50 select-none">
-                        <div class="px-2 pb-1 size-full flex items-end">
-                            <h2 class="font-bold text-shadow">Ms. Joe Allen Balbero</h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="group relative size-50 min-w-50 max-tablet:size-40 max-tablet:min-w-40 rounded-2xl bg-[url(resources/dp/backdrop.svg)] bg-cover shadow-xl text-white">
-                    <img src="resources/ccis.svg" alt="sup1" class="absolute left-1/2 bottom-2 max-tablet:bottom-0 -translate-x-1/2 size-45 rounded-2xl drop-shadow-lg duration-500 select-none group-hover:-translate-y-4">
-                    <div class="absolute bottom-0 w-full h-1/2 rounded-b-2xl bg-linear-to-b from-transparent to-off-white/50 select-none">
-                        <div class="px-2 pb-1 size-full flex items-end">
-                            <h2 class="font-bold text-shadow">Ms. Reyna Batal</h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="group relative size-50 min-w-50 max-tablet:size-40 max-tablet:min-w-40 rounded-2xl bg-[url(resources/dp/backdrop.svg)] bg-cover shadow-xl text-white">
-                    <img src="resources/ccis.svg" alt="sup1" class="absolute left-1/2 bottom-2 max-tablet:bottom-0 -translate-x-1/2 size-45 rounded-2xl drop-shadow-lg duration-500 select-none group-hover:-translate-y-4">
-                    <div class="absolute bottom-0 w-full h-1/2 rounded-b-2xl bg-linear-to-b from-transparent to-off-white/50 select-none">
-                        <div class="px-2 pb-1 size-full flex items-end">
-                            <h2 class="font-bold text-shadow">Ms. Rachele M. Maglaya</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section id="abt-devs" class="mt-20 h-200">
-            <h1 class="my-5 text-3xl font-bold text-center">Scholar Finds' Developer Team</h1>
-            <div class="mb-10 h-160 flex items-center justify-center overflow-clip">
-                <div class="card p-5 w-75 h-120 rounded-2xl bg-lgreen flex flex-col items-center gap-5 drop-shadow-xl transform transition-transform duration-500">
-                    <div class="mt-5 size-35 bg-slgreen bg-cover rounded-full overflow-clip select-none">
-                        <img src="resources/dp/dev-renz.png" alt="Developer Renz" class="drop-shadow-lg">
-                    </div>
-                    <div class="w-full *:leading-none">
-                        <h2 class="text-center text-xl font-bold">Renzjan S. Moncinilla</h2>
-                        <p class="text-center text-sm">Fullstack Lead Developer</p>
-                        <hr class="my-5 w-full rounded-xl border-1">
-                        <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi malesuada ut neque eu dignissim. Aliquam dui quam, ornare quis scelerisque et, pulvinar non velit. Ut blandit eget ipsum ultricies mattis. Mauris hendrerit ante lorem, a eleifend augue fringilla eget. Donec ultrices id est eu bibendum.</p>
-                    </div>
-                </div>
-                <div class="card p-5 w-75 h-120 rounded-2xl bg-lgreen flex flex-col items-center gap-5 drop-shadow-xl transform transition-transform duration-500">
-                    <div class="mt-5 size-35 bg-slgreen bg-cover rounded-full overflow-clip select-none">
-                        <img src="resources/dp/dev-dhanica.png" alt="Developer Dhanica" class="drop-shadow-lg">
-                    </div>
-                    <div class="w-full *:leading-none">
-                        <h2 class="text-center text-xl font-bold">Ma. Dhanica S. Ballesteros</h2>
-                        <p class="text-center text-sm">UI/UX Designer</p>
-                        <hr class="my-5 w-full rounded-xl border-1">
-                        <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi malesuada ut neque eu dignissim. Aliquam dui quam, ornare quis scelerisque et, pulvinar non velit. Ut blandit eget ipsum ultricies mattis. Mauris hendrerit ante lorem, a eleifend augue fringilla eget. Donec ultrices id est eu bibendum.</p>
-                    </div>
-                </div>
-                <div class="card p-5 w-75 h-120 rounded-2xl bg-lgreen flex flex-col items-center gap-5 drop-shadow-xl transform transition-transform duration-500">
-                    <div class="mt-5 size-35 bg-slgreen bg-cover rounded-full overflow-clip select-none">
-                        <img src="resources/dp/dev-xia.png" alt="Developer Xia" class="drop-shadow-lg">
-                    </div>
-                    <div class="w-full *:leading-none">
-                        <h2 class="text-center text-xl font-bold">Lilxianaze C. Garcia</h2>
-                        <p class="text-center text-sm">Data Analyst</p>
-                        <hr class="my-5 w-full rounded-xl border-1">
-                        <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi malesuada ut neque eu dignissim. Aliquam dui quam, ornare quis scelerisque et, pulvinar non velit. Ut blandit eget ipsum ultricies mattis. Mauris hendrerit ante lorem, a eleifend augue fringilla eget. Donec ultrices id est eu bibendum.</p>
-                    </div>
-                </div>  
-                <div class="card p-5 w-75 h-120 rounded-2xl bg-lgreen flex flex-col items-center gap-5 drop-shadow-xl transform transition-transform duration-500">
-                    <div class="mt-5 size-35 bg-slgreen bg-cover rounded-full overflow-clip select-none">
-                        <img src="resources/dp/dev-andrei.png" alt="Developer Andrei" class="drop-shadow-lg">
-                    </div>
-                    <div class="w-full *:leading-none">
-                        <h2 class="text-center text-xl font-bold">Paul Andrei D. Valencia</h2>
-                        <p class="text-center text-sm">Researcher</p>
-                        <hr class="my-5 w-full rounded-xl border-1">
-                        <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi malesuada ut neque eu dignissim. Aliquam dui quam, ornare quis scelerisque et, pulvinar non velit. Ut blandit eget ipsum ultricies mattis. Mauris hendrerit ante lorem, a eleifend augue fringilla eget. Donec ultrices id est eu bibendum.</p>
-                    </div>
-                </div>
-            </div>
-              
-            <script>
-                const cards = document.querySelectorAll('.card');
-                let selectedCard = 0, autoInterval, scrollTriggered = false;
-
-                function updateCards() {
-                    cards.forEach((card, i) => {
-                        card.style.transform = i === selectedCard ? 'scale(1.3)' : 'scale(1)';
-                        card.style.opacity = i === selectedCard ? '1' : '0.5';
-                        card.style.zIndex = i === selectedCard ? '2' : '1';
-                        card.style.userSelect = i === selectedCard ? 'text' : 'none';
-                        card.style.cursor = i === selectedCard ? 'auto' : 'pointer';
-                        card.style.transition = 'transform 0.5s ease, opacity 0.5s ease';
-                        card.style.marginRight = i < cards.length - 1 ? '20px' : '0';
-                    });
-                }
-
-                function startAutoUpdate() {
-                    autoInterval = setInterval(() => {
-                        selectedCard = (selectedCard + 1) % cards.length;
-                        updateCards();
-                    }, 3000);
-                }
-
-                function stopAutoUpdate() {
-                    clearInterval(autoInterval);
-                    if (!scrollTriggered) {
-                        scrollTriggered = true;
-                        window.addEventListener('scroll', resumeOnScroll, { once: true });
-                    }
-                }
-
-                function resumeOnScroll() {
-                    scrollTriggered = false;
-                    startAutoUpdate();
-                }
-
-                cards.forEach((card, i) => {
-                    card.addEventListener('click', () => {
-                        selectedCard = i;
-                        updateCards();
-                        stopAutoUpdate();
-                    });
-                });
-
-                updateCards();
-                startAutoUpdate();
-            </script>
-        </section>
-        <section id="abt-docu" class="my-10 px-10 max-tablet:px-5 h-170 max-tablet:h-135 max-big-phone:h-300 max-phone:h-320 flex max-big-phone:flex-col max-big-phone:items-center gap-10">
-            <div class="big-phone:flex-1 flex flex-col justify-center text-lg text-justify leading-6">
-                <h2 class="mb-2 text-2xl font-bold text-left max-big-phone:text-center leading-7">Developer Team's Journey</h2>
-                <p>From the <b>College of Innovative Teacher Education-Higher School ng UMak (CITE-HSU)</b>, the Group 3 of G12-03 CPG, from the Academic Year 2024-2025, developed <b>Scholar Finds</b> as part of their requirements for <b>Computer Programming 4, Work Immersion, and Research Project</b>. This platform is designed to simplify the research process and enhance convenience for students and researchers in their respective fields.</p>
-            </div>
-            <div class="max-big-phone:flex-1 w-140 max-tablet:w-90 max-phone:w-full max-big-phone:h-100 max-big-phone:flex max-big-phone:flex-col max-big-phone:justify-evenly relative *:select-none">
-                <img src="resources/images/docu1.jpg" alt="docu-1" class="big-phone:absolute top-0 right-0 h-70 max-tablet:h-50 max-big-phone:h-65 max-phone:h-auto rounded-2xl shadow-[var(--around-shadow-sm)] z-1">
-                <img src="resources/images/docu2.jpg" alt="docu-2" class="big-phone:absolute top-40 max-tablet:top-42.5 left-0 h-70 max-tablet:h-50 max-big-phone:h-65 max-phone:h-auto rounded-2xl shadow-[var(--around-shadow-sm)] z-2">
-                <img src="resources/images/docu3.jpg" alt="docu-3" class="big-phone:absolute top-90 max-tablet:top-85 right-0 h-70 max-tablet:h-50 max-big-phone:h-65 max-phone:h-auto rounded-2xl shadow-[var(--around-shadow-sm)] z-3">
-            </div>
-        </section>
-        <footer class="relative tablet:my-5 py-10 h-auto text-off-white font-extralight">
-            <div class="absolute z-1 bottom-0 -left-15 max-tablet:left-0 w-[calc(100%+120px)] max-tablet:w-full h-full bg-zinc-800"></div>
-            <div class="relative z-2 max-tablet:px-10">
-                <h1 class="mb-2 text-2xl font-semibold">References</h1>
-                <div class="*:pl-9 *:-indent-9 max-big-phone:text-xs max-phone:break-words">
-                    <p>
-                        University of Makati. (2025, March 10). <em>College of Computing and Information Sciences - University of Makati.</em> https://www.umak.edu.ph/academics/college/ccis/
-                    </p>
-                    <p>
-                        University of Makati. (2025, March 10). <em>College of Computing and Information Sciences - University of Makati.</em> https://www.umak.edu.ph/academics/college/ccis/
-                    </p>
-                    <p>
-                        University of Makati. (2025, March 10). <em>College of Computing and Information Sciences - University of Makati.</em> https://www.umak.edu.ph/academics/college/ccis/
-                    </p>
-                    <p>
-                        University of Makati. (2025, March 10). <em>College of Computing and Information Sciences - University of Makati.</em> https://www.umak.edu.ph/academics/college/ccis/
-                    </p>
-                </div>
-            </div>
-        </footer>
+            session_unset();
+        ?>
     </main>
     <script>
-        location.hash && history.replaceState(null, '', location.pathname);
+        fetch('data.json').then(res => res.json()).then(json => (data = json, displaySets())).catch(console.error);
+
+        let data = { theses: [] }, thesesPerPage = 15, selectedSet = 0, searchQuery = "", searchCategory = "title", selectedThesis = [];
+        const tarchiveMode = document.getElementById("tarchive-mode"), taSelectAll = document.getElementById("ta-select-all"), tsetsSelect = document.getElementById("tsets-per-page"),
+        tarchive = document.getElementById("tarchive"), tretrieve = document.getElementById("tretrieve"), tdelete = document.getElementById("tdelete");
+
+        [tarchiveMode, taSelectAll, tsetsSelect].forEach(el => el.addEventListener("change", e => {
+            if (e.target === tarchiveMode) (selectedThesis = [], taSelectAll.checked = false, selectedSet = 0);
+            if (e.target === tsetsSelect) selectedSet = +e.target.value - 1;
+            if (e.target === taSelectAll) selectedThesis = taSelectAll.checked ? data.theses.filter(t => t.archived == tarchiveMode.checked).map(t => t.thesis_id) : [];
+            displaySets();
+        }));
+
+        document.getElementById("theses-container").addEventListener("change", e => {
+            if (!e.target.classList.contains("tcb")) return;
+            selectedThesis = e.target.checked ? [...new Set([...selectedThesis, e.target.id])] : selectedThesis.filter(id => id != e.target.id);
+            taSelectAll.checked = document.querySelectorAll('.tcb:checked').length === document.querySelectorAll('.tcb').length;
+            tarchive.disabled = selectedThesis.length === 0;
+            tretrieve.disabled = selectedThesis.length === 0;
+            tdelete.disabled = selectedThesis.length === 0;
+
+            console.log(selectedThesis);
+        });
+
+        function displaySets() {
+            const tcontainer = document.getElementById("theses-container"), tpageInfo = document.getElementById("tpage-info");
+            let filteredData = data.theses.filter(t => t.archived == tarchiveMode.checked && (!searchQuery || t[searchCategory]?.toLowerCase().includes(searchQuery.toLowerCase())));
+            let totalSets = Math.ceil(filteredData.length / thesesPerPage);
+            selectedSet = Math.max(0, Math.min(selectedSet, totalSets - 1));
+            tsetsSelect.innerHTML = [...Array(totalSets)].map((_, i) => `<option value="${i + 1}">${i + 1}</option>`).join("");
+            tsetsSelect.value = selectedSet + 1;
+            tarchive.classList.toggle('hidden', tarchiveMode.checked);
+            tretrieve.classList.toggle('hidden', !tarchiveMode.checked);
+            tdelete.classList.toggle('hidden', !tarchiveMode.checked);
+            tarchive.disabled = selectedThesis.length === 0;
+            tretrieve.disabled = selectedThesis.length === 0;
+            tdelete.disabled = selectedThesis.length === 0;
+
+            tcontainer.innerHTML = filteredData.length ? filteredData.slice(selectedSet * thesesPerPage, (selectedSet + 1) * thesesPerPage).map(t => `
+                <tr class="*:rounded-md *:bg-slgreen *:py-0.5 *:overflow-hidden *:text-ellipsis *:whitespace-nowrap">
+                    <td class="flex items-center justify-center gap-0.5 select-none overflow-visible!">
+                        <input type="checkbox" class="tcb mx-1 cursor-pointer" id="${t.thesis_id}" ${selectedThesis.includes(t.thesis_id) ? "checked" : ""}>
+                        ${tarchiveMode.checked? 
+                        '<span class="relative">' +
+                            '<button class="peer opacity-65 hover:opacity-100 active:scale-95 cursor-pointer" onclick="toggleThesisAction(\'retrieve\', \'' + t.thesis_id + '\');">↩️</button>' +
+                            '<p class="hidden peer-hover:block absolute -top-4 left-1/2 -translate-x-1/2 px-1 rounded-sm bg-zinc-700 text-off-white text-xs text-center select-none">Retrieve</p>' +
+                        '</span> <span class="relative">' +
+                            '<button class="peer opacity-65 hover:opacity-100 active:scale-95 cursor-pointer" onclick="toggleThesisAction(\'delete\', \'' + t.thesis_id + '\');">🗑️</button>' +
+                            '<p class="hidden peer-hover:block absolute -top-4 left-1/2 -translate-x-1/2 px-1 rounded-sm bg-zinc-700 text-off-white text-xs text-center select-none">Delete</p>' +
+                        '</span>' : 
+                        '<span class="relative">' +
+                            '<button class="peer opacity-65 hover:opacity-100 active:scale-95 cursor-pointer" onclick="openTCreator(' + t.thesis_id +')">✏️</button>' +
+                            '<p class="hidden peer-hover:block absolute -top-4 left-1/2 -translate-x-1/2 px-1 rounded-sm bg-zinc-700 text-off-white text-xs text-center select-none">Edit</p>' +
+                        '</span>' +
+                        '<span class="relative">' +
+                            '<button class="peer opacity-65 hover:opacity-100 active:scale-95 cursor-pointer" onclick="toggleThesisAction(\'archive\', \'' + t.thesis_id + '\');">📥</button>' +
+                            '<p class="hidden peer-hover:block absolute -top-4 left-1/2 -translate-x-1/2 px-1 rounded-sm bg-zinc-700 text-off-white text-xs text-center select-none">Archive</p>' +
+                        '</span>'}
+                    </td>
+                    <td class="text-center">${t.thesis_id.toString().padStart(4, '0')}</td>
+                    <td class="text-center">${t.published_date}</td>
+                    <td class="text-center">${t.course}</td>
+                    <td>${t.title}</td>
+                    <td>${t.authors}</td>
+                    <td>${t.abstract || "N/A"}</td>
+                    <td>${t.keywords || "N/A"}</td>
+                </tr>`).join("") : "<tr><td colspan='8' class='text-center'>No results found.</td></tr>";
+
+            tpageInfo.textContent = totalSets === 0 ? `no${tarchiveMode.checked ? " archived" : ""}` : `${selectedSet + 1} of ${totalSets + (tarchiveMode.checked ? " archived" : "")} set/s of`;
+        }
+
+        ["first", "previous", "next", "last"].forEach((fn, i) => window[fn + "TSet"] = () => {
+            selectedSet = [0, Math.max(0, selectedSet - 1), Math.min(selectedSet + 1, tsetsSelect.options.length - 1), tsetsSelect.options.length - 1][i];
+            displaySets();
+        });
+
+        function toggleThesesBulkAction(action) {      
+            const box = document.getElementById("tbulk-action-box");
+            box.classList.toggle('hidden');
+
+            document.getElementById("tba-msg").textContent = action.charAt(0).toUpperCase() + str.slice(1) + " selected theses?";
+            document.getElementById("tba-warning-msg").textContent = action == "delete" ? "This action cannot be reverted!" : "";
+            document.getElementById("tba-selection").textContent = selectedThesis.map(id => id.toString().padStart(4, '0')).join(', ');
+            document.getElementById("ba-data").value = selectedThesis.join('-');
+            document.getElementById("t-bulk").value = action;
+        }
+
+        function toggleThesisAction(action, id) {
+            const box = document.getElementById("taction-box");
+            box.classList.toggle('hidden');
+
+            document.getElementById("ta-msg").innerHTML = action.charAt(0).toUpperCase() + str.slice(1) + " the thesis with an ID of <b>" + id.toString().padStart(4, '0') + "</b>?";
+            document.getElementById("ta-warning-msg").textContent = action == "delete" ? "This action cannot be reverted!" : "";
+            document.getElementById("a-data").value = id;
+            document.getElementById("t-act").value = action;
+        }
+
+        fetch('data.json').then(res => res.json()).then(json => (userData = json, displayUsers())).catch(console.error);
+
+        let userData = { accounts: [] }, usersPerPage = 15, userSelectedSet = 0, userSearchQuery = "", userSearchCategory = "username", selectedUsers = [];
+        const userArchiveMode = document.getElementById("uarchive-mode"), userSelectAll = document.getElementById("ua-select-all"), 
+              userSetsSelect = document.getElementById("usets-per-page"), userArchive = document.getElementById("uarchive"), 
+              userRetrieve = document.getElementById("uretrieve"), userDelete = document.getElementById("udelete");
+
+        [userArchiveMode, userSelectAll, userSetsSelect].forEach(el => el.addEventListener("change", e => {
+            if (e.target === userArchiveMode) (selectedUsers = [], userSelectAll.checked = false, userSelectedSet = 0);
+            if (e.target === userSetsSelect) userSelectedSet = +e.target.value - 1;
+            if (e.target === userSelectAll) selectedUsers = userSelectAll.checked ? userData.accounts.filter(u => u.archived == userArchiveMode.checked).map(u => u.user_id) : [];
+            displayUsers();
+        }));
+
+        document.getElementById("users-container").addEventListener("change", e => {
+            if (!e.target.classList.contains("ucb")) return;
+            selectedUsers = e.target.checked ? [...new Set([...selectedUsers, e.target.id])] : selectedUsers.filter(id => id != e.target.id);
+            userSelectAll.checked = document.querySelectorAll('.ucb:checked').length === document.querySelectorAll('.ucb').length;
+            userArchive.disabled = selectedUsers.length === 0;
+            userRetrieve.disabled = selectedUsers.length === 0;
+            userDelete.disabled = selectedUsers.length === 0;
+        });
+
+        function displayUsers() {
+            const userContainer = document.getElementById("users-container"), userPageInfo = document.getElementById("upage-info");
+            let filteredUserData = userData.accounts.filter(u => u.archived == userArchiveMode.checked && (!userSearchQuery || u[userSearchCategory]?.toLowerCase().includes(userSearchQuery.toLowerCase())));
+            let totalUserSets = Math.ceil(filteredUserData.length / usersPerPage);
+            userSelectedSet = Math.max(0, Math.min(userSelectedSet, totalUserSets - 1));
+            userSetsSelect.innerHTML = [...Array(totalUserSets)].map((_, i) => `<option value="${i + 1}">${i + 1}</option>`).join("");
+            userSetsSelect.value = userSelectedSet + 1;
+            userArchive.classList.toggle('hidden', userArchiveMode.checked);
+            userRetrieve.classList.toggle('hidden', !userArchiveMode.checked);
+            userDelete.classList.toggle('hidden', !userArchiveMode.checked);
+            userArchive.disabled = selectedUsers.length === 0;
+            userRetrieve.disabled = selectedUsers.length === 0;
+            userDelete.disabled = selectedUsers.length === 0;
+
+            const lastUserId = userData.accounts.length ? Math.max(...userData.accounts.map(u => u.user_id)) : 0;
+            document.getElementById("new-usr-id").innerHTML = (lastUserId + 1).toString().padStart(4, '0');
+
+            userContainer.innerHTML = filteredUserData.length ? filteredUserData.slice(userSelectedSet * usersPerPage, (userSelectedSet + 1) * usersPerPage).map(user => `
+                <tr class="*:rounded-md *:bg-slgreen *:py-0.5 *:overflow-hidden *:text-ellipsis *:whitespace-nowrap">
+                    <td class="flex items-center justify-center gap-0.5 select-none overflow-visible!">
+                        <input type="checkbox" class="ucb mx-1 px-1" id="${user.user_id}" ${selectedUsers.includes(user.user_id) ? "checked" : ""}>
+                        ${userArchiveMode.checked? 
+                        '<span class="relative">' +
+                            '<button class="peer opacity-65 hover:opacity-100 active:scale-95 cursor-pointer" onclick="toggleUserAction(\'retrieve\', \'' + user.user_id + '\');">↩️</button>' +
+                            '<p class="hidden peer-hover:block absolute -top-4 left-1/2 -translate-x-1/2 px-1 rounded-sm bg-zinc-700 text-off-white text-xs text-center select-none">Retrieve</p>' +
+                        '</span> <span class="relative">' +
+                            '<button class="peer opacity-65 hover:opacity-100 active:scale-95 cursor-pointer" onclick="toggleUserAction(\'delete\', \'' + user.user_id + '\');">🗑️</button>' +
+                            '<p class="hidden peer-hover:block absolute -top-4 left-1/2 -translate-x-1/2 px-1 rounded-sm bg-zinc-700 text-off-white text-xs text-center select-none">Delete</p>' +
+                        '</span>' : 
+                        '<span class="relative">' +
+                            '<button class="peer opacity-65 hover:opacity-100 active:scale-95 cursor-pointer">✏️</button>' +
+                            '<p class="hidden peer-hover:block absolute -top-4 left-1/2 -translate-x-1/2 px-1 rounded-sm bg-zinc-700 text-off-white text-xs text-center select-none">Edit</p>' +
+                        '</span>' +
+                        '<span class="relative">' +
+                            '<button class="peer opacity-65 hover:opacity-100 active:scale-95 cursor-pointer" onclick="toggleUserAction(\'archive\', \'' + user.user_id + '\');">📥</button>' +
+                            '<p class="hidden peer-hover:block absolute -top-4 left-1/2 -translate-x-1/2 px-1 rounded-sm bg-zinc-700 text-off-white text-xs text-center select-none">Archive</p>' +
+                        '</span>'}
+                    </td>
+                    <td class="text-center">${user.user_id.toString().padStart(4, '0')}</td>
+                    <td class="text-center">${user.date_joined}</td>
+                    <td class="text-center">${user.role}</td>
+                    <td class="text-center">${user.membership}</td>
+                    <td>${user.username}</td>
+                    <td>${user.name}</td>
+                    <td>${user.email}</td>
+                    <td>${user.password}</td>
+                    <td class="text-center">${user.college}</td>
+                    <td class="text-center">${user.yearsection || "N/A"}</td>
+                </tr>`).join("") : "<tr><td colspan='8' class='text-center'>No results found.</td></tr>";
+            userPageInfo.textContent = totalUserSets === 0 ? `no${userArchiveMode.checked ? " archived" : ""}` : `${userSelectedSet + 1} of ${totalUserSets} set/s`;
+        }
+
+        ["first", "previous", "next", "last"].forEach((fn, i) => window[fn + "USet"] = () => {
+            userSelectedSet = [0, Math.max(0, userSelectedSet - 1), Math.min(userSelectedSet + 1, userSetsSelect.options.length - 1), userSetsSelect.options.length - 1][i];
+            displayUsers();
+        });
+
+        function toggleUsersBulkAction(action) {
+            const box = document.getElementById("ubulk-action-box");
+            box.classList.toggle('hidden');
+            document.getElementById("uba-msg").textContent = action.charAt(0).toUpperCase() + str.slice(1) + " selected users?";
+            document.getElementById("uba-warning-msg").textContent = action == "delete" ? "This action cannot be reverted!" : "";
+            document.getElementById("uba-selection").textContent = selectedUsers.map(id => id.toString().padStart(4, '0')).join(', ');
+            document.getElementById("uba-data").value = selectedUsers.join('-');
+            document.getElementById("u-bulk").value = action;
+        }
+
+        function toggleUserAction(action, id) {
+            const box = document.getElementById("uaction-box");
+            box.classList.toggle('hidden');
+            document.getElementById("ua-msg").innerHTML = action.charAt(0).toUpperCase() + str.slice(1) + " the user with an ID of <b>" + id.toString().padStart(4, '0') + "</b>?";
+            document.getElementById("ua-warning-msg").textContent = action == "delete" ? "This action cannot be reverted!" : "";
+            document.getElementById("ua-data").value = id;
+            document.getElementById("u-act").value = action;
+        }
+
+        window.onload = () => {
+            // Theses Data
+            document.getElementById("tsets-per-page")?.addEventListener("change", e => { selectedSet = e.target.value - 1; displaySets(); });
+            document.getElementById("tsearch-box")?.addEventListener("input", e => { searchQuery = e.target.value; selectedSet = 0; displaySets(); });
+            document.getElementById("tsearch-category")?.addEventListener("change", e => { searchCategory = e.target.value; selectedSet = 0; displaySets(); });
+            document.getElementById("tarchive-mode")?.addEventListener("change", e => {selectedSet = 0; displaySets(); });
+
+            // Users Data
+            document.getElementById("usets-per-page")?.addEventListener("change", e => { userSelectedSet = e.target.value - 1; displayUsers(); });
+            document.getElementById("usearch-box")?.addEventListener("input", e => { userSearchQuery = e.target.value; userSelectedSet = 0; displayUsers(); });
+            document.getElementById("usearch-category")?.addEventListener("change", e => { userSearchCategory = e.target.value; userSelectedSet = 0; displayUsers(); });
+            document.getElementById("uarchive-mode")?.addEventListener("change", e => {userSelectedSet = 0; displayUsers(); });
+        };
+
+        function openTCreator(thesisId) {
+            document.getElementById("tcreator").classList.toggle("hidden");
+            document.getElementById("tcreator-backdrop").classList.toggle("hidden");
+    
+
+            ["title", "authors", "abstract", "keywords", "course", "pdate"].forEach(field => {
+                document.getElementById(field).value = "";
+            });
+            let lastThesisId = data.theses.length ? Math.max(...data.theses.map(t => t.thesis_id)) : 0;
+            document.getElementById("ths-id").innerHTML = (lastThesisId + 1).toString().padStart(4, '0');
+            document.getElementById("thesis-id").value = lastThesisId + 1;
+
+            if (!thesisId) return;
+
+            let thesis = data.theses.find(t => t.thesis_id == thesisId);
+
+            ['title', 'authors', 'abstract', 'keywords', 'course'].forEach(field => 
+                document.getElementById(field).value = thesis[field]
+            );
+
+            document.getElementById('pdate').value = thesis.published_date.length != 7 ? thesis.published_date + "-01" : thesis.published_date;
+            document.getElementById('ths-id').innerHTML = thesis.thesis_id.toString().padStart(4, '0');
+            document.getElementById('thesis-id').value = thesis.thesis_id;
+        }
+
     </script>
 </body>
 </html>

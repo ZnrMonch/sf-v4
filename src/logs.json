@@ -1,0 +1,20 @@
+{
+    "logs": [
+        {
+            "reference_id": "rerer",
+            "type": "accounts",
+            "operation": "added",
+            "date": "2025-04-19",
+            "details": "rere",
+            "initiator": "none"
+        },
+        {
+            "reference_id": "",
+            "type": "",
+            "operation": "",
+            "date": "2025-04-19",
+            "details": "r",
+            "initiator": "none"
+        }
+    ]
+}

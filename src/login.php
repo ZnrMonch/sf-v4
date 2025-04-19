@@ -1,5 +1,11 @@
 <?php
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'dependency/PHPMailer/src/Exception.php';
+require 'dependency/PHPMailer/src/PHPMailer.php';
+require 'dependency/PHPMailer/src/SMTP.php';
 require_once 'config.php';
 session_start();
 
@@ -17,8 +23,8 @@ if (isset($_POST['login'])) {
         $user = $result->fetch_assoc();
         
         if (
-            ($user['role'] === 'regular' && ($user['password'] !== decrypt($password) ||
-            (($user['role'] === 'admin' || $user['role'] === 'superadmin') && $password !== $user['password'])))
+            ($user['role'] === 'regular' && $user['password'] !== decrypt($password)) ||
+            (($user['role'] === 'admin' || $user['role'] === 'superadmin') && $user['password'] !== $password)  
         ) {
             $_SESSION['log-error'] = 'Error: Incorrect password!';
         } else {
@@ -42,26 +48,31 @@ if (isset($_POST['register'])) {
     $name = trim($_POST['rname']);
     $email = trim($_POST['remail']);
     $password = encrypt(trim($_POST['rpassword']));
+    $membership = trim($_POST['membership']);
 
-    if(isset($_POST['g-recaptcha-response']) && !empty($_POST['g-recaptcha-response'])) {
-        $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='. "6LdIQ_UqAAAAAPeuiqN1wgrqQQHvRkU_9Uh9s00p" .'&response='.$_POST['g-recaptcha-response']);
+    if (isset($_POST['g-recaptcha-response']) && !empty($_POST['g-recaptcha-response'])) {
+        $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='. "6LdD-hkrAAAAAD-Y3PZCSNd318vaIRHUQt3uPxdQ" .'&response='.$_POST['g-recaptcha-response']);
         $responseData = json_decode($verifyResponse);
 
         if($responseData->success) {
-            $stmt = $conn->prepare("SELECT * FROM accounts WHERE email = ?");
-            $stmt->bind_param("s", $email);
+            $stmt = $conn->prepare("SELECT email, username FROM accounts WHERE email = ? OR username = ?");
+            $stmt->bind_param("ss", $email, $username);
             $stmt->execute();
             $result = $stmt->get_result();
 
-            if ($result->num_rows > 0) {
-                $_SESSION['reg-error'] = 'Error: Email already exists!';
-            } else if (!str_ends_with($email, '@umak.edu.ph')) {
-                $_SESSION['reg-error'] = 'Error: Email must be a UMak email!';
+            if ($row = $result->fetch_assoc()) {
+                if ($row['email'] === $email) {
+                    $_SESSION['reg-error'] = 'Error: Email already exists!';
+                } else if ($row['username'] === $username) {
+                    $_SESSION['reg-error'] = 'Error: Username already taken!';
+                }
+            } else if ($_POST['secure-level'] < 2) { 
+                $_SESSION['reg-error'] = 'Error: Password is too weak!';
             } else {
                 $stmt->close();
 
-                $stmt = $conn->prepare("INSERT INTO accounts (username, name, email, password) VALUES (?, ?, ?, ?)");
-                $stmt->bind_param("ssss", $username, $name, $email, $password);
+                $stmt = $conn->prepare("INSERT INTO accounts (date_joined, membership, username, name, email, password) VALUES (?, ?, ?, ?, ?, ?)");
+                $stmt->bind_param("ssssss", date('Y-m-d'), $membership, $username, $name, $email, $password);
                 $stmt->execute();
                 $stmt->close();
                 
@@ -71,60 +82,134 @@ if (isset($_POST['register'])) {
         } else {
             $_SESSION['reg-error'] = 'Error! Robot verification failed, please try again.';
         }
-    } else {
-       $_SESSION['reg-error'] = 'Error! Please check the reCAPTCHA checkbox.'; 
-    }
 
+    } else {
+        $_SESSION['reg-error'] = 'Error! Please check the reCAPTCHA checkbox.'; 
+    }
+    
     $_SESSION['activeForm'] = 'regisform';
     header("Location: access.php");
     exit();
 }
 
 // ================================================================================================================================ FORGET PASSWORD FORM
-if (isset($_POST['fpw'])) {
+if (isset($_POST['fpw']) || isset($_POST['send-otp'])) {
     $email = trim($_POST['femail']); 
+
+    if (!empty($_POST['otp'])) {
+        $otpInput = trim($_POST['otp']);
+        $otpCookie = array_values(array_filter(array_keys($_COOKIE), fn($k) => str_starts_with($k, 'otp-')))[0] ?? null;
+        $realOtp = $otpCookie ? $_COOKIE[$otpCookie] : null;
+        if (!$otpCookie) {
+            $_SESSION['fpw-error'] = 'Error! OTP is expired.';
+        } else if ($otpInput != $realOtp) {
+            $_SESSION['fpw-error'] = 'Error! Wrong OTP.';
+        } else {
+            setcookie($otpCookie, '', time() - 3600, '/');
+            setcookie("email", $email, time() + (86400 * 30), "/");
+            $_SESSION['fpw-success'] = 'Success! You can now reset your password.';
+        }
+
+        if ($_SESSION['fpw-error']) {
+            $_SESSION['email'] = $email;
+        }
+
+        header("Location: fpw.php");
+        exit();
+    }
+
     $stmt = $conn->prepare('SELECT * FROM accounts WHERE email = ?');
     $stmt->bind_param('s', $email);
     $stmt->execute();
     $result = $stmt->get_result();
     $stmt->close();
 
-    if(!isset($_POST['g-recaptcha-response']) && empty($_POST['g-recaptcha-response'])) {
+    if (!isset($_POST['g-recaptcha-response']) && empty($_POST['g-recaptcha-response'])) {
         $_SESSION['fpw-error'] = 'Error! Please check the reCAPTCHA checkbox.'; 
     } else {
-        $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='. "6LfGZvUqAAAAALrlsjkqmD6h6af0PzZVIe33yB7M" .'&response='.$_POST['g-recaptcha-response']);
+        $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='. "6LdD-xkrAAAAAMLhtv-PDRGKNjGO-svkWu8c4ptu" .'&response='.$_POST['g-recaptcha-response']);
         $responseData = json_decode($verifyResponse);
 
-        if(!$responseData->success) {
+        if (!$responseData->success) {
             $_SESSION['fpw-error'] = 'Error! Robot verification failed, please try again.';
         } else {
             if (!$result->num_rows > 0) {
                 $_SESSION['fpw-error'] = 'Error! Email does not exist.';     
             } else {
                 $otp = rand(100000, 999999);
-                setCookie('otp', $otp, time() + 300, '/');
-
-                $headers = [
-                    'MIME-Version' => '1.0',
-                    'Content-Type' => 'text/html; charset=UTF-8',
-                    'From' => 'Scholar Finds <no-reply@scholarfinds.com>',
-                    'Reply-To' => 'no-reply@scholarfinds.com',
-                ];
+                setCookie('otp-' . $email, $otp, time() + 600, '/');
 
                 $message = file_get_contents('fpw-email.php');
                 $message = str_replace('not generated', $otp, $message);
-                $message = str_replace('no-time', '5 MINUTES', $message);
+                $message = str_replace('no-time', '10 minutes', $message);
 
-                mail(
-                    $email,
-                    'Scholar Finds OTP',
-                    $message,
-                    $headers
-                );
+                $mail = new PHPMailer(true);
+                
+                $_SESSION['femail'] = $email;
+
+                try {
+                    // Server settings
+                    $mail->isSMTP();
+                    $mail->Host       = 'smtp.gmail.com';                   // Set your SMTP server
+                    $mail->SMTPAuth   = true;
+                    $mail->Username   = 'renzjan.moncinilla@umak.edu.ph';   // SMTP username
+                    $mail->Password   = 'lqdn wude utoj smds';              // SMTP password
+                    $mail->SMTPSecure = 'tls';                              // Encryption: 'ssl' or 'tls'
+                    $mail->Port       = 587;                                // TCP port to connect to
+
+                    // Sender and recipient
+                    $mail->setFrom('no-reply@scholarfinds.com', 'Scholar Finds');
+                    $mail->addAddress($email); // recipient's email
+
+                    // Content
+                    $mail->isHTML(true);
+                    $mail->Subject = 'Scholar Finds OTP';
+                    $mail->Body    = $message;
+
+                    $mail->send();
+                    
+                    $_SESSION['fpw-success'] = 'Success! Check your email for the OTP.';
+                } catch (Exception $e) {
+                    $_SESSION['fpw-error'] = "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                }
             }
         }
     }
 
+    if ($_SESSION['fpw-error']) {
+        $_SESSION['email'] = $email;
+    }
+
     header("Location: fpw.php");
     exit();
+}
+
+if (isset($_POST['change-pw'])) {
+    $email = $_COOKIE['email'] ?? null;
+    $newPassword = $_POST['npassword'];
+
+    if (!$email) {
+        $_SESSION['fpw-error'] = 'Error! Email not found.';
+    } else if ($_POST['secure-level'] < 2) { 
+        $_SESSION['fpw-error'] = 'Error: New password is too weak!';
+    } else {
+        $stmt = $conn->prepare("SELECT role FROM accounts WHERE email = ?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $role = $result->fetch_assoc()['role'] ?? null;
+        $stmt->close();
+
+        $finalPassword = ($role === 'regular') ? encrypt($newPassword) : $newPassword;
+
+        $stmt = $conn->prepare("UPDATE accounts SET password = ? WHERE email = ?");
+        $stmt->bind_param("ss", $finalPassword, $email);
+        $stmt->execute();
+        $stmt->close();
+
+        setcookie("email", '', time() - 3600, '/');
+        $_SESSION['fpw-success'] = 'Success! Password changed successfully.';
+        header("Location: fpw.php");
+        exit();
+    }
 }

@@ -5,6 +5,11 @@ if (isset($_COOKIE['id'])) {
 }
 
 session_start();
+$activeForm = $_SESSION['activeForm'] ?? 'loginform';
+
+function activeForm($form, $activeForm) {
+    return $form === $activeForm ? "block" : "hidden";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
@@ -15,124 +20,176 @@ session_start();
     <link rel="shortcut icon" href="resources/sf-logo.svg" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
-    <link href="./output.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <link href="./output.css" rel="stylesheet">
 </head>
-<body class="h-[200vh] bg-[url('resources/lib-bg.jpg')] font-nunito text-white flex">
-    <div class="fixed inset-0 bg-black/50 h-screen z-0"></div>
-    <header class="group fixed top-0 left-0 lg:pt-10 lg:pb-10 max-lg:px-5 lg:w-20 w-full lg:hover:w-60 lg:duration-500 lg:ease-out lg:h-screen max-lg:h-15 flex lg:flex-col justify-between bg-ash/85 backdrop-blur-md shadow-[var(--around-shadow-md)] select-none text-off-white z-10">
-        <div class="w-full lg:h-35 max-lg:flex max-lg:items-center max-lg:gap-2.5">
-            <img src="resources/umak.svg" alt="UMak Logo" class="mt-3 ml-3.5 size-12 inline-block max-lg:hidden">
-            <img src="resources/ccis.svg" alt="CCIS Logo" class="mt-3 ml-3.5 size-12 inline-block max-lg:hidden">  
-            <img src="resources/sf-logo.svg" alt="Scholar Finds Logo" class="lg:mt-3 lg:ml-3.5 size-12 max-lg:size-8 inline-block">
-            <a href="index.html" class="outline-none"><h1 class="lg:m-3.5 whitespace-nowrap overflow-hidden text-3xl max-lg:text-xl lg:opacity-0 lg:group-hover:opacity-100 duration-500 font-semibold">Scholar Finds</h1></a>
-        </div>
-        <nav class="hidden max-lg:flex items-center">
-            <input type="checkbox" hidden id="menu" class="peer">
-            <label for="menu">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#eeeeee" class="p-1.5 size-10 cursor-pointer">
-                    <path fill-rule="evenodd" d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75ZM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12Zm0 5.25a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd" />
-                </svg>
-            </label>
-            <label for="menu" class="fixed top-0 left-0 w-screen h-screen hidden peer-checked:block"></label>
-            <ul class="absolute top-20 right-5 py-5 w-40 rounded-lg bg-ash/90 backdrop-blur-md text-center leading-8 *:hover:bg-zinc-700 *:duration-200 animate-fadeIn hidden peer-checked:block">
-                <li><a href="index.html" class="block w-full">Home</a></li>
-                <li><a href="about.html" class="block w-full">About</a></li>
-                <li><a href="contact.html" class="block w-full">Contact</a></li>
-                <hr class="my-2.5 opacity-30">
-                <li><a href="library.php" class="block w-full">Library</a></li>
-                <li><a href="bookmarks.html" class="block w-full">Bookmarks</a></li>
-                <li><a href="profile.php" class="block w-full">Profile</a></li>
-                <li><a href="admin.php" class="block w-full">Admin</a></li>
-            </ul>
-        </nav>
-        <nav class="max-lg:hidden">
-            <ul class="flex flex-col gap-2">
-                <li><a href="index.html" class="flex items-center gap-8 pl-5 py-2 hover:opacity-60 duration-200 ease-linear">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="min-w-8 w-8">
-                        <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />
-                        <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" />
-                    </svg> 
-                    <p class="text-lg overflow-hidden text-clip">Home</p>
-                </a></li>
-                <li><a href="about.html" class="flex items-center gap-8 pl-5 py-2 hover:opacity-60 duration-200 ease-linear">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="min-w-8 w-8">
-                        <path fill-rule="evenodd" d="M8.25 6.75a3.75 3.75 0 1 1 7.5 0 3.75 3.75 0 0 1-7.5 0ZM15.75 9.75a3 3 0 1 1 6 0 3 3 0 0 1-6 0ZM2.25 9.75a3 3 0 1 1 6 0 3 3 0 0 1-6 0ZM6.31 15.117A6.745 6.745 0 0 1 12 12a6.745 6.745 0 0 1 6.709 7.498.75.75 0 0 1-.372.568A12.696 12.696 0 0 1 12 21.75c-2.305 0-4.47-.612-6.337-1.684a.75.75 0 0 1-.372-.568 6.787 6.787 0 0 1 1.019-4.38Z" clip-rule="evenodd" />
-                        <path d="M5.082 14.254a8.287 8.287 0 0 0-1.308 5.135 9.687 9.687 0 0 1-1.764-.44l-.115-.04a.563.563 0 0 1-.373-.487l-.01-.121a3.75 3.75 0 0 1 3.57-4.047ZM20.226 19.389a8.287 8.287 0 0 0-1.308-5.135 3.75 3.75 0 0 1 3.57 4.047l-.01.121a.563.563 0 0 1-.373.486l-.115.04c-.567.2-1.156.349-1.764.441Z" />
-                    </svg>                       
-                    <p class="text-lg overflow-hidden text-clip">About</p>
-                </a></li>
-                <li><a href="contact.html" class="flex items-center gap-8 pl-5 py-2 hover:opacity-60 duration-200 ease-linear">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="min-w-8 w-8">
-                        <path fill-rule="evenodd" d="M1.5 4.5a3 3 0 0 1 3-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 0 1-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 0 0 6.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 0 1 1.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 0 1-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5Z" clip-rule="evenodd" />
-                    </svg>                      
-                    <p class="text-lg overflow-hidden text-clip">Contact</p>
-                </a></li>
-                <li><a href="library.php" class="flex items-center gap-8 pl-5 py-2 hover:opacity-60 duration-200 ease-linear">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="min-w-8 w-8">
-                        <path d="M11.25 4.533A9.707 9.707 0 0 0 6 3a9.735 9.735 0 0 0-3.25.555.75.75 0 0 0-.5.707v14.25a.75.75 0 0 0 1 .707A8.237 8.237 0 0 1 6 18.75c1.995 0 3.823.707 5.25 1.886V4.533ZM12.75 20.636A8.214 8.214 0 0 1 18 18.75c.966 0 1.89.166 2.75.47a.75.75 0 0 0 1-.708V4.262a.75.75 0 0 0-.5-.707A9.735 9.735 0 0 0 18 3a9.707 9.707 0 0 0-5.25 1.533v16.103Z" />
-                    </svg>                      
-                    <p class="text-lg overflow-hidden text-clip">Library</p>
-                </a></li>
-            </ul>
-        </nav>
-        <menu class="flex flex-col gap-2 max-lg:hidden">
-            <li><a href="bookmarks.html" class="flex items-center gap-8 pl-5 py-2 hover:opacity-60 duration-200 ease-linear">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="min-w-8 w-8">
-                    <path fill-rule="evenodd" d="M7.502 6h7.128A3.375 3.375 0 0 1 18 9.375v9.375a3 3 0 0 0 3-3V6.108c0-1.505-1.125-2.811-2.664-2.94a48.972 48.972 0 0 0-.673-.05A3 3 0 0 0 15 1.5h-1.5a3 3 0 0 0-2.663 1.618c-.225.015-.45.032-.673.05C8.662 3.295 7.554 4.542 7.502 6ZM13.5 3A1.5 1.5 0 0 0 12 4.5h4.5A1.5 1.5 0 0 0 15 3h-1.5Z" clip-rule="evenodd" />
-                    <path fill-rule="evenodd" d="M3 9.375C3 8.339 3.84 7.5 4.875 7.5h9.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-9.75A1.875 1.875 0 0 1 3 20.625V9.375ZM6 12a.75.75 0 0 1 .75-.75h.008a.75.75 0 0 1 .75.75v.008a.75.75 0 0 1-.75.75H6.75a.75.75 0 0 1-.75-.75V12Zm2.25 0a.75.75 0 0 1 .75-.75h3.75a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75ZM6 15a.75.75 0 0 1 .75-.75h.008a.75.75 0 0 1 .75.75v.008a.75.75 0 0 1-.75.75H6.75a.75.75 0 0 1-.75-.75V15Zm2.25 0a.75.75 0 0 1 .75-.75h3.75a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75ZM6 18a.75.75 0 0 1 .75-.75h.008a.75.75 0 0 1 .75.75v.008a.75.75 0 0 1-.75.75H6.75a.75.75 0 0 1-.75-.75V18Zm2.25 0a.75.75 0 0 1 .75-.75h3.75a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd" />
-                </svg>
-                <p class="text-lg overflow-hidden text-clip">Bookmarks</p>
-            </a></li>
-            <li><a href="profile.php" class="flex items-center gap-8 pl-5 py-2 hover:opacity-60 duration-200 ease-linear">                  
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="min-w-8 w-8">
-                    <path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" clip-rule="evenodd" />
-                </svg>  
-                <p class="text-lg overflow-hidden text-clip">Profile</p>
-            </a></li>
-            <li><a href="admin.php" class="flex items-center gap-8 pl-5 py-2 hover:opacity-60 duration-200 ease-linear">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="min-w-8 w-8">
-                    <path d="M21 6.375c0 2.692-4.03 4.875-9 4.875S3 9.067 3 6.375 7.03 1.5 12 1.5s9 2.183 9 4.875Z" />
-                    <path d="M12 12.75c2.685 0 5.19-.586 7.078-1.609a8.283 8.283 0 0 0 1.897-1.384c.016.121.025.244.025.368C21 12.817 16.97 15 12 15s-9-2.183-9-4.875c0-.124.009-.247.025-.368a8.285 8.285 0 0 0 1.897 1.384C6.809 12.164 9.315 12.75 12 12.75Z" />
-                    <path d="M12 16.5c2.685 0 5.19-.586 7.078-1.609a8.282 8.282 0 0 0 1.897-1.384c.016.121.025.244.025.368 0 2.692-4.03 4.875-9 4.875s-9-2.183-9-4.875c0-.124.009-.247.025-.368a8.284 8.284 0 0 0 1.897 1.384C6.809 15.914 9.315 16.5 12 16.5Z" />
-                    <path d="M12 20.25c2.685 0 5.19-.586 7.078-1.609a8.282 8.282 0 0 0 1.897-1.384c.016.121.025.244.025.368 0 2.692-4.03 4.875-9 4.875s-9-2.183-9-4.875c0-.124.009-.247.025-.368a8.284 8.284 0 0 0 1.897 1.384C6.809 19.664 9.315 20.25 12 20.25Z" />
-                  </svg>                  
-                <p class="text-lg overflow-hidden text-clip">Admin</p>
-            </a></li>
-        </menu>
-        <script>
-            const admin = document.querySelector('a[href="admin.php"]');
-            const role = document.cookie.match(/role=([^;]+)/)?.[1];
-            if (!role || role === "regular") admin?.classList.add("hidden");
-        </script> 
-    </header>
-    <main>
+<body class="bg-neutral-950 max-big-phone:bg-neutral-900 font-nunito text-white flex">
+    <!-- ================================================== MAIN ================================================== -->
+    <main class="relative z-1 w-full h-screen flex items-center justify-center">
         <?php
+            $success = $_SESSION['fpw-success'] ?? '';
             $error = $_SESSION['fpw-error'] ?? '';
+
+            if ($success) {
+                echo "<div class='absolute top-5 left-1/2 -translate-x-1/2 p-2 w-100 h-10 rounded-xl bg-green-900 select-none z-5 animate-downfadeinout'>" . $success . "</div>";
+            } 
             if ($error) {
                 echo "<div class='absolute top-5 left-1/2 -translate-x-1/2 p-2 w-100 h-10 rounded-xl bg-[#7f1d1d] select-none z-5 animate-downfadeinout'>" . $error . "</div>";
             }
-            session_unset();
         ?>
-        <div class="max-sm:scale-75 max-lg:scale-90 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 px-5 py-10 w-110 h-140 rounded-3xl bg-[#060d0d79] backdrop-blur-lg shadow-[var(--around-shadow-md)] flex-col justify-between animate-fadeIn" id="fpwdiv">
-            <a class="absolute top-5 right-5 cursor-pointer" href="access.php">
-                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
-            </a>
-            <form action="login.php" method="post" class="h-full flex flex-col justify-between gap-2 select-none" id="fpw-form">
-                <h2 class="py-5 text-center text-3xl font-semibold">Forgot Password?</h2>
-                <span class="relative flex flex-col">
-                    <label for="femail">UMak Email Address:</label>
-                    <input type="text" name="femail" id="femail" required class="pl-7 py-1 bg-black/30 border-1 border-gray-500 rounded-lg text-gray-300/80 font-sans outline-none" autocomplete="off">
-                    <svg class="absolute left-1.5 bottom-2" xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="#e8eaed"><path d="M170-114q-56.72 0-96.36-40.14Q34-194.27 34-250v-460q0-55.72 39.64-95.86T170-846h620q56.72 0 96.36 40.14T926-710v460q0 55.73-39.64 95.86Q846.72-114 790-114H170Zm310-274 310-200v-122L480-508 170-710v122l310 200Z"/></svg>
-                </span>
-                <div class="py-5 flex flex-col items-center select-none" >
-                    <div id="captcha2" class="g-recaptcha scale-70" data-sitekey="6LfGZvUqAAAAAC3HdNLI0eRuIaaZR-PSpXrD6GRK"></div>
-                    <i class="pb-2">You will receive an OTP via email for verification.</i>
-                    <input type="submit" name="fpw" class="py-1 w-30 rounded-lg bg-green-900 text-sm cursor-pointer hover:opacity-80 active:scale-95" value="Send OTPm">
+        <div class="absolute top-5 max-big-phone:top-2.5 left-1/2 -translate-x-1/2 flex flex-col gap-2 **:select-none **:leading-none max-tablet:scale-85 z-2 **:whitespace-nowrap text-off-white max-big-phone:text-sm">
+            <span class="flex gap-1 items-center justify-center *:size-10">
+                <img src="resources/umak.svg" alt="">
+                <img src="resources/ccis.svg" alt="">
+                <img src="resources/sf-logo.svg" alt="">
+            </span>
+            <span class="flex flex-col items-center text-center">
+                <h1>University of Makati</h1>
+                <h2>College of Computing and Information Sciences</h2>
+                <h3>Scholar Finds</h3>
+            </span>
+        </div>
+        <div class="relative z-1 p-10 py-12.5 max-big-phone:p-5 w-120 big-phone:rounded-tl-4xl rounded-br-4xl bg-neutral-900 big-phone:border-2 border-neutral-800 max-big-phone:drop-shadow-none drop-shadow-[0_0_10px_rgb(0,0,0,0.5)] drop-shadow-black overflow-clip duration-100 max-tablet:scale-85">
+            <div class="absolute -right-45 -top-45 size-75 bg-radial-[closest-side] from-off-white/10 max-big-phone:hidden"></div>
+            <!-- FORGET PW -->
+            <form action="login.php" method="post" class="<?php echo isset($_COOKIE['email']) ? 'hidden' : 'flex' ?> flex-col gap-10 *:relative animate-fadeIn">
+                <div class="flex flex-col font-semibold select-none">
+                    <h1 class="text-3xl">Forgot Password</h1>
+                    <p class="text-neutral-600 text-sm">Recover your account</p>
+                </div>
+                <div class="flex flex-col gap-3">
+                    <span>
+                        <label for="femail" class="pl-2 text-neutral-400 select-none">Email Address</label>
+                        <input type="email" name="femail" id="femail" class="w-full px-2.5 py-1 rounded-lg bg-neutral-800 border-1 border-neutral-700 shadow-[0_2px_10px_rgb(0,0,0,0.5)] caret-neutral-500 outline-none" value="<?php echo $_SESSION['email'] ?? '' ?>" required>
+                        <p class="mt-1 text-neutral-600 text-sm text-right select-none">A 6-digit OTP will be sent to your email.</p>
+                    </span>
+                    <span class="relative">
+                        <label for="otp" class="pl-2 text-neutral-400 select-none">One Time Password (OTP)</label>
+                        <input type="number" name="otp" id="otp" maxlength="6" class="w-full px-2.5 pr-30 py-1 rounded-lg bg-neutral-800 disabled:bg-neutral-900 border-1 border-neutral-700 shadow-[0_2px_10px_rgb(0,0,0,0.5)] caret-neutral-500 outline-none disabled:hover:cursor-not-allowed" disabled>
+                        <div class="absolute right-1 bottom-1 flex items-center gap-1">
+                            <p id="otp-timer" class="text-neutral-300 select-none"></p>
+                            <button type="submit" name="send-otp" id="send-otp" class="w-full px-2.5 py-1 rounded-lg bg-green-900 disabled:bg-neutral-700 enabled:border-1 border-green-950 shadow-[0_2px_10px_rgb(0,0,0,0.5)] outline-none enabled:hover:bg-green-800 text-xs transition-all duration-200 cursor-pointer">
+                                Send OTP
+                            </button>
+                        </div>    
+                    </span>
+                    <span class="pt-5 flex flex-col items-center gap-2 **:select-none">
+                        <div class="g-recaptcha scale-70" data-sitekey="6LdD-xkrAAAAADgm3R_8kC6eniIEzBhKsUe_Te22" data-theme="dark"></div>
+                        <button type="submit" id="fpw-submit" name="fpw" class="w-full px-2.5 py-1 rounded-lg bg-green-900 disabled:bg-neutral-700 enabled:border-1 border-green-950 shadow-[0_2px_10px_rgb(0,0,0,0.5)] outline-none enabled:hover:bg-green-800 transition-all duration-200 cursor-pointer disabled:cursor-not-allowed" disabled>Reset</button>
+                        <p class="text-neutral-600 font-semibold text-sm"><a href="access.php" class="text-green-700 hover:text-green-600 duration-200 font-semibold cursor-pointer">Login</a> | <a id="gotoregis" class="text-green-700 hover:text-green-600 duration-200 font-semibold cursor-pointer">Register</a></p>             
+                    </span>
                 </div>
             </form>
+
+            <!-- CHANGE PASSWORD -->
+            <form action="login.php" method="post" class="<?php echo isset($_COOKIE['email']) ? 'flex' : 'hidden' ?> flex-col gap-10 *:relative animate-fadeIn">
+                <div class="flex flex-col font-semibold select-none">
+                    <h1 class="text-3xl">Change Password</h1>
+                    <p class="text-neutral-600 text-sm">Secure your account</p>
+                </div>
+                <div class="flex flex-col gap-3">
+                    <span>
+                        <label for="npassword" class="pl-2 text-neutral-400 select-none">New Password</label>
+                        <span class="relative flex gap-1">
+                            <span class="flex-1 relative">
+                                <input type="password" name="npassword" id="npassword" class="w-full px-2.5 py-1 rounded-lg bg-neutral-800 border-1 border-neutral-700 shadow-[0_2px_10px_rgb(0,0,0,0.5)] caret-neutral-500 outline-none" required>
+                                <button onclick="togglePw('n')" type="button" class="absolute top-1/2 -translate-y-1/2 right-2.5 text-neutral-400 hover:text-neutral-200 duration-200 cursor-pointer">
+                                    <!-- OPEN --> <svg id="nopen" class="size-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><!-- Icon from MingCute Icon by MingCute Design - https://github.com/Richard9394/MingCute/blob/main/LICENSE --><g fill="none"><path d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"/><path fill="currentColor" d="M12 5c3.679 0 8.162 2.417 9.73 5.901c.146.328.27.71.27 1.099c0 .388-.123.771-.27 1.099C20.161 16.583 15.678 19 12 19s-8.162-2.417-9.73-5.901C2.124 12.77 2 12.389 2 12c0-.388.123-.771.27-1.099C3.839 7.417 8.322 5 12 5m0 3a4 4 0 1 0 0 8a4 4 0 0 0 0-8m0 2a2 2 0 1 1 0 4a2 2 0 0 1 0-4"/></g></svg>
+                                    <!-- CLOSE  --> <svg id="nclose" class="size-6 hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><!-- Icon from MingCute Icon by MingCute Design - https://github.com/Richard9394/MingCute/blob/main/LICENSE --><g fill="none"><path d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"/><path fill="currentColor" d="M3.05 9.31a1 1 0 1 1 1.914-.577c2.086 6.986 11.982 6.987 14.07.004a1 1 0 1 1 1.918.57a9.5 9.5 0 0 1-1.813 3.417L20.414 14A1 1 0 0 1 19 15.414l-1.311-1.311a9.1 9.1 0 0 1-2.32 1.269l.357 1.335a1 1 0 1 1-1.931.518l-.364-1.357c-.947.14-1.915.14-2.862 0l-.364 1.357a1 1 0 1 1-1.931-.518l.357-1.335a9.1 9.1 0 0 1-2.32-1.27l-1.31 1.312A1 1 0 0 1 3.585 14l1.275-1.275c-.784-.936-1.41-2.074-1.812-3.414Z"/></g></svg>
+                                </button>
+                            </span>
+                            <svg id="shield" class="p-0.5 size-8 text-neutral-400 drop-shadow-[0_2px_10px_rgb(0,0,0,0.5)] peer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><!-- Icon from MingCute Icon by MingCute Design - https://github.com/Richard9394/MingCute/blob/main/LICENSE --><g fill="none" fill-rule="evenodd"><path d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"/><path fill="currentColor" d="M11.298 2.195a2 2 0 0 1 1.404 0l7 2.625A2 2 0 0 1 21 6.693v5.363a9 9 0 0 1-4.975 8.05l-3.354 1.677a1.5 1.5 0 0 1-1.342 0l-3.354-1.677A9 9 0 0 1 3 12.056V6.693A2 2 0 0 1 4.298 4.82z"/></g></svg>
+                            <div class="absolute top-0 translate-y-10 right-0 hidden p-2 rounded-lg bg-neutral-900 border border-neutral-800 peer-hover:flex flex-col text-xs z-2">
+                                <input type="text" name="secure-level" id="secure-level" hidden>
+                                <p>Your password is <span id="security-msg" class="font-bold text-red-800">WEAK</span>.</p>
+                            </div>
+                        </span>
+                    </span>
+                    <ul class="mt-5 list-disc *:ml-5 text-sm text-neutral-300 select-none">
+                        To stregthen your password, consider:
+                        <li id="length-pattern">Having more than 8 characters.</li>
+                        <li id="uppercase-pattern">Having at least 1 uppercase.</li>
+                        <li id="alphanumeric-pattern">Having at least 1 number or special characters.</li>
+                    </ul>
+                    <span class="pt-5 flex flex-col items-center gap-2 **:select-none">
+                        <button type="submit" name="change-pw" class="w-full px-2.5 py-1 rounded-lg bg-green-900 border-1 border-green-950 shadow-[0_2px_10px_rgb(0,0,0,0.5)] outline-none hover:bg-green-800 transition-all duration-200 cursor-pointer">Change Password</button>
+                    </span>
+                </div>
+            </form>
+            <script>
+                document.getElementById('gotoregis').addEventListener('click', () => {
+                    document.cookie = 'gotoform=regis';
+                    document.location.href = 'access.php';
+                })
+
+                const otpTimer = document.getElementById('otp-timer');
+                let duration = 120;
+
+                const emailInput = document.getElementById('femail');
+                const otp = document.getElementById('otp');
+                const otpButton = document.getElementById('send-otp');
+                const otpCookie = document.cookie.split(';').filter(cookie => cookie.trim().startsWith('otp-'));
+                const fpwSubmit = document.getElementById('fpw-submit');
+                console.log(otpCookie);
+
+                if (otpCookie.length) {
+                    emailInput.value = document.cookie.split('; ').find(c => c.startsWith('otp-'))?.split('=')[0].slice(4) || '';
+                    otp.disabled = false;
+                    otpButton.innerText = "Resend OTP";
+                    const countdown = setInterval(() => {
+                        if (duration <= 0) {
+                            clearInterval(countdown);
+                            otpTimer.textContent = "";
+                            otpButton.disabled = false;
+                            return;
+                        }
+                        
+                        otpButton.disabled = true;
+                        fpwSubmit.disabled = false;
+
+                        const minutes = Math.floor(duration / 60);
+                        const seconds = duration % 60;
+                        otpTimer.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                        duration--;
+                    }, 1000);
+                }
+
+                function togglePw(mode) {
+                    document.getElementById(mode + 'open').classList.toggle('hidden');
+                    document.getElementById(mode + 'close').classList.toggle('hidden');
+                    document.getElementById(mode + 'password').type = document.getElementById(mode + 'password').type === 'password' ? 'text' : 'password';
+                }
+
+                const newfpw = document.getElementById('npassword');
+                const shield = document.getElementById('shield');
+                const securityMsg = document.getElementById('security-msg');
+
+                let lengthPattern = /^.{8,}$/;
+                let alphanumericPattern = /^(?=.*[\d\W]).+$/;
+                let uppercasePattern = /[A-Z]/;
+
+                newfpw.addEventListener('input', () => {
+                    let secureLevel = 0;
+                    lengthPattern.test(newfpw.value) ? ++secureLevel : '';
+                    document.getElementById('length-pattern').classList.toggle('line-through', lengthPattern.test(newfpw.value));
+                    document.getElementById('length-pattern').classList.toggle('text-neutral-600', lengthPattern.test(newfpw.value));
+                    alphanumericPattern.test(newfpw.value) ? ++secureLevel : '';
+                    document.getElementById('alphanumeric-pattern').classList.toggle('line-through', alphanumericPattern.test(newfpw.value));
+                    document.getElementById('alphanumeric-pattern').classList.toggle('text-neutral-600', alphanumericPattern.test(newfpw.value));
+                    uppercasePattern.test(newfpw.value) ? ++secureLevel : '';
+                    document.getElementById('uppercase-pattern').classList.toggle('line-through', uppercasePattern.test(newfpw.value));
+                    document.getElementById('uppercase-pattern').classList.toggle('text-neutral-600', uppercasePattern.test(newfpw.value));
+                    shield.classList.remove('text-neutral-400', 'text-red-900', 'text-yellow-600', 'text-green-800')
+                    shield.classList.add(newfpw.value.length === 0 ? 'text-neutral-400' : secureLevel <= 1 ? 'text-red-900' : secureLevel === 2 ? 'text-yellow-600' : 'text-green-800');
+                    securityMsg.classList.remove('text-red-800', 'text-yellow-500', 'text-green-700')
+                    securityMsg.classList.add(secureLevel <= 1 ? 'text-red-800' : secureLevel === 2 ? 'text-yellow-500' : 'text-green-700');
+                    securityMsg.innerText = secureLevel <= 1 ? 'WEAK' : secureLevel === 2 ? 'MEDIUM' : 'STRONG';
+                    document.getElementById('secure-level').value = secureLevel;
+                });
+            </script>
         </div>
     </main>
 </body>
+<?php session_unset();?>
 </html>

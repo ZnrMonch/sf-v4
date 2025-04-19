@@ -1,7 +1,7 @@
 <?php
     session_start();
     if (!isset($_COOKIE['id'])) {
-        $_SESSION['log-error'] = 'Error: Unauthorized access! Please login first.';
+        $_SESSION['log-error'] = "We can't take you there yet! Please log in first.";
         header("Location: access.php");
         exit();
     }
@@ -15,13 +15,20 @@
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
 
+        $userId = $user['user_id'];
+        $membership = $user['membership'];
         $username = $user['username'];
         $name = $user['name'];
         $email = $user['email'];
+        $college = $user['college'];
+        $yearsection = $user['yearsection'];
+        $bio = $user['bio'];
+        $bookmarks = $user['bookmarks'];
         $personalization = $user['personalization'];
         $dp = substr($personalization, 0, 2);
+        $bg = substr($personalization, 3);
         setcookie("personalization", $personalization, time() + (86400 * 30), "/");
-    }
+    }   
 ?>
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
@@ -76,7 +83,7 @@
             </ul>
         </nav>
         <menu class="flex flex-col gap-2">
-            <li><a href="bookmarks.html" class="flex items-center gap-8 pl-5 py-2 hover:opacity-60 duration-200 ease-linear">
+            <li><a href="bookmarks.php" class="flex items-center gap-8 pl-5 py-2 hover:opacity-60 duration-200 ease-linear">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="min-w-8 w-8">
                     <path fill-rule="evenodd" d="M7.502 6h7.128A3.375 3.375 0 0 1 18 9.375v9.375a3 3 0 0 0 3-3V6.108c0-1.505-1.125-2.811-2.664-2.94a48.972 48.972 0 0 0-.673-.05A3 3 0 0 0 15 1.5h-1.5a3 3 0 0 0-2.663 1.618c-.225.015-.45.032-.673.05C8.662 3.295 7.554 4.542 7.502 6ZM13.5 3A1.5 1.5 0 0 0 12 4.5h4.5A1.5 1.5 0 0 0 15 3h-1.5Z" clip-rule="evenodd" />
                     <path fill-rule="evenodd" d="M3 9.375C3 8.339 3.84 7.5 4.875 7.5h9.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-9.75A1.875 1.875 0 0 1 3 20.625V9.375ZM6 12a.75.75 0 0 1 .75-.75h.008a.75.75 0 0 1 .75.75v.008a.75.75 0 0 1-.75.75H6.75a.75.75 0 0 1-.75-.75V12Zm2.25 0a.75.75 0 0 1 .75-.75h3.75a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75ZM6 15a.75.75 0 0 1 .75-.75h.008a.75.75 0 0 1 .75.75v.008a.75.75 0 0 1-.75.75H6.75a.75.75 0 0 1-.75-.75V15Zm2.25 0a.75.75 0 0 1 .75-.75h3.75a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75ZM6 18a.75.75 0 0 1 .75-.75h.008a.75.75 0 0 1 .75.75v.008a.75.75 0 0 1-.75.75H6.75a.75.75 0 0 1-.75-.75V18Zm2.25 0a.75.75 0 0 1 .75-.75h3.75a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd" />
@@ -90,12 +97,7 @@
                 <p class="text-lg overflow-hidden text-clip">Profile</p>
             </a></li>
             <li><a href="admin.php" class="flex items-center gap-8 pl-5 py-2 hover:opacity-60 duration-200 ease-linear">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="min-w-8 w-8">
-                    <path d="M21 6.375c0 2.692-4.03 4.875-9 4.875S3 9.067 3 6.375 7.03 1.5 12 1.5s9 2.183 9 4.875Z" />
-                    <path d="M12 12.75c2.685 0 5.19-.586 7.078-1.609a8.283 8.283 0 0 0 1.897-1.384c.016.121.025.244.025.368C21 12.817 16.97 15 12 15s-9-2.183-9-4.875c0-.124.009-.247.025-.368a8.285 8.285 0 0 0 1.897 1.384C6.809 12.164 9.315 12.75 12 12.75Z" />
-                    <path d="M12 16.5c2.685 0 5.19-.586 7.078-1.609a8.282 8.282 0 0 0 1.897-1.384c.016.121.025.244.025.368 0 2.692-4.03 4.875-9 4.875s-9-2.183-9-4.875c0-.124.009-.247.025-.368a8.284 8.284 0 0 0 1.897 1.384C6.809 15.914 9.315 16.5 12 16.5Z" />
-                    <path d="M12 20.25c2.685 0 5.19-.586 7.078-1.609a8.282 8.282 0 0 0 1.897-1.384c.016.121.025.244.025.368 0 2.692-4.03 4.875-9 4.875s-9-2.183-9-4.875c0-.124.009-.247.025-.368a8.284 8.284 0 0 0 1.897 1.384C6.809 19.664 9.315 20.25 12 20.25Z" />
-                  </svg>                  
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor" class="min-w-8 w-8"><path d="M680-80q-83 0-141.5-58.5T480-280q0-83 58.5-141.5T680-480q83 0 141.5 58.5T880-280q0 83-58.5 141.5T680-80Zm-200 0q-139-35-229.5-159.5T160-516v-244l320-120 320 120v227q-26-13-58.5-20t-61.5-7q-116 0-198 82t-82 198q0 62 23.5 112T483-81q-1 0-1.5.5t-1.5.5Zm200-200q25 0 42.5-17.5T740-340q0-25-17.5-42.5T680-400q-25 0-42.5 17.5T620-340q0 25 17.5 42.5T680-280Zm0 120q31 0 57-14.5t42-38.5q-22-13-47-20t-52-7q-27 0-52 7t-47 20q16 24 42 38.5t57 14.5Z"/></svg>
                 <p class="text-lg overflow-hidden text-clip">Admin</p>
             </a></li>
         </menu>
@@ -127,14 +129,14 @@
             <hr class="my-5 w-full opacity-30 *:active:bg-neutral-300">
             <div class="w-full *:px-7.5 *:py-1 *:flex *:items-center *:gap-2 *:active:bg-neutral-300">
                 <a href="library.php" class="block w-full"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5"> <path d="M10.75 16.82A7.462 7.462 0 0 1 15 15.5c.71 0 1.396.098 2.046.282A.75.75 0 0 0 18 15.06v-11a.75.75 0 0 0-.546-.721A9.006 9.006 0 0 0 15 3a8.963 8.963 0 0 0-4.25 1.065V16.82ZM9.25 4.065A8.963 8.963 0 0 0 5 3c-.85 0-1.673.118-2.454.339A.75.75 0 0 0 2 4.06v11a.75.75 0 0 0 .954.721A7.506 7.506 0 0 1 5 15.5c1.579 0 3.042.487 4.25 1.32V4.065Z" /> </svg>Library</a>
-                <a href="bookmarks.html" class="block w-full"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5"> <path fill-rule="evenodd" d="M10 2c-1.716 0-3.408.106-5.07.31C3.806 2.45 3 3.414 3 4.517V17.25a.75.75 0 0 0 1.075.676L10 15.082l5.925 2.844A.75.75 0 0 0 17 17.25V4.517c0-1.103-.806-2.068-1.93-2.207A41.403 41.403 0 0 0 10 2Z" clip-rule="evenodd" /> </svg>Bookmarks</a>
+                <a href="bookmarks.php" class="block w-full"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5"> <path fill-rule="evenodd" d="M10 2c-1.716 0-3.408.106-5.07.31C3.806 2.45 3 3.414 3 4.517V17.25a.75.75 0 0 0 1.075.676L10 15.082l5.925 2.844A.75.75 0 0 0 17 17.25V4.517c0-1.103-.806-2.068-1.93-2.207A41.403 41.403 0 0 0 10 2Z" clip-rule="evenodd" /> </svg>Bookmarks</a>
                 <a href="profile.php" class="block w-full"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5"> <path fill-rule="evenodd" d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-5.5-2.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0ZM10 12a5.99 5.99 0 0 0-4.793 2.39A6.483 6.483 0 0 0 10 16.5a6.483 6.483 0 0 0 4.793-2.11A5.99 5.99 0 0 0 10 12Z" clip-rule="evenodd" /> </svg>Profile</a>
                
             </div>
             <hr class="my-5 w-full opacity-30 *:active:bg-neutral-300">
             <div class="w-full *:px-7.5 *:py-1 *:flex *:items-center *:gap-2 *:active:bg-neutral-300">
-                <a href="" class="block w-full text-red-700"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5"> <path fill-rule="evenodd" d="M3 4.25A2.25 2.25 0 0 1 5.25 2h5.5A2.25 2.25 0 0 1 13 4.25v2a.75.75 0 0 1-1.5 0v-2a.75.75 0 0 0-.75-.75h-5.5a.75.75 0 0 0-.75.75v11.5c0 .414.336.75.75.75h5.5a.75.75 0 0 0 .75-.75v-2a.75.75 0 0 1 1.5 0v2A2.25 2.25 0 0 1 10.75 18h-5.5A2.25 2.25 0 0 1 3 15.75V4.25Z" clip-rule="evenodd" /> <path fill-rule="evenodd" d="M6 10a.75.75 0 0 1 .75-.75h9.546l-1.048-.943a.75.75 0 1 1 1.004-1.114l2.5 2.25a.75.75 0 0 1 0 1.114l-2.5 2.25a.75.75 0 1 1-1.004-1.114l1.048-.943H6.75A.75.75 0 0 1 6 10Z" clip-rule="evenodd" /> </svg>Logout</a>
-                <a href="admin.php" class="block w-full"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5"> <path fill-rule="evenodd" d="M10 1c3.866 0 7 1.79 7 4s-3.134 4-7 4-7-1.79-7-4 3.134-4 7-4Zm5.694 8.13c.464-.264.91-.583 1.306-.952V10c0 2.21-3.134 4-7 4s-7-1.79-7-4V8.178c.396.37.842.688 1.306.953C5.838 10.006 7.854 10.5 10 10.5s4.162-.494 5.694-1.37ZM3 13.179V15c0 2.21 3.134 4 7 4s7-1.79 7-4v-1.822c-.396.37-.842.688-1.306.953-1.532.875-3.548 1.369-5.694 1.369s-4.162-.494-5.694-1.37A7.009 7.009 0 0 1 3 13.179Z" clip-rule="evenodd" /> </svg>Admin</a>
+                <a onclick="logOut()" class="block w-full text-red-700"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5"> <path fill-rule="evenodd" d="M3 4.25A2.25 2.25 0 0 1 5.25 2h5.5A2.25 2.25 0 0 1 13 4.25v2a.75.75 0 0 1-1.5 0v-2a.75.75 0 0 0-.75-.75h-5.5a.75.75 0 0 0-.75.75v11.5c0 .414.336.75.75.75h5.5a.75.75 0 0 0 .75-.75v-2a.75.75 0 0 1 1.5 0v2A2.25 2.25 0 0 1 10.75 18h-5.5A2.25 2.25 0 0 1 3 15.75V4.25Z" clip-rule="evenodd" /> <path fill-rule="evenodd" d="M6 10a.75.75 0 0 1 .75-.75h9.546l-1.048-.943a.75.75 0 1 1 1.004-1.114l2.5 2.25a.75.75 0 0 1 0 1.114l-2.5 2.25a.75.75 0 1 1-1.004-1.114l1.048-.943H6.75A.75.75 0 0 1 6 10Z" clip-rule="evenodd" /> </svg>Logout</a>
+                <a href="admin.php" class="block w-full"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor" class="size-5"><path d="M680-80q-83 0-141.5-58.5T480-280q0-83 58.5-141.5T680-480q83 0 141.5 58.5T880-280q0 83-58.5 141.5T680-80Zm-200 0q-139-35-229.5-159.5T160-516v-244l320-120 320 120v227q-26-13-58.5-20t-61.5-7q-116 0-198 82t-82 198q0 62 23.5 112T483-81q-1 0-1.5.5t-1.5.5Zm200-200q25 0 42.5-17.5T740-340q0-25-17.5-42.5T680-400q-25 0-42.5 17.5T620-340q0 25 17.5 42.5T680-280Zm0 120q31 0 57-14.5t42-38.5q-22-13-47-20t-52-7q-27 0-52 7t-47 20q16 24 42 38.5t57 14.5Z"/></svg>Admin</a>
             </div>
         </div>
         <!-- SCRIPT -->
@@ -147,48 +149,276 @@
                 mobNav.classList.toggle("flex");
                 overlay.classList.toggle("hidden");
             }
+
+            function logOut() {
+                document.cookie = "id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                document.cookie = "personalization=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                document.cookie = "role=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                window.location.href= "index.html";
+            }
         </script> 
     </nav>
     <!-- ================================================== MAIN ================================================== -->
-    <main class="ml-25 m-5 p-15 w-[calc(100vw-135px)] min-h-[calc(100vh-40px)] h-auto rounded-4xl flex flex-col gap-5 bg-[#eeeeee] z-2 text-dirty-brown drag-none">
-        <h1 class="mb-10 text-3xl font-bold text-[#585345] select-none">Profile</h1>
-        <button class="absolute top-20 right-20 flex items-center gap-1 px-5 py-1 rounded-md bg-dirty-brown font-semibold text-sm text-white select-none cursor-pointer hover:opacity-90 active:scale-95 duration-100" onclick="logout()">
-            <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="22px" fill="#ffffff"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z"/></svg>
-            Logout
-        </button>
-        <script>
-            function logout() {
-                document.cookie = "id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-                document.cookie = "role=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-                window.location.href = "index.html";
-            }
-        </script>
-        <div class="flex-1 w-full flex">
-            <section class="w-80">
-                <div class="p-5 py-10 w-full h-120 rounded-xl bg-lgreen flex flex-col items-center gap-1">
-                    <div class="relative">
-                        <img src="resources/dp/RJ.svg" alt="" class="size-35 rounded-full border-4 border-dirty-brown">
-                        <button class="absolute top-0 right-0 -translate-x-1/2 translate-y-1/2 cursor-pointer hover:scale-120 active:scale-90 duration-100">
-                            <svg class="p-1 size-6 rounded-full bg-dirty-brown text-off-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><!-- Icon from Material Symbols by Google - https://github.com/google/material-design-icons/blob/master/LICENSE --><path fill="currentColor" d="M3 21v-4.25L16.2 3.575q.3-.275.663-.425t.762-.15t.775.15t.65.45L20.425 5q.3.275.438.65T21 6.4q0 .4-.137.763t-.438.662L7.25 21zM17.6 7.8L19 6.4L17.6 5l-1.4 1.4z"/></svg>
-                        </button>
+    <main class="ml-25 m-5 p-15 w-[calc(100vw-135px)] min-h-[calc(100vh-40px)] h-auto rounded-4xl flex flex-col bg-[#eeeeee] z-2 text-dirty-brown drag-none
+    max-tablet:m-0 max-tablet:p-5 max-tablet:min-h-screen max-tablet:size-full max-tablet:rounded-none">
+        <div id="overlay-customize-profile" onclick="toggleFlex('customize-profile')" class="fixed top-0 left-0 z-2 size-full bg-black/40 hidden"></div>
+        <div id="overlay-edit-intro" onclick="toggleEditIntro()" class="fixed top-0 left-0 z-2 size-full bg-black/40 hidden"></div>
+        <div class="relative w-full h-70 max-big-phone:h-50 rounded-2xl <?php echo $bg; ?>">
+            <button onclick="toggleFlex('customize-profile')" class="absolute top-4 right-5 hover:brightness-125 cursor-pointer"><svg class="size-5 max-big-phone:size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><!-- Icon from Material Symbols by Google - https://github.com/google/material-design-icons/blob/master/LICENSE --><path fill="currentColor" d="M10 15q-.425 0-.712-.288T9 14v-2.425q0-.4.15-.763t.425-.637l8.6-8.6q.3-.3.675-.45t.75-.15q.4 0 .763.15t.662.45L22.425 3q.275.3.425.663T23 4.4t-.137.738t-.438.662l-8.6 8.6q-.275.275-.637.438t-.763.162zm9.6-9.2l1.425-1.4l-1.4-1.4L18.2 4.4zM5 21q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h6.5q.35 0 .575.175t.35.45t.087.55t-.287.525l-4.65 4.65q-.275.275-.425.638T7 10.75V15q0 .825.588 1.412T9 17h4.225q.4 0 .763-.15t.637-.425L19.3 11.75q.25-.25.525-.288t.55.088t.45.35t.175.575V19q0 .825-.587 1.413T19 21z"/></svg></button>     
+        </div>
+        <form action="customize.php" method="post" id="customize-profile" class="fixed z-3 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-10 w-120 rounded-xl hidden flex-col gap-5 drop-shadow-lg bg-off-white text-dirty-brown **:outline-none">
+            <div class="relative">
+                <button onclick="toggleFlex('customize-profile')" type="button" class="absolute -top-2.5 -right-2.5 cursor-pointer hover:opacity-80 active:scale-95 duration-200"><svg class="size-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></button>
+                <h2 class="py-5 font-bold text-2xl text-center">Customize Profile</h2>
+            </div>
+            <div class="flex flex-col gap-1">
+                <h2 class="font-semibold select-none">Background Cover:</h2>
+                <div class="h-15 flex gap-1 *:flex-1 *:h-full *:rounded-md font-semibold text-sm select-none **:cursor-pointer">
+                    <input type="radio" name="bg" id="golden-blush" value="golden-blush" class="peer/gb" checked hidden>
+                    <input type="radio" name="bg" id="pink-panther" value="pink-panther" class="peer/pp" hidden>
+                    <input type="radio" name="bg" id="dusty-grass" value="dusty-grass" class="peer/dg" hidden>
+                    <input type="radio" name="bg" id="snowy-mint" value="snowy-mint" class="peer/sm" hidden>
+                    <div class="bg-golden-blush group opacity-40 peer-checked/gb:opacity-100">
+                        <label for="golden-blush" class="size-full items-center justify-center hidden group-hover:flex">Golden Blush</label>
                     </div>
-                    
-                    <h1 class="text-xl text-center font-bold"><?php echo $name;?></h1>
-                    <div class="relative mt-10 w-full flex flex-col gap-2 text-center *:py-0.5 *:rounded-md">
-                        <button class="absolute -top-8 right-0 px-5 bg-dirty-brown flex items-center gap-1 text-off-white text-sm cursor-pointer hover:opacity-80 active:scale-90 duration-100">
-                            <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><!-- Icon from MingCute Icon by MingCute Design - https://github.com/Richard9394/MingCute/blob/main/LICENSE --><g fill="none" fill-rule="evenodd"><path d="m12.594 23.258l-.012.002l-.071.035l-.02.004l-.014-.004l-.071-.036q-.016-.004-.024.006l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.016-.018m.264-.113l-.014.002l-.184.093l-.01.01l-.003.011l.018.43l.005.012l.008.008l.201.092q.019.005.029-.008l.004-.014l-.034-.614q-.005-.019-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.003-.011l.018-.43l-.003-.012l-.01-.01z"/><path fill="currentColor" d="m14.535 12.225l4.242 4.243l-4.243 4.243a1 1 0 0 1-.707.293H11a1 1 0 0 1-1-1v-2.829a1 1 0 0 1 .293-.707zM17 2a2 2 0 0 1 1.995 1.85L19 4v4.02a5 5 0 0 0-4.27 1.192l-.196.185l-5.656 5.657a3 3 0 0 0-.872 1.923l-.007.198v2.829a3 3 0 0 0 .11.804l.06.192H5a2 2 0 0 1-1.995-1.85L3 19V4a2 2 0 0 1 1.85-1.995L5 2zm3.191 8.811a3 3 0 0 1 0 4.243L15.95 10.81a3 3 0 0 1 4.242 0ZM11 6H7a1 1 0 0 0 0 2h4a1 1 0 1 0 0-2"/></g></svg>
-                            Edit
-                        </button>
-                        <p class="bg-slgreen"><?php echo '@' . strtolower($username);?></p>
-                        <p class="bg-slgreen"><?php echo strtolower($email);?></p>
+                    <div class="bg-pink-panther group opacity-40 peer-checked/pp:opacity-100">
+                        <label for="pink-panther" class="size-full items-center justify-center hidden group-hover:flex">Pink Panther</label>
+                    </div>
+                    <div class="bg-dusty-grass group opacity-40 peer-checked/dg:opacity-100">
+                        <label for="dusty-grass" class="size-full items-center justify-center hidden group-hover:flex">Dusty Grass</label>
+                    </div>
+                    <div class="bg-snowy-mint group opacity-40 peer-checked/sm:opacity-100">
+                        <label for="snowy-mint" class="size-full items-center justify-center hidden group-hover:flex">Snowy Mint</label>
                     </div>
                 </div>
-            </section>
-            <section>
+            </div>
+            <div class="w-full h-35">
+                <h2 class="font-semibold select-none">Profile Picture:</h2>
+                <div class="size-full grid grid-cols-5 items-center justify-center ">
+                    <input type="radio" name="dp" id="dp1" value="01" class="peer/dp1" checked hidden>
+                    <input type="radio" name="dp" id="dp2" value="02" class="peer/dp2" hidden>
+                    <input type="radio" name="dp" id="dp3" value="03" class="peer/dp3" hidden>
+                    <input type="radio" name="dp" id="dp4" value="04" class="peer/dp4" hidden>
+                    <input type="radio" name="dp" id="dp5" value="05" class="peer/dp5" hidden>
+                    <input type="radio" name="dp" id="dp6" value="06" class="peer/dp6" hidden>
+                    <input type="radio" name="dp" id="dp7" value="07" class="peer/dp7" hidden>
+                    <input type="radio" name="dp" id="dp8" value="08" class="peer/dp8" hidden>
+                    <input type="radio" name="dp" id="dp9" value="09" class="peer/dp9" hidden>
+                    <input type="radio" name="dp" id="dp10" value="10" class="peer/dp10" hidden>
+                    <div class="peer-checked/dp1:opacity-100 opacity-40">
+                        <label for="dp1" class="size-15"><img src="resources/dp/01.svg" alt="" class="size-15 rounded-full border-2 border-dirty-brown cursor-pointer"></label>
+                    </div>
+                    <div class="peer-checked/dp2:opacity-100 opacity-40">
+                        <label for="dp2" class="size-15"><img src="resources/dp/02.svg" alt="" class="size-15 rounded-full border-2 border-dirty-brown cursor-pointer"></label>
+                    </div>
+                    <div class="peer-checked/dp3:opacity-100 opacity-40">
+                        <label for="dp3" class="size-15"><img src="resources/dp/03.svg" alt="" class="size-15 rounded-full border-2 border-dirty-brown cursor-pointer"></label>
+                    </div>
+                    <div class="peer-checked/dp4:opacity-100 opacity-40">
+                        <label for="dp4" class="size-15"><img src="resources/dp/04.svg" alt="" class="size-15 rounded-full border-2 border-dirty-brown cursor-pointer"></label>
+                    </div>
+                    <div class="peer-checked/dp5:opacity-100 opacity-40">
+                        <label for="dp5" class="size-15"><img src="resources/dp/05.svg" alt="" class="size-15 rounded-full border-2 border-dirty-brown cursor-pointer"></label>
+                    </div>
+                    <!-- lower -->
+                    <div class="peer-checked/dp6:opacity-100 opacity-40">
+                        <label for="dp6" class="size-15"><img src="resources/dp/06.svg" alt="" class="size-15 rounded-full border-2 border-dirty-brown cursor-pointer"></label>
+                    </div>
+                    <div class="peer-checked/dp7:opacity-100 opacity-40">
+                        <label for="dp7" class="size-15"><img src="resources/dp/07.svg" alt="" class="size-15 rounded-full border-2 border-dirty-brown cursor-pointer"></label>
+                    </div>
+                    <div class="peer-checked/dp8:opacity-100 opacity-40">
+                        <label for="dp8" class="size-15"><img src="resources/dp/08.svg" alt="" class="size-15 rounded-full border-2 border-dirty-brown cursor-pointer"></label>
+                    </div>
+                    <div class="peer-checked/dp9:opacity-100 opacity-40">
+                        <label for="dp9" class="size-15"><img src="resources/dp/09.svg" alt="" class="size-15 rounded-full border-2 border-dirty-brown cursor-pointer"></label>
+                    </div>
+                    <div class="peer-checked/dp10:opacity-100 opacity-40">
+                        <label for="dp10" class="size-15"><img src="resources/dp/10.svg" alt="" class="size-15 rounded-full border-2 border-dirty-brown cursor-pointer"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="my-5 flex justify-center">
+                <input type="text" name="userid" id="userid" value="<?php echo $userId;?>" hidden>
+                <button type="submit" name="save-cp" class="px-5 py-1 w-30 rounded-md bg-lgreen font-bold hover:opacity-80 duration-100 cursor-pointer">Save</button>
+            </div>
+        </form>
+        <div class="flex-1 relative w-full flex flex-col gap-5 max-big-phone:gap-10">
+            <div class="group absolute -top-25 max-big-phone:-top-20 left-10 max-big-phone:left-1/2 max-big-phone:-translate-x-1/2 size-50 max-big-phone:size-40 rounded-full border-6 border-off-white overflow-clip">
+                <img src="resources/dp/<?php echo $dp;?>.svg" alt="" class="relative z-1 select-none">
+            </div>
+            <div class="pl-70 pr-0 py-3 max-big-phone:p-0 max-big-phone:pt-37.5 w-full h-25 flex justify-between">
+                <div class="h-full flex flex-col max-big-phone:items-center justify-end gap-1 **:leading-none">
+                    <h1 class="font-bold text-2xl max-big-phone:text-xl"><?php echo $name;?> <i class="text-lg">(<?php echo '@' . strtolower($username);?>)</i></h1>
+                    <h2 class="opacity-80 flex items-center gap-2 max-big-phone:text-sm"><?php echo ucfirst($membership);?><span>•</span><span><?php echo $college == 'HSU' ? 'Higher School ng UMak' : ($college == 'CCIS' ? 'College of Computing and Information Sciences' : ''); ?></span></h2>
+                    <i class="opacity-80 text-sm max-big-phone:text-xs">Joined in <span class="font-bold">January 2023</span></i>
+                </div>
+                <div>
+                    <button onclick="logOut()" class="px-5 py-0.5 rounded-md bg-red-900 text-off-white text-sm select-none cursor-pointer hover:opacity-80 active:scale-95 duration-200">
+                        Sign out
+                    </button>
+                </div>
+            </div>
+            <div class="flex-1 w-full flex max-big-phone:flex-col gap-5">
+                <div class="relative p-5 w-100 max-tablet:w-70 max-big-phone:w-full rounded-xl bg-zinc-200 border border-zinc-300 flex flex-col gap-5 **:leading-none">
+                    <button onclick="toggleEditIntro()" class="absolute top-5 right-5 hover:brightness-125 cursor-pointer"><svg class="size-5 max-big-phone:size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><!-- Icon from Material Symbols by Google - https://github.com/google/material-design-icons/blob/master/LICENSE --><path fill="currentColor" d="M10 15q-.425 0-.712-.288T9 14v-2.425q0-.4.15-.763t.425-.637l8.6-8.6q.3-.3.675-.45t.75-.15q.4 0 .763.15t.662.45L22.425 3q.275.3.425.663T23 4.4t-.137.738t-.438.662l-8.6 8.6q-.275.275-.637.438t-.763.162zm9.6-9.2l1.425-1.4l-1.4-1.4L18.2 4.4zM5 21q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h6.5q.35 0 .575.175t.35.45t.087.55t-.287.525l-4.65 4.65q-.275.275-.425.638T7 10.75V15q0 .825.588 1.412T9 17h4.225q.4 0 .763-.15t.637-.425L19.3 11.75q.25-.25.525-.288t.55.088t.45.35t.175.575V19q0 .825-.587 1.413T19 21z"/></svg></button>
+                    <h2 class="font-bold text-xl max-big-phone:text-lg select-none">Introduction</h2>
+                    <p class="text-justify max-big-phone:text-sm">
+                        <?php echo $bio ?>
+                    </p>
+                    <div id="profile-info" class="flex big-phone:flex-col gap-5 max-big-phone:text-sm">
+                        <p class="max-big-phone:flex-1 flex flex-col gap-1">
+                            <b class="select-none whitespace-nowrap">Year and Section:</b>
+                            <span><?php echo $yearsection ?></span>
+                        </p>
+                        <p class="flex flex-col gap-1">
+                            <b class="select-none whitespace-nowrap">Email Address:</b>
+                            <span class="break-all"><?php echo $email ?></span>
+                        </p>
+                    </div>
+                    <div id="edit-intro" class="fixed z-3 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-10 w-120 rounded-xl hidden flex-col justify-evenly gap-5 drop-shadow-lg bg-off-white text-dirty-brown **:outline-none">
+                        <div class="relative">
+                            <button onclick="toggleEditIntro()" type="button" class="absolute -top-2.5 -right-2.5 cursor-pointer hover:opacity-80 active:scale-95 duration-200"><svg class="size-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></button>
+                            <h2 class="py-5 font-bold text-2xl text-center">Edit Introduction</h2>
+                        </div>    
+                        <form class="flex flex-col gap-5 *:relative">
+                            <span>
+                                <input type="text" name="name" id="name" required class="peer px-2 py-1.5 w-full rounded-md border-2 border-dirty-brown text-sm">
+                                <label for="name" class="absolute top-2.5 left-2 px-1 bg-slgreen leading-none select-none opacity-70 peer-valid:-translate-y-4 peer-valid:text-xs peer-valid:opacity-100 peer-focus:-translate-y-4 peer-focus:text-xs peer-focus:opacity-100 duration-200">Name</label>
+                            </span>
+                            <span class="flex *:flex-1 *:flex *:items-center *:justify-center *:gap-1">
+                                <span>
+                                    <input type="radio" name="college" id="CCIS" onchange="toggleInputs('ccis-input'); toggleInputs('hsu-input');" class="peer">
+                                    <label for="CCIS" class="font-semibold select-none opacity-50 peer-checked:opacity-100">CCIS</label>
+                                </span>
+                                <span>
+                                    <input type="radio" name="college" id="HSU" onchange="toggleInputs('ccis-input'); toggleInputs('hsu-input');" class="peer">
+                                    <label for="HSU" class="font-semibold select-none opacity-50 peer-checked:opacity-100">HSU</label>
+                                </span>
+                            </span>
+                            <script>
+                                const toggleInputs = (id) => {
+                                    document.getElementById(id).classList.toggle('flex');
+                                    document.getElementById(id).classList.toggle('hidden');
+                                };
+                            </script>
+                            <!-- COLLEGE STUDENT -->
+                            <div id="ccis-input" class="flex gap-2.5 *:relative">
+                                <span class="flex-1">
+                                    <label for="year" class="absolute top-2.5 left-2 px-1 bg-slgreen leading-none select-none opacity-100 -translate-y-4 text-xs">Year</label>
+                                    <select name="year" id="year" class="px-2 py-1.5 w-full rounded-md border-2 border-dirty-brown text-sm">
+                                        <option value="I">I</option>
+                                        <option value="II">II</option>
+                                        <option value="III">III</option>
+                                        <option value="IV">IV</option>
+                                    </select>  
+                                </span>
+                                <span class="flex-3">
+                                    <input type="text" name="section" id="section" required class="peer px-2 py-1.5 w-full rounded-md border-2 border-dirty-brown text-sm">
+                                    <label for="section" class="absolute top-2.5 left-2 px-1 bg-slgreen leading-none select-none opacity-70 peer-valid:-translate-y-4 peer-valid:text-xs peer-valid:opacity-100 peer-focus:-translate-y-4 peer-focus:text-xs peer-focus:opacity-100 duration-200">Section</label>
+                                </span>
+                            </div>
+                            <!-- SENIOR HIGH STUDENT -->
+                            <div id="hsu-input" class="hidden gap-2.5 *:relative">
+                                <span class="flex-1">
+                                    <label for="shs-grade" class="absolute top-2.5 left-2 px-1 bg-slgreen leading-none select-none opacity-100 -translate-y-4 text-xs">Year</label>
+                                    <select name="shs-grade" id="shs-grade" class="px-2 py-1.5 w-full rounded-md border-2 border-dirty-brown text-sm">
+                                        <option value="G11">Grade 11</option>
+                                        <option value="G12">Grade 12</option>
+                                    </select>  
+                                </span>
+                                <span class="flex-3">
+                                    <input type="text" name="shs-section" id="shs-section" required class="peer px-2 py-1.5 w-full rounded-md border-2 border-dirty-brown text-sm">
+                                    <label for="shs-section" class="absolute top-2.5 left-2 px-1 bg-slgreen leading-none select-none opacity-70 peer-valid:-translate-y-4 peer-valid:text-xs peer-valid:opacity-100 peer-focus:-translate-y-4 peer-focus:text-xs peer-focus:opacity-100 duration-200">Section</label>
+                                </span>
+                            </div>
+                            <span>
+                                <textarea type="text" name="bio" id="bio" maxlength="200" required class="peer px-2 py-1.5 w-full h-20 rounded-md border-2 border-dirty-brown text-sm resize-none"></textarea>
+                                <label for="bio" class="absolute top-2.5 left-2 px-1 bg-slgreen leading-none select-none opacity-70 peer-valid:-translate-y-4 peer-valid:text-xs peer-valid:opacity-100 peer-focus:-translate-y-4 peer-focus:text-xs peer-focus:opacity-100 duration-200">Bio</label>
+                                <i class="text-sm select-none">*maximum of 200 characters</i>
+                            </span>
+                            <div class="flex justify-center">
+                                <button class="px-5 py-1 w-30 rounded-md bg-lgreen font-bold hover:opacity-80 duration-200 cursor-pointer">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                    <script>
+                        function toggleEditIntro() {
+                            let element = document.getElementById('edit-intro');
+                            document.getElementById('overlay-edit-intro').classList.toggle('hidden');
+                            element.classList.toggle('hidden');
+                            element.classList.toggle('flex');
 
-            </section>
+                            document.getElementById('name').value = "<?php echo $name;?>";
+                            document.getElementById('bio').value = "<?php echo $bio;?>";
 
-        </div> 
+                            if ('<?php echo $college ?>' == 'CCIS') {
+                                document.getElementById('year').value = "<?php echo explode('-', $yearsection)[0];?>";
+                                document.getElementById('section').value = "<?php echo explode('-', $yearsection)[1];?>";
+                                document.getElementById('CCIS').checked = true;
+                            } else if ('<?php echo $college ?>' == 'HSU') {
+                                document.getElementById('shs-grade').value = "<?php echo explode('-', $yearsection)[0];?>";
+                                document.getElementById('shs-section').value = "<?php echo explode('-', $yearsection)[1];?>"
+                                document.getElementById('HSU').checked = true;
+                                toggleInputs('ccis-input'); toggleInputs('hsu-input');
+                            }
+                        }
+                    </script>
+                </div>
+                <div class="relative flex-1 mt-5 flex flex-col gap-2.5 **:leading-none">
+                    <div class="flex items-center justify-between select-none">
+                        <h2 class="text-xl max-big-phone:text-lg font-bold">Bookmarks</h2>
+                        <a href="library.php" class="text-sm font-bold">Show More</a>
+                    </div>
+                    <div class="flex-1 relative">
+                        <div class="absolute bottom-0 w-full h-1/2 max-tablet:h-3/4 bg-linear-to-b from-transparent to-off-white"></div>
+                        <div class="flex flex-col gap-2 *:h-20 max-tablet:*:h-27 max-big-phone:*:h-20">
+                        <?php
+                            $allBookmarks = array_slice(explode('-', $bookmarks), 0, 4);
+                            $placeholders = implode(',', array_fill(0, count($allBookmarks), '?'));
+
+                            $stmt = $conn->prepare("SELECT * FROM theses WHERE thesis_id IN ($placeholders)");
+                            $stmt->bind_param(str_repeat('s', count($allBookmarks)), ...$allBookmarks);
+                            $stmt->execute();
+                            $result = $stmt->get_result();
+
+                            $theses = $result->fetch_all(MYSQLI_ASSOC);
+                            
+
+                            foreach ($theses as $thesis): 
+                                $textColor = $thesis['course'] === "BSCS-AD" ? "text-violet-950" : ($thesis['course'] === "BSIT-NS" ? "text-sky-950" : "text-yellow-950"); ?>
+                                <div class="relative w-full px-5 p-2.5 h-25 max-big-phone:h-27.5 rounded-xl bg-neutral-100 border border-neutral-300 hover:border-dirty-brown/70 flex gap-2.5">
+                                    <div class="flex-1 flex flex-col items-start justify-center select-text">
+                                        <h3 class="font-bold text-base leading-4 max-big-phone:text-sm max-big-phone:leading-3 <?= $textColor ?>">
+                                            <?= htmlspecialchars($thesis['title']) ?>
+                                            <?php if (trim($thesis['course']) !== "BSCS-AD" && trim($thesis['course']) !== "BSIT-NS"): ?>
+                                                <i class="max-big-phone:mb-0.5 px-2 rounded-full bg-yellow-800/80 text-xs text-off-white select-none">
+                                                    <?= htmlspecialchars($thesis['course']) ?>
+                                                </i>
+                                            <?php endif; ?>
+                                        </h3>
+                                        <i class="leading-none text-sm max-big-phone:text-xs">
+                                            <?php
+                                                $authors = explode("-", $thesis['authors']);
+                                                echo htmlspecialchars(implode(", ", $authors));
+                                            ?>
+                                        </i>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            function toggleFlex(targetElement) {
+                let element = document.getElementById(targetElement);
+                let overlay = document.getElementById('overlay-' + targetElement);
+                overlay.classList.toggle('hidden');
+                element.classList.toggle('hidden');
+                element.classList.toggle('flex');
+            }
+        </script>
     </main>
 </body>
 </html>
