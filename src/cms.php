@@ -78,7 +78,7 @@ if (isset($_POST['u-act'])) {
         $stmt->close();
 
         $_SESSION['success'] = 'Successfully archived account with an ID of ' . $padded_a_data . '.';
-        logAction($conn, 'archive', 'account', $a_data, $_COOKIE['id']);
+        logAction($conn, 'archived', 'account', $a_data, $_COOKIE['id']);
     }
 
     // RETRIEVE

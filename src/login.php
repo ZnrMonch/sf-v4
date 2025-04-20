@@ -36,8 +36,9 @@ if (isset($_POST['login'])) {
             $userId = $result->fetch_assoc()['user_id'] ?? null;
             $stmt->close();
             
+            $_SESSION['success'] = 'Success! You are now logged in.';
             setcookie("id", $userId, time() + (86400 * 30), "/");
-            setcookie("role", "regular", time() + (86400 * 30), "/");;
+            setcookie("role", $user['role'], time() + (86400 * 30), "/");;
         }
         
     } else {
@@ -90,8 +91,40 @@ if (isset($_POST['register'])) {
                 $userId = $result->fetch_assoc()['user_id'] ?? null;
                 $stmt->close();
                 
+                $_SESSION['success'] = 'Success! Account created successfully. Welcome user!';
                 setcookie("id", $userId, time() + (86400 * 30), "/");
                 setcookie("role", "regular", time() + (86400 * 30), "/");
+
+                $userId = '';
+                $stmt = $conn->prepare("SELECT user_id FROM accounts WHERE email = ?");
+                $stmt->bind_param('s', $userEmail);
+                $stmt->execute();
+                $stmt->bind_result($userId);
+                $stmt->fetch();
+                $stmt->close();
+
+                $lastRefId = '';
+                $stmt = $conn->prepare("SELECT reference_id FROM logs WHERE reference_id LIKE 'ACT#%' ORDER BY CAST(SUBSTRING_INDEX(reference_id, '#', -1) AS UNSIGNED) DESC LIMIT 1");
+                $stmt->execute();
+                $stmt->bind_result($lastRefId);
+                $stmt->fetch();
+                $stmt->close();
+
+                if ($lastRefId) {
+                    $lastNum = (int)substr($lastRefId, 4);
+                    $newId = 'ACT#' . str_pad($lastNum + 1, 6, '0', STR_PAD_LEFT);
+                } else {
+                    $newId = 'ACT#000001';
+                }
+
+                $type = 'account';
+                $operation = 'added';
+                $details = "Created a new user with an ID of [ID#" . str_pad($userId, 4, '0', STR_PAD_LEFT) . "].";
+
+                $stmt = $conn->prepare("INSERT INTO logs (reference_id, type, operation, date, details, initiator) VALUES (?, ?, ?, NOW(), ?, ?)");
+                $stmt->bind_param('sssss', $newId, $type, $operation, $details, $userEmail);
+                $stmt->execute();
+                $stmt->close();
             }
         } else {
             $_SESSION['reg-error'] = 'Error! Robot verification failed, please try again.';
@@ -223,55 +256,7 @@ if (isset($_POST['change-pw'])) {
 
         setcookie("email", '', time() - 3600, '/');
         $_SESSION['fpw-success'] = 'Success! Password changed successfully.';
-        header("Location: fpw.php");
+        header("Location: access.php");
         exit();
     }
 }
-
-function logAction($conn, $operation, $itemType, $itemIds, $initiatorId) {
-    $initiatorEmail = '';
-    $lastRefId = '';
-
-    // Get initiator's email
-    $stmt = $conn->prepare("SELECT email FROM accounts WHERE user_id = ?");
-    $stmt->bind_param('i', $initiatorId);
-    $stmt->execute();
-    $stmt->bind_result($initiatorEmail);
-    $stmt->fetch();
-    $stmt->close();
-
-    // Ensure $itemIds is an array
-    if (!is_array($itemIds)) {
-        $itemIds = [$itemIds];
-    }
-
-    $prefix = $itemType === 'thesis' ? 'THS#' : 'ACT#';
-
-    foreach ($itemIds as $id) {
-        // Get last reference ID for prefix
-        $stmt = $conn->prepare("SELECT reference_id FROM logs WHERE reference_id LIKE ? ORDER BY CAST(SUBSTRING_INDEX(reference_id, '#', -1) AS UNSIGNED) DESC LIMIT 1");
-        $likePattern = $prefix . '%';
-        $stmt->bind_param('s', $likePattern);
-        $stmt->execute();
-        $stmt->bind_result($lastRefId);
-        $stmt->fetch();
-        $stmt->close();
-
-        if ($lastRefId) {
-            $lastNum = (int)substr($lastRefId, 4);
-            $newId = $prefix . str_pad($lastNum + 1, 6, '0', STR_PAD_LEFT);
-        } else {
-            $newId = $prefix . '000001';
-        }
-
-        // Build log details
-        $details = ucfirst($operation) . " " . ucfirst($itemType) . " with an ID of [ID#" . str_pad($id, 4, '0', STR_PAD_LEFT) . "].";
-
-        // Insert log entry
-        $stmt = $conn->prepare("INSERT INTO logs (reference_id, type, operation, date, details, initiator) VALUES (?, ?, ?, NOW(), ?, ?)");
-        $stmt->bind_param('sssss', $newId, $itemType, $operation, $details, $initiatorEmail);
-        $stmt->execute();
-        $stmt->close();
-    }
-}
-

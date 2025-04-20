@@ -21,7 +21,12 @@
         $name = $user['name'];
         $email = $user['email'];
         $college = $user['college'];
-        $yearsection = $user['yearsection'];
+        $yearsection = $user['yearsection'] ?? '';
+        if (!empty($yearsection)) {
+            $yearsection = explode("-", $yearsection);
+        }
+        $year = $yearsection[0] ?? '';
+        $section = $yearsection[1] ?? '';
         $bio = $user['bio'];
         $bookmarks = $user['bookmarks'];
         $personalization = $user['personalization'];
@@ -150,11 +155,19 @@
         </script> 
     </nav>
     <!-- ================================================== MAIN ================================================== -->
-    <!-- ================================================== MAIN ================================================== -->
+    <?php
+        $success = $_SESSION['success'] ?? '';
+
+        if ($success) {
+            echo "<div class='absolute top-10 left-1/2 -translate-x-1/2 p-2 px-5 w-100 rounded-xl border-2 bg-[#d9ead3] border-[#b6d7a8] text-[#274e13] select-none leading-none z-5 animate-downfadeinout delay-200'>" . $success . "</div>";
+        }
+
+        session_unset();
+    ?>
     <main class="ml-25 m-5 p-15 w-[calc(100vw-135px)] min-h-[calc(100vh-40px)] h-auto rounded-4xl flex flex-col bg-[#eeeeee] z-2 text-dirty-brown drag-none
     max-tablet:m-0 max-tablet:p-5 max-tablet:min-h-screen max-tablet:size-full max-tablet:rounded-none">
         <div id="overlay-customize-profile" onclick="toggleFlex('customize-profile')" class="fixed top-0 left-0 z-2 size-full bg-black/40 hidden"></div>
-        <div id="overlay-edit-intro" onclick="toggleEditIntro()" class="fixed top-0 left-0 z-2 size-full bg-black/40 hidden"></div>
+        <div id="overlay-edit-intro" onclick="toggleEditIntro()" class="fixed top-0 left-0 z-3 size-full bg-black/40 hidden"></div>
         <div class="relative w-full h-70 max-big-phone:h-50 rounded-2xl <?php echo $bg; ?>">
             <button onclick="toggleFlex('customize-profile')" class="absolute top-4 right-5 hover:brightness-125 cursor-pointer"><svg class="size-5 max-big-phone:size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><!-- Icon from Material Symbols by Google - https://github.com/google/material-design-icons/blob/master/LICENSE --><path fill="currentColor" d="M10 15q-.425 0-.712-.288T9 14v-2.425q0-.4.15-.763t.425-.637l8.6-8.6q.3-.3.675-.45t.75-.15q.4 0 .763.15t.662.45L22.425 3q.275.3.425.663T23 4.4t-.137.738t-.438.662l-8.6 8.6q-.275.275-.637.438t-.763.162zm9.6-9.2l1.425-1.4l-1.4-1.4L18.2 4.4zM5 21q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h6.5q.35 0 .575.175t.35.45t.087.55t-.287.525l-4.65 4.65q-.275.275-.425.638T7 10.75V15q0 .825.588 1.412T9 17h4.225q.4 0 .763-.15t.637-.425L19.3 11.75q.25-.25.525-.288t.55.088t.45.35t.175.575V19q0 .825-.587 1.413T19 21z"/></svg></button>     
         </div>
@@ -261,7 +274,7 @@
                     <div id="profile-info" class="flex big-phone:flex-col gap-5 max-big-phone:text-sm">
                         <p class="max-big-phone:flex-1 flex flex-col gap-1">
                             <b class="select-none whitespace-nowrap">Year and Section:</b>
-                            <span><?php echo $yearsection ?></span>
+                            <span><?php echo !empty($yearsection) ? implode(' - ', $yearsection) : ''?></span>
                         </p>
                         <p class="flex flex-col gap-1">
                             <b class="select-none whitespace-nowrap">Email Address:</b>
@@ -273,18 +286,18 @@
                             <button onclick="toggleEditIntro()" type="button" class="absolute -top-2.5 -right-2.5 cursor-pointer hover:opacity-80 active:scale-95 duration-200"><svg class="size-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></button>
                             <h2 class="py-5 font-bold text-2xl text-center">Edit Introduction</h2>
                         </div>    
-                        <form class="flex flex-col gap-5 *:relative">
+                        <form action="update.php" method="post" class="flex flex-col gap-5 *:relative">
                             <span>
                                 <input type="text" name="name" id="name" required class="peer px-2 py-1.5 w-full rounded-md border-2 border-dirty-brown text-sm">
                                 <label for="name" class="absolute top-2.5 left-2 px-1 bg-slgreen leading-none select-none opacity-70 peer-valid:-translate-y-4 peer-valid:text-xs peer-valid:opacity-100 peer-focus:-translate-y-4 peer-focus:text-xs peer-focus:opacity-100 duration-200">Name</label>
                             </span>
                             <span class="flex *:flex-1 *:flex *:items-center *:justify-center *:gap-1">
                                 <span>
-                                    <input type="radio" name="college" id="CCIS" onchange="toggleInputs('ccis-input'); toggleInputs('hsu-input');" class="peer">
+                                    <input type="radio" name="college" value="ccis" id="CCIS" onchange="toggleInputs('ccis-input'); toggleInputs('hsu-input');" class="peer" checked>
                                     <label for="CCIS" class="font-semibold select-none opacity-50 peer-checked:opacity-100">CCIS</label>
                                 </span>
                                 <span>
-                                    <input type="radio" name="college" id="HSU" onchange="toggleInputs('ccis-input'); toggleInputs('hsu-input');" class="peer">
+                                    <input type="radio" name="college" value="hsu" id="HSU" onchange="toggleInputs('ccis-input'); toggleInputs('hsu-input');" class="peer">
                                     <label for="HSU" class="font-semibold select-none opacity-50 peer-checked:opacity-100">HSU</label>
                                 </span>
                             </span>
@@ -330,32 +343,57 @@
                                 <i class="text-sm select-none">*maximum of 200 characters</i>
                             </span>
                             <div class="flex justify-center">
-                                <button class="px-5 py-1 w-30 rounded-md bg-lgreen font-bold hover:opacity-80 duration-200 cursor-pointer">Save</button>
+                                <input type="text" name="id" id="id" value="<?php echo $_COOKIE['id'];?>" hidden>
+                                <button type="submit" name="update" class="px-5 py-1 w-30 rounded-md bg-lgreen font-bold hover:opacity-80 duration-200 cursor-pointer">Save</button>
                             </div>
                         </form>
                     </div>
                     <script>
-                        function toggleEditIntro() {
-                            let element = document.getElementById('edit-intro');
-                            document.getElementById('overlay-edit-intro').classList.toggle('hidden');
-                            element.classList.toggle('hidden');
-                            element.classList.toggle('flex');
+                        const toggleCollege = () => {
+                            const ccis = document.getElementById('CCIS').checked;
+                            ['ccis-input', 'year', 'section'].forEach(id => {
+                                const el = document.getElementById(id);
+                                el.classList?.toggle('hidden', !ccis);
+                                el.disabled = !ccis;
+                            });
+                            ['hsu-input', 'shs-grade', 'shs-section'].forEach(id => {
+                                const el = document.getElementById(id);
+                                el.classList?.toggle('hidden', ccis);
+                                el.disabled = ccis;
+                            });
+                        };
 
-                            document.getElementById('name').value = "<?php echo $name;?>";
-                            document.getElementById('bio').value = "<?php echo $bio;?>";
+                        const toggleEditIntro = () => {
+                            const overlay = document.getElementById('overlay-edit-intro');
+                            const panel = document.getElementById('edit-intro');
+                            overlay.classList.toggle('hidden');
+                            panel.classList.toggle('hidden');
+                            panel.classList.toggle('flex');
 
-                            if ('<?php echo $college ?>' == 'CCIS') {
-                                document.getElementById('year').value = "<?php echo explode('-', $yearsection)[0];?>";
-                                document.getElementById('section').value = "<?php echo explode('-', $yearsection)[1];?>";
-                                document.getElementById('CCIS').checked = true;
-                            } else if ('<?php echo $college ?>' == 'HSU') {
-                                document.getElementById('shs-grade').value = "<?php echo explode('-', $yearsection)[0];?>";
-                                document.getElementById('shs-section').value = "<?php echo explode('-', $yearsection)[1];?>"
-                                document.getElementById('HSU').checked = true;
-                                toggleInputs('ccis-input'); toggleInputs('hsu-input');
+                            document.getElementById('name').value = "<?php echo $name; ?>";
+                            document.getElementById('bio').value = "<?php echo $bio; ?>";
+
+                            const college = "<?php echo $college ?>";
+                            document.getElementById(college).checked = true;
+
+                            if (college === 'CCIS') {
+                                document.getElementById('year').value = "<?php echo $year; ?>";
+                                document.getElementById('section').value = "<?php echo $section; ?>";
+                            } else {
+                                document.getElementById('shs-grade').value = "<?php echo $year; ?>";
+                                document.getElementById('shs-section').value = "<?php echo $section; ?>";
                             }
-                        }
+
+                            toggleCollege();
+                        };
+
+                        document.addEventListener('DOMContentLoaded', () => {
+                            ['CCIS', 'HSU'].forEach(id =>
+                                document.getElementById(id).addEventListener('change', toggleCollege)
+                            );
+                        });
                     </script>
+
                 </div>
                 <div class="relative flex-1 mt-5 flex flex-col gap-2.5 **:leading-none">
                     <div class="flex items-center justify-between select-none">
@@ -363,8 +401,8 @@
                         <a href="library.php" class="text-sm font-bold">Show More</a>
                     </div>
                     <div class="flex-1 relative">
-                        <div class="absolute bottom-0 w-full h-1/2 max-tablet:h-3/4 bg-linear-to-b from-transparent to-off-white"></div>
-                        <div class="flex flex-col gap-2 *:h-20 max-tablet:*:h-27 max-big-phone:*:h-20">
+                        <div class="absolute z-2 bottom-0 w-full h-1/2 max-tablet:h-3/4 bg-linear-to-b from-transparent to-off-white"></div>
+                        <div class="relative z-1 flex flex-col gap-2 *:h-20 max-tablet:*:h-27 max-big-phone:*:h-20">
                         <?php
                             $allBookmarks = array_slice(explode('-', $bookmarks), 0, 4);
                             $placeholders = implode(',', array_fill(0, count($allBookmarks), '?'));
@@ -376,8 +414,7 @@
 
                             $theses = $result->fetch_all(MYSQLI_ASSOC);
                             
-
-                            foreach ($theses as $thesis): 
+                            foreach ($theses as $thesis):
                                 $textColor = $thesis['course'] === "BSCS-AD" ? "text-violet-950" : ($thesis['course'] === "BSIT-NS" ? "text-sky-950" : "text-yellow-950"); ?>
                                 <div class="relative w-full px-5 p-2.5 h-25 max-big-phone:h-27.5 rounded-xl bg-neutral-100 border border-neutral-300 hover:border-dirty-brown/70 flex gap-2.5">
                                     <div class="flex-1 flex flex-col items-start justify-center select-text">
@@ -397,7 +434,7 @@
                                         </i>
                                     </div>
                                 </div>
-                            <?php endforeach; ?>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </div>

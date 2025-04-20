@@ -17,7 +17,7 @@
     --around-shadow-md:  0px 0px 20px 10px rgba(0, 0, 0, 0.4);
     --animate-header: header .5s ease-in-out;
     --animate-header-close: header-close .5s ease-in-out;
-    --animate-downfadeinout: downFadeInOut 3s ease-in-out forwards;
+    --animate-downfadeinout: downFadeInOut 5s ease-in-out forwards;
     --animate-fadeIn: fadeIn .5s ease-in-out;
     --animate-blur-up: blur-up 1s ease-in-out;
     --animate-blur-left: blur-left 1s ease-in-out;

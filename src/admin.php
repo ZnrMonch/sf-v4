@@ -1175,7 +1175,7 @@ require_once 'data.php';
                             '<p class="hidden peer-hover:block absolute -top-4 left-1/2 -translate-x-1/2 px-1 rounded-sm bg-zinc-700 text-off-white text-xs text-center select-none">Archive</p>' +
                         '</span>'}
                         </td>
-                </tr>`).join("") : "<tr><td colspan='8' class='text-center'>No results found.</td></tr>";
+                </tr>`).join("") : "<tr><td colspan='9' class='text-center'>No results found.</td></tr>";
 
             tpageInfo.textContent = totalSets === 0 ? `no${tarchiveMode.checked ? " archived" : ""}` : `${selectedSet + 1} of ${totalSets + (tarchiveMode.checked ? " archived" : "")} set/s of`;
         }
@@ -1287,7 +1287,7 @@ require_once 'data.php';
                             '<p class="hidden peer-hover:block absolute -top-4 left-1/2 -translate-x-1/2 px-1 rounded-sm bg-zinc-700 text-off-white text-xs text-center select-none">Archive</p>' +
                         '</span>'}
                     </td>
-                </tr>`).join("") : "<tr><td colspan='11' class='text-center'>No results found.</td></tr>";
+                </tr>`).join("") : "<tr><td colspan='12' class='text-center'>No results found.</td></tr>";
             userPageInfo.textContent = totalUserSets === 0 ? `no${userArchiveMode.checked ? " archived" : ""}` : `${userSelectedSet + 1} of ${totalUserSets} set/s`;
         }
 

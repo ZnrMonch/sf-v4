@@ -14,12 +14,11 @@
         setcookie('view', $view, time() + 86400, "/");
 
         $personalVisits = isset($_COOKIE['personal-visits']) ? explode('-', $_COOKIE['personal-visits']) : [];
-    
+
         if (!in_array($view, $personalVisits)) {
             $personalVisits[] = $view;
             $updatedVisits = implode('-', $personalVisits);
             setcookie('personal-visits', $updatedVisits, time() + 86400, "/");
-
             $stmt = $conn->prepare('SELECT email FROM accounts where user_id = ?');
             $stmt->bind_param('s', $_COOKIE['id']);
             $stmt->execute();

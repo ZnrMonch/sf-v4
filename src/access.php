@@ -29,6 +29,11 @@ function activeForm($form, $activeForm) {
     <main class="relative z-1 w-full h-screen flex items-center justify-center">
         <?php
             $error = $_SESSION['log-error'] ?? $_SESSION['reg-error'] ?? '';
+            $success = $_SESSION['fpw-success'] ?? '';
+
+            if ($success) {
+                echo "<div class='absolute top-5 left-1/2 -translate-x-1/2 p-2 w-100 h-10 rounded-xl bg-green-900 select-none z-5 animate-downfadeinout'>" . $success . "</div>";
+            }
             if ($error) {
                 echo "<div class='absolute top-5 left-1/2 -translate-x-1/2 p-2 w-100 h-10 rounded-xl bg-[#7f1d1d] select-none z-5 animate-downfadeinout'>" . $error . "</div>";
             }
@@ -143,7 +148,7 @@ function activeForm($form, $activeForm) {
             </form>
 
             <script>
-                if (document.cookie.incudes('gotoform=')) {
+                if (document.cookie.includes('gotoform=')) {
                     document.cookie = "gotoform=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
                     toggleFlex2('login', 'register');
                 }
