@@ -28,68 +28,57 @@ require_once 'data.php';
     <header class="group fixed top-0 left-0 pt-10 pb-10 w-20 hover:w-60 duration-500 ease-out h-screen flex max-tablet:hidden flex-col justify-between bg-ash/85 backdrop-blur-md shadow-[var(--around-shadow-md)] select-none text-off-white z-10">
         <div class="w-full h-35">
             <img src="resources/umak.svg" alt="UMak Logo" class="mt-3 ml-3.5 size-12 inline-block">
-            <img src="resources/ccis.svg" alt="CCIS Logo" class="mt-3 ml-3.5 size-12 inline-block">
+            <img src="resources/ccis.svg" alt="CCIS Logo" class="mt-3 ml-3.5 size-12 inline-block">  
             <img src="resources/sf-logo.svg" alt="Scholar Finds Logo" class="mt-3 ml-3.5 size-12 inline-block">
-            <a href="index.html" class="outline-none">
-                <h1 class=" m-3.5 whitespace-nowrap overflow-hidden text-3xl opacity-0 group-hover:opacity-100 duration-500 font-semibold">Scholar Finds</h1>
-            </a>
+            <a href="index.html" class="outline-none"><h1 class=" m-3.5 whitespace-nowrap overflow-hidden text-3xl opacity-0 group-hover:opacity-100 duration-500 font-semibold">Scholar Finds</h1></a>
         </div>
         <nav>
             <ul class="flex flex-col gap-2">
                 <li><a href="index.html" class="flex items-center gap-8 pl-5 py-2 hover:opacity-60 duration-200 ease-linear">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="min-w-8 w-8">
-                            <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />
-                            <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" />
-                        </svg>
-                        <p class="text-lg overflow-hidden text-clip">Home</p>
-                    </a></li>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="min-w-8 w-8">
+                        <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />
+                        <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" />
+                    </svg> 
+                    <p class="text-lg overflow-hidden text-clip">Home</p>
+                </a></li>
                 <li><a href="about.html" class="flex items-center gap-8 pl-5 py-2 hover:opacity-60 duration-200 ease-linear">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="min-w-8 w-8">
-                            <path fill-rule="evenodd" d="M8.25 6.75a3.75 3.75 0 1 1 7.5 0 3.75 3.75 0 0 1-7.5 0ZM15.75 9.75a3 3 0 1 1 6 0 3 3 0 0 1-6 0ZM2.25 9.75a3 3 0 1 1 6 0 3 3 0 0 1-6 0ZM6.31 15.117A6.745 6.745 0 0 1 12 12a6.745 6.745 0 0 1 6.709 7.498.75.75 0 0 1-.372.568A12.696 12.696 0 0 1 12 21.75c-2.305 0-4.47-.612-6.337-1.684a.75.75 0 0 1-.372-.568 6.787 6.787 0 0 1 1.019-4.38Z" clip-rule="evenodd" />
-                            <path d="M5.082 14.254a8.287 8.287 0 0 0-1.308 5.135 9.687 9.687 0 0 1-1.764-.44l-.115-.04a.563.563 0 0 1-.373-.487l-.01-.121a3.75 3.75 0 0 1 3.57-4.047ZM20.226 19.389a8.287 8.287 0 0 0-1.308-5.135 3.75 3.75 0 0 1 3.57 4.047l-.01.121a.563.563 0 0 1-.373.486l-.115.04c-.567.2-1.156.349-1.764.441Z" />
-                        </svg>
-                        <p class="text-lg overflow-hidden text-clip">About</p>
-                    </a></li>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="min-w-8 w-8">
+                        <path fill-rule="evenodd" d="M8.25 6.75a3.75 3.75 0 1 1 7.5 0 3.75 3.75 0 0 1-7.5 0ZM15.75 9.75a3 3 0 1 1 6 0 3 3 0 0 1-6 0ZM2.25 9.75a3 3 0 1 1 6 0 3 3 0 0 1-6 0ZM6.31 15.117A6.745 6.745 0 0 1 12 12a6.745 6.745 0 0 1 6.709 7.498.75.75 0 0 1-.372.568A12.696 12.696 0 0 1 12 21.75c-2.305 0-4.47-.612-6.337-1.684a.75.75 0 0 1-.372-.568 6.787 6.787 0 0 1 1.019-4.38Z" clip-rule="evenodd" />
+                        <path d="M5.082 14.254a8.287 8.287 0 0 0-1.308 5.135 9.687 9.687 0 0 1-1.764-.44l-.115-.04a.563.563 0 0 1-.373-.487l-.01-.121a3.75 3.75 0 0 1 3.57-4.047ZM20.226 19.389a8.287 8.287 0 0 0-1.308-5.135 3.75 3.75 0 0 1 3.57 4.047l-.01.121a.563.563 0 0 1-.373.486l-.115.04c-.567.2-1.156.349-1.764.441Z" />
+                    </svg>                       
+                    <p class="text-lg overflow-hidden text-clip">About</p>
+                </a></li>
                 <li><a href="contact.html" class="flex items-center gap-8 pl-5 py-2 hover:opacity-60 duration-200 ease-linear">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="min-w-8 w-8">
-                            <path fill-rule="evenodd" d="M1.5 4.5a3 3 0 0 1 3-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 0 1-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 0 0 6.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 0 1 1.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 0 1-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5Z" clip-rule="evenodd" />
-                        </svg>
-                        <p class="text-lg overflow-hidden text-clip">Contact</p>
-                    </a></li>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="min-w-8 w-8">
+                        <path fill-rule="evenodd" d="M1.5 4.5a3 3 0 0 1 3-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 0 1-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 0 0 6.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 0 1 1.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 0 1-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5Z" clip-rule="evenodd" />
+                    </svg>                      
+                    <p class="text-lg overflow-hidden text-clip">Contact</p>
+                </a></li>
                 <li><a href="library.php" class="flex items-center gap-8 pl-5 py-2 hover:opacity-60 duration-200 ease-linear">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="min-w-8 w-8">
-                            <path d="M11.25 4.533A9.707 9.707 0 0 0 6 3a9.735 9.735 0 0 0-3.25.555.75.75 0 0 0-.5.707v14.25a.75.75 0 0 0 1 .707A8.237 8.237 0 0 1 6 18.75c1.995 0 3.823.707 5.25 1.886V4.533ZM12.75 20.636A8.214 8.214 0 0 1 18 18.75c.966 0 1.89.166 2.75.47a.75.75 0 0 0 1-.708V4.262a.75.75 0 0 0-.5-.707A9.735 9.735 0 0 0 18 3a9.707 9.707 0 0 0-5.25 1.533v16.103Z" />
-                        </svg>
-                        <p class="text-lg overflow-hidden text-clip">Library</p>
-                    </a></li>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="min-w-8 w-8">
+                        <path d="M11.25 4.533A9.707 9.707 0 0 0 6 3a9.735 9.735 0 0 0-3.25.555.75.75 0 0 0-.5.707v14.25a.75.75 0 0 0 1 .707A8.237 8.237 0 0 1 6 18.75c1.995 0 3.823.707 5.25 1.886V4.533ZM12.75 20.636A8.214 8.214 0 0 1 18 18.75c.966 0 1.89.166 2.75.47a.75.75 0 0 0 1-.708V4.262a.75.75 0 0 0-.5-.707A9.735 9.735 0 0 0 18 3a9.707 9.707 0 0 0-5.25 1.533v16.103Z" />
+                    </svg>                      
+                    <p class="text-lg overflow-hidden text-clip">Library</p>
+                </a></li>
             </ul>
         </nav>
         <menu class="flex flex-col gap-2">
-            <li><a href="bookmarks.php" class="flex items-center gap-8 pl-5 py-2 hover:opacity-60 duration-200 ease-linear">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="min-w-8 w-8">
-                        <path fill-rule="evenodd" d="M7.502 6h7.128A3.375 3.375 0 0 1 18 9.375v9.375a3 3 0 0 0 3-3V6.108c0-1.505-1.125-2.811-2.664-2.94a48.972 48.972 0 0 0-.673-.05A3 3 0 0 0 15 1.5h-1.5a3 3 0 0 0-2.663 1.618c-.225.015-.45.032-.673.05C8.662 3.295 7.554 4.542 7.502 6ZM13.5 3A1.5 1.5 0 0 0 12 4.5h4.5A1.5 1.5 0 0 0 15 3h-1.5Z" clip-rule="evenodd" />
-                        <path fill-rule="evenodd" d="M3 9.375C3 8.339 3.84 7.5 4.875 7.5h9.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-9.75A1.875 1.875 0 0 1 3 20.625V9.375ZM6 12a.75.75 0 0 1 .75-.75h.008a.75.75 0 0 1 .75.75v.008a.75.75 0 0 1-.75.75H6.75a.75.75 0 0 1-.75-.75V12Zm2.25 0a.75.75 0 0 1 .75-.75h3.75a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75ZM6 15a.75.75 0 0 1 .75-.75h.008a.75.75 0 0 1 .75.75v.008a.75.75 0 0 1-.75.75H6.75a.75.75 0 0 1-.75-.75V15Zm2.25 0a.75.75 0 0 1 .75-.75h3.75a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75ZM6 18a.75.75 0 0 1 .75-.75h.008a.75.75 0 0 1 .75.75v.008a.75.75 0 0 1-.75.75H6.75a.75.75 0 0 1-.75-.75V18Zm2.25 0a.75.75 0 0 1 .75-.75h3.75a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd" />
-                    </svg>
-                    <p class="text-lg overflow-hidden text-clip">Bookmarks</p>
-                </a></li>
-            <li><a href="profile.php" class="flex items-center gap-8 pl-5 py-2 hover:opacity-60 duration-200 ease-linear">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="min-w-8 w-8">
-                        <path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" clip-rule="evenodd" />
-                    </svg>
-                    <p class="text-lg overflow-hidden text-clip">Profile</p>
-                </a></li>
+            <li><a href="profile.php" class="flex items-center gap-8 pl-5 py-2 hover:opacity-60 duration-200 ease-linear">                  
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="min-w-8 w-8">
+                    <path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" clip-rule="evenodd" />
+                </svg>  
+                <p class="text-lg overflow-hidden text-clip">Profile</p>
+            </a></li>
             <li><a href="admin.php" class="flex items-center gap-8 pl-5 py-2 hover:opacity-60 duration-200 ease-linear">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor" class="min-w-8 w-8">
-                        <path d="M680-80q-83 0-141.5-58.5T480-280q0-83 58.5-141.5T680-480q83 0 141.5 58.5T880-280q0 83-58.5 141.5T680-80Zm-200 0q-139-35-229.5-159.5T160-516v-244l320-120 320 120v227q-26-13-58.5-20t-61.5-7q-116 0-198 82t-82 198q0 62 23.5 112T483-81q-1 0-1.5.5t-1.5.5Zm200-200q25 0 42.5-17.5T740-340q0-25-17.5-42.5T680-400q-25 0-42.5 17.5T620-340q0 25 17.5 42.5T680-280Zm0 120q31 0 57-14.5t42-38.5q-22-13-47-20t-52-7q-27 0-52 7t-47 20q16 24 42 38.5t57 14.5Z" />
-                    </svg>
-                    <p class="text-lg overflow-hidden text-clip">Admin</p>
-                </a></li>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor" class="min-w-8 w-8"><path d="M680-80q-83 0-141.5-58.5T480-280q0-83 58.5-141.5T680-480q83 0 141.5 58.5T880-280q0 83-58.5 141.5T680-80Zm-200 0q-139-35-229.5-159.5T160-516v-244l320-120 320 120v227q-26-13-58.5-20t-61.5-7q-116 0-198 82t-82 198q0 62 23.5 112T483-81q-1 0-1.5.5t-1.5.5Zm200-200q25 0 42.5-17.5T740-340q0-25-17.5-42.5T680-400q-25 0-42.5 17.5T620-340q0 25 17.5 42.5T680-280Zm0 120q31 0 57-14.5t42-38.5q-22-13-47-20t-52-7q-27 0-52 7t-47 20q16 24 42 38.5t57 14.5Z"/></svg>
+                <p class="text-lg overflow-hidden text-clip">Admin</p>
+            </a></li>
         </menu>
         <script>
             const admin = document.querySelector('a[href="admin.php"]');
             const role = document.cookie.match(/role=([^;]+)/)?.[1];
             if (!role || role === "regular") admin?.classList.add("hidden");
-        </script>
+        </script> 
     </header>
     <!-- MOBILE NAVIGATION-->
     <nav class="tablet:hidden z-50">
@@ -101,52 +90,31 @@ require_once 'data.php';
         <div onclick="toggleNav()" id="overlay" class="fixed top-0 left-0 w-screen h-screen bg-black/50 hidden"></div>
         <div id="mob-nav" class="fixed top-0 right-0 pt-20 overflow-clip w-70 h-screen bg-off-white hidden flex-col animate-header font-semibold text-dirty-brown **:select-none">
             <div onclick="toggleNav()" class="absolute top-5 right-5">
-                <svg class="size-9" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#585345">
-                    <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
-                </svg>
+                <svg class="size-9" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#585345"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
             </div>
             <h1 class="px-7.5 text-2xl font-bold">Scholar Finds</h1>
             <hr class="my-5 w-full opacity-30 *:active:bg-neutral-300">
             <div class="w-full *:px-7.5 *:py-1 *:flex *:items-center *:gap-2 *:active:bg-neutral-300">
-                <a href="index.html" class="block w-full"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
-                        <path fill-rule="evenodd" d="M9.293 2.293a1 1 0 0 1 1.414 0l7 7A1 1 0 0 1 17 11h-1v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6H3a1 1 0 0 1-.707-1.707l7-7Z" clip-rule="evenodd" />
-                    </svg>Home</a>
-                <a href="about.html" class="block w-full"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
-                        <path d="M10 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM6 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM1.49 15.326a.78.78 0 0 1-.358-.442 3 3 0 0 1 4.308-3.516 6.484 6.484 0 0 0-1.905 3.959c-.023.222-.014.442.025.654a4.97 4.97 0 0 1-2.07-.655ZM16.44 15.98a4.97 4.97 0 0 0 2.07-.654.78.78 0 0 0 .357-.442 3 3 0 0 0-4.308-3.517 6.484 6.484 0 0 1 1.907 3.96 2.32 2.32 0 0 1-.026.654ZM18 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM5.304 16.19a.844.844 0 0 1-.277-.71 5 5 0 0 1 9.947 0 .843.843 0 0 1-.277.71A6.975 6.975 0 0 1 10 18a6.974 6.974 0 0 1-4.696-1.81Z" />
-                    </svg>About</a>
-                <a href="contact.html" class="block w-full"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
-                        <path fill-rule="evenodd" d="M2 3.5A1.5 1.5 0 0 1 3.5 2h1.148a1.5 1.5 0 0 1 1.465 1.175l.716 3.223a1.5 1.5 0 0 1-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 0 0 6.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 0 1 1.767-1.052l3.223.716A1.5 1.5 0 0 1 18 15.352V16.5a1.5 1.5 0 0 1-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 0 1 2.43 8.326 13.019 13.019 0 0 1 2 5V3.5Z" clip-rule="evenodd" />
-                    </svg>Contact</a>
+                <a href="index.html" class="block w-full"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5"> <path fill-rule="evenodd" d="M9.293 2.293a1 1 0 0 1 1.414 0l7 7A1 1 0 0 1 17 11h-1v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6H3a1 1 0 0 1-.707-1.707l7-7Z" clip-rule="evenodd" /></svg>Home</a>
+                <a href="about.html" class="block w-full"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5"> <path d="M10 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM6 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM1.49 15.326a.78.78 0 0 1-.358-.442 3 3 0 0 1 4.308-3.516 6.484 6.484 0 0 0-1.905 3.959c-.023.222-.014.442.025.654a4.97 4.97 0 0 1-2.07-.655ZM16.44 15.98a4.97 4.97 0 0 0 2.07-.654.78.78 0 0 0 .357-.442 3 3 0 0 0-4.308-3.517 6.484 6.484 0 0 1 1.907 3.96 2.32 2.32 0 0 1-.026.654ZM18 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM5.304 16.19a.844.844 0 0 1-.277-.71 5 5 0 0 1 9.947 0 .843.843 0 0 1-.277.71A6.975 6.975 0 0 1 10 18a6.974 6.974 0 0 1-4.696-1.81Z" /> </svg>About</a>
+                <a href="contact.html" class="block w-full"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5"> <path fill-rule="evenodd" d="M2 3.5A1.5 1.5 0 0 1 3.5 2h1.148a1.5 1.5 0 0 1 1.465 1.175l.716 3.223a1.5 1.5 0 0 1-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 0 0 6.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 0 1 1.767-1.052l3.223.716A1.5 1.5 0 0 1 18 15.352V16.5a1.5 1.5 0 0 1-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 0 1 2.43 8.326 13.019 13.019 0 0 1 2 5V3.5Z" clip-rule="evenodd" /> </svg>Contact</a>
             </div>
             <hr class="my-5 w-full opacity-30 *:active:bg-neutral-300">
             <div class="w-full *:px-7.5 *:py-1 *:flex *:items-center *:gap-2 *:active:bg-neutral-300">
-                <a href="library.php" class="block w-full"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
-                        <path d="M10.75 16.82A7.462 7.462 0 0 1 15 15.5c.71 0 1.396.098 2.046.282A.75.75 0 0 0 18 15.06v-11a.75.75 0 0 0-.546-.721A9.006 9.006 0 0 0 15 3a8.963 8.963 0 0 0-4.25 1.065V16.82ZM9.25 4.065A8.963 8.963 0 0 0 5 3c-.85 0-1.673.118-2.454.339A.75.75 0 0 0 2 4.06v11a.75.75 0 0 0 .954.721A7.506 7.506 0 0 1 5 15.5c1.579 0 3.042.487 4.25 1.32V4.065Z" />
-                    </svg>Library</a>
-                <a href="bookmarks.php" class="block w-full"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
-                        <path fill-rule="evenodd" d="M10 2c-1.716 0-3.408.106-5.07.31C3.806 2.45 3 3.414 3 4.517V17.25a.75.75 0 0 0 1.075.676L10 15.082l5.925 2.844A.75.75 0 0 0 17 17.25V4.517c0-1.103-.806-2.068-1.93-2.207A41.403 41.403 0 0 0 10 2Z" clip-rule="evenodd" />
-                    </svg>Bookmarks</a>
-                <a href="profile.php" class="block w-full"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
-                        <path fill-rule="evenodd" d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-5.5-2.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0ZM10 12a5.99 5.99 0 0 0-4.793 2.39A6.483 6.483 0 0 0 10 16.5a6.483 6.483 0 0 0 4.793-2.11A5.99 5.99 0 0 0 10 12Z" clip-rule="evenodd" />
-                    </svg>Profile</a>
-
+                <a href="library.php" class="block w-full"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5"> <path d="M10.75 16.82A7.462 7.462 0 0 1 15 15.5c.71 0 1.396.098 2.046.282A.75.75 0 0 0 18 15.06v-11a.75.75 0 0 0-.546-.721A9.006 9.006 0 0 0 15 3a8.963 8.963 0 0 0-4.25 1.065V16.82ZM9.25 4.065A8.963 8.963 0 0 0 5 3c-.85 0-1.673.118-2.454.339A.75.75 0 0 0 2 4.06v11a.75.75 0 0 0 .954.721A7.506 7.506 0 0 1 5 15.5c1.579 0 3.042.487 4.25 1.32V4.065Z" /> </svg>Library</a>
+                <a href="profile.php" class="block w-full"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5"> <path fill-rule="evenodd" d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-5.5-2.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0ZM10 12a5.99 5.99 0 0 0-4.793 2.39A6.483 6.483 0 0 0 10 16.5a6.483 6.483 0 0 0 4.793-2.11A5.99 5.99 0 0 0 10 12Z" clip-rule="evenodd" /> </svg>Profile</a>
             </div>
             <hr class="my-5 w-full opacity-30 *:active:bg-neutral-300">
             <div class="w-full *:px-7.5 *:py-1 *:flex *:items-center *:gap-2 *:active:bg-neutral-300">
-                <a onclick="logOut()" class="block w-full text-red-700"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
-                        <path fill-rule="evenodd" d="M3 4.25A2.25 2.25 0 0 1 5.25 2h5.5A2.25 2.25 0 0 1 13 4.25v2a.75.75 0 0 1-1.5 0v-2a.75.75 0 0 0-.75-.75h-5.5a.75.75 0 0 0-.75.75v11.5c0 .414.336.75.75.75h5.5a.75.75 0 0 0 .75-.75v-2a.75.75 0 0 1 1.5 0v2A2.25 2.25 0 0 1 10.75 18h-5.5A2.25 2.25 0 0 1 3 15.75V4.25Z" clip-rule="evenodd" />
-                        <path fill-rule="evenodd" d="M6 10a.75.75 0 0 1 .75-.75h9.546l-1.048-.943a.75.75 0 1 1 1.004-1.114l2.5 2.25a.75.75 0 0 1 0 1.114l-2.5 2.25a.75.75 0 1 1-1.004-1.114l1.048-.943H6.75A.75.75 0 0 1 6 10Z" clip-rule="evenodd" />
-                    </svg>Logout</a>
-                <a href="admin.php" class="block w-full"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor" class="size-5">
-                        <path d="M680-80q-83 0-141.5-58.5T480-280q0-83 58.5-141.5T680-480q83 0 141.5 58.5T880-280q0 83-58.5 141.5T680-80Zm-200 0q-139-35-229.5-159.5T160-516v-244l320-120 320 120v227q-26-13-58.5-20t-61.5-7q-116 0-198 82t-82 198q0 62 23.5 112T483-81q-1 0-1.5.5t-1.5.5Zm200-200q25 0 42.5-17.5T740-340q0-25-17.5-42.5T680-400q-25 0-42.5 17.5T620-340q0 25 17.5 42.5T680-280Zm0 120q31 0 57-14.5t42-38.5q-22-13-47-20t-52-7q-27 0-52 7t-47 20q16 24 42 38.5t57 14.5Z" />
-                    </svg>Admin</a>
+                <a onclick="logOut()" class="block w-full text-red-700"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5"> <path fill-rule="evenodd" d="M3 4.25A2.25 2.25 0 0 1 5.25 2h5.5A2.25 2.25 0 0 1 13 4.25v2a.75.75 0 0 1-1.5 0v-2a.75.75 0 0 0-.75-.75h-5.5a.75.75 0 0 0-.75.75v11.5c0 .414.336.75.75.75h5.5a.75.75 0 0 0 .75-.75v-2a.75.75 0 0 1 1.5 0v2A2.25 2.25 0 0 1 10.75 18h-5.5A2.25 2.25 0 0 1 3 15.75V4.25Z" clip-rule="evenodd" /> <path fill-rule="evenodd" d="M6 10a.75.75 0 0 1 .75-.75h9.546l-1.048-.943a.75.75 0 1 1 1.004-1.114l2.5 2.25a.75.75 0 0 1 0 1.114l-2.5 2.25a.75.75 0 1 1-1.004-1.114l1.048-.943H6.75A.75.75 0 0 1 6 10Z" clip-rule="evenodd" /> </svg>Logout</a>
+                <a href="admin.php" class="block w-full"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor" class="size-5"><path d="M680-80q-83 0-141.5-58.5T480-280q0-83 58.5-141.5T680-480q83 0 141.5 58.5T880-280q0 83-58.5 141.5T680-80Zm-200 0q-139-35-229.5-159.5T160-516v-244l320-120 320 120v227q-26-13-58.5-20t-61.5-7q-116 0-198 82t-82 198q0 62 23.5 112T483-81q-1 0-1.5.5t-1.5.5Zm200-200q25 0 42.5-17.5T740-340q0-25-17.5-42.5T680-400q-25 0-42.5 17.5T620-340q0 25 17.5 42.5T680-280Zm0 120q31 0 57-14.5t42-38.5q-22-13-47-20t-52-7q-27 0-52 7t-47 20q16 24 42 38.5t57 14.5Z"/></svg>Admin</a>
             </div>
         </div>
         <!-- SCRIPT -->
         <script>
             const mobNav = document.getElementById("mob-nav");
             const overlay = document.getElementById("overlay");
-
+    
             function toggleNav() {
                 mobNav.classList.toggle("hidden");
                 mobNav.classList.toggle("flex");
@@ -157,29 +125,38 @@ require_once 'data.php';
                 document.cookie = "id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
                 document.cookie = "personalization=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
                 document.cookie = "role=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-                window.location.href = "index.html";
+                window.location.href= "index.html";
             }
-        </script>
+        </script> 
     </nav>
     <!-- ================================================== MAIN ================================================== -->
     <main class="ml-25 m-5 p-15 w-[calc(100vw-80px)] min-h-[calc(100vh-40px)] h-auto rounded-4xl bg-off-white z-2 text-black drag-none flex flex-col
         max-tablet:m-0 max-tablet:p-5 max-tablet:min-h-screen max-tablet:size-full max-tablet:rounded-none">
         <div class="flex flex-col gap-5 mb-5 text-dirty-brown">
-            <div class="flex items-center gap-2.5 font-semibold *:select-none *:cursor-pointer text-sm">
-                <input type="radio" name="admin-menu" id="ov-amenu" checked class="peer/ov-amenu" hidden>
-                <label for="ov-amenu" class="peer-checked/ov-amenu:bg-dirty-brown peer-checked/ov-amenu:text-off-white px-5 rounded-md border-2 border-dirty-brown duration-100">Overview</label>
+            <div class="flex items-center gap-2.5 font-bold *:select-none *:cursor-pointer text-sm *:flex *:items-center *:gap-1 **:leading-none">
+                <input type="radio" name="admin-menu" id="da-amenu" checked class="peer/da-amenu" hidden>
+                <label for="da-amenu" class="px-2.5 py-1 rounded-md peer-checked/da-amenu:bg-neutral-300 opacity-40 peer-checked/da-amenu:opacity-100 duration-100">
+                    <svg class="size-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor"><path d="M280-280h80v-200h-80v200Zm320 0h80v-400h-80v400Zm-160 0h80v-120h-80v120Zm0-200h80v-80h-80v80ZM200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z"/></svg>
+                    Dashboard
+                </label>
                 <input type="radio" name="admin-menu" id="db-amenu" class="peer/db-amenu" hidden>
-                <label for="db-amenu" class="peer-checked/db-amenu:bg-dirty-brown peer-checked/db-amenu:text-off-white px-5 rounded-md border-2 border-dirty-brown duration-100">Database</label>
+                <label for="db-amenu" class="px-2.5 py-1 rounded-md peer-checked/db-amenu:bg-neutral-300 opacity-40 peer-checked/db-amenu:opacity-100 duration-100">
+                    <svg class="size-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-507h560v-133H200v133Zm0 214h560v-134H200v134Zm0 213h560v-133H200v133Zm40-454v-80h80v80h-80Zm0 214v-80h80v80h-80Zm0 214v-80h80v80h-80Z"/></svg>
+                    Database
+                </label>
                 <input type="radio" name="admin-menu" id="log-amenu" class="peer/log-amenu" hidden>
-                <label for="log-amenu" class="peer-checked/log-amenu:bg-dirty-brown peer-checked/log-amenu:text-off-white px-5 rounded-md border-2 border-dirty-brown duration-100">Logs</label>
+                <label for="log-amenu" class="px-2.5 py-1 rounded-md peer-checked/log-amenu:bg-neutral-300 opacity-40 peer-checked/log-amenu:opacity-100 duration-100">
+                    <svg class="size-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor"><path d="m787-145 28-28-75-75v-112h-40v128l87 87Zm-587 25q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v268q-19-9-39-15.5t-41-9.5v-243H200v560h242q3 22 9.5 42t15.5 38H200Zm0-120v40-560 243-3 280Zm80-40h163q3-21 9.5-41t14.5-39H280v80Zm0-160h244q32-30 71.5-50t84.5-27v-3H280v80Zm0-160h400v-80H280v80ZM720-40q-83 0-141.5-58.5T520-240q0-83 58.5-141.5T720-440q83 0 141.5 58.5T920-240q0 83-58.5 141.5T720-40Z"/></svg>
+                    Logs
+                </label>
             </div>
             <div class="flex flex-col gap-2.5">
-                <h1 id="header-title" class="font-bold text-3xl select-none">Overview</h1>
+                <h1 id="header-title" class="font-bold text-3xl select-none">Dashboard</h1>
                 <script>
                     const menuConfig = {
-                        "ov-amenu": {
-                            title: "Overview",
-                            contentId: "overview-content"
+                        "da-amenu": {
+                            title: "Dashboard",
+                            contentId: "dashboard-content"
                         },
                         "db-amenu": {
                             title: "Database",
@@ -192,7 +169,7 @@ require_once 'data.php';
                     };
 
                     function updateMenu(selectedId) {
-                        document.getElementById("header-title").innerText = menuConfig[selectedId]?.title || "Overview";
+                        document.getElementById("header-title").innerText = menuConfig[selectedId]?.title || "Dashboard";
                         Object.values(menuConfig).forEach(cfg => {
                             const el = document.getElementById(cfg.contentId);
                             if (el) el.classList.add("hidden");
@@ -202,7 +179,7 @@ require_once 'data.php';
                     }
 
                     document.addEventListener('DOMContentLoaded', () => {
-                        const savedId = getCookie('adminMenu') || 'ov-amenu';
+                        const savedId = getCookie('adminMenu') || 'da-amenu';
                         const savedInput = document.getElementById(savedId);
                         if (savedInput) savedInput.checked = true;
                         updateMenu(savedId);
@@ -211,7 +188,7 @@ require_once 'data.php';
                     document.querySelectorAll('input[name="admin-menu"]').forEach(input => {
                         input.addEventListener('change', () => {
                             const selectedId = document.querySelector('input[name="admin-menu"]:checked').id;
-                            setCookie('adminMenu', selectedId, 7); // Store for 7 days
+                            setCookie('adminMenu', selectedId, 1);
                             updateMenu(selectedId);
                         });
                     });
@@ -220,19 +197,38 @@ require_once 'data.php';
         </div>
 
         <!-- ================================================== OVERVIEW ================================================== -->
-        <div id="overview-content" class="flex-1 flex">
+        <div id="dashboard-content" class="flex-1 flex max-[1000px]:flex-col gap-5 text-dirty-brown">
             <div class="flex-1">
-                <div class="w-full h-100">
-
+                <div class="p-5 w-full bg-neutral-50 border border-neutral-300 rounded-xl shadow-lg">
+                    <div class="flex justify-between">
+                        <h1 class="text-xl font-bold select-none">Visitors</h1>
+                        <div class="rounded-lg bg-off-white border border-neutral-300 flex items-center leading-none drop-shadow-sm">
+                            <select name="vchart-range" id="vchart-range" class="px-2.5 mr-2.5 w-30 font-semibold text-sm outline-none">
+                                <option value="7days">Last 7 Days</option>
+                                <option value="month">This Month</option>
+                                <option value="year">This Year</option>
+                            </select>
+                        </div>
+                        
+                    </div>
+                    <div class="flex-1 relative h-100 max-tablet:h-80">
+                        <canvas id="visitors-chart" class="!w-full !h-full absolute inset-0"></canvas>
+                    </div>
                 </div>
             </div>
-            <div class="w-75 h-full flex flex-col gap-5 *:relative *:p-5 *:rounded-lg *:bg-neutral-50 *:border *:border-neutral-300 *:shadow-lg font-bold text-dirty-brown">
-                <div class="flex-1">
-                    <h1 class="text-xl">Accounts</h1>
+            <div class="w-75 h-full flex flex-col max-[1000px]:flex-row max-big-phone:flex-col max-[1000px]:*:w-75! max-big-phone:items-center max-big-phone:w-full gap-5 *:relative *:p-5 *:pb-7 *:h-max *:rounded-xl *:flex *:flex-col *:gap-2 *:bg-neutral-50 *:border *:border-neutral-300 *:shadow-lg **:leading-none font-bold select-none">
+                <div>
+                    <div class="flex items-end justify-between">
+                        <h1 class="text-xl">Accounts</h1>
+                        <h2 id="accounts-count" class="text-sm">0 accounts found</h2>
+                    </div>
                     <canvas id="accounts-chart"></canvas>
                 </div>
-                <div class="flex-1">
-                    <h1 class="text-xl">Thesis</h1>
+                <div>
+                    <div class="flex items-end justify-between">
+                        <h1 class="text-xl">Theses</h1>
+                        <h2 id="theses-count" class="text-sm">0 accounts found</h2>
+                    </div>
                     <canvas id="thesis-chart"></canvas>
                 </div>
             </div>
@@ -241,19 +237,19 @@ require_once 'data.php';
         <!-- ================================================== DATABASE ================================================== -->
         <div id="database-content" class="hidden">
             <div class="relative">
-                <input type="radio" name="tb" id="thesestb" class="peer/thesestb" hidden>
+                <input type="radio" name="tb" id="thesestb" checked class="peer/thesestb" hidden>
                 <label for="thesestb" class="absolute text-dirty-brown font-bold text-xl opacity-60 peer-checked/thesestb:opacity-100 peer-checked/thesestb:underline peer-checked/thesestb:decoration-3 peer-checked/thesestb:underline-offset-6 duration-300 select-none cursor-pointer z-5">Theses</label>
-                <input type="radio" name="tb" id="userstb" checked class="peer/userstb" hidden>
+                <input type="radio" name="tb" id="userstb" class="peer/userstb" hidden>
                 <label for="userstb" class="absolute left-19 text-dirty-brown font-bold text-xl opacity-60 peer-checked/userstb:opacity-100 peer-checked/userstb:underline peer-checked/userstb:decoration-3 peer-checked/userstb:underline-offset-6 duration-300 select-none cursor-pointer z-5 <?php echo $_COOKIE["role"] !== "superadmin" ? "hidden" : ""; ?>">Users</label>
 
                 <div class="max-big-phone:pt-10 flex items-center justify-end gap-2.5 max-tablet:gap-1 *:px-5 max-phone:*:px-4 *:py-0.5 max-tablet:*:py-1 *:rounded-md *:shadow-md *:bg-dirty-brown text-off-white *:text-sm *:max-tablet:text-xs *:hover:opacity-85 *:active:scale-95 *:duration-50 *:cursor-pointer *:select-none *:flex *:items-center *:gap-1">
-                    <button onclick="openTCreator()" class="">
+                    <button id="open-tcreator" onclick="openTCreator()" class="hidden">
                         <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor">
                             <path d="M440-120v-480H120v-160q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H440Zm80-80h240v-160H520v160Zm0-240h240v-160H520v160ZM200-680h560v-80H200v80ZM120-80v-80h102q-48-23-77.5-68T115-330q0-79 55.5-134.5T305-520v80q-45 0-77.5 32T195-330q0 39 24 69t61 38v-97h80v240H120Z" />
                         </svg>
                         Append Thesis
                     </button>
-                    <button onclick="openUCreator()" class="">
+                    <button id="open-ucreator" onclick="openUCreator()" class="hidden">
                         <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor">
                             <path d="M440-120v-480H120v-160q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H440Zm80-80h240v-160H520v160Zm0-240h240v-160H520v160ZM200-680h560v-80H200v80ZM120-80v-80h102q-48-23-77.5-68T115-330q0-79 55.5-134.5T305-520v80q-45 0-77.5 32T195-330q0 39 24 69t61 38v-97h80v240H120Z" />
                         </svg>
@@ -288,9 +284,9 @@ require_once 'data.php';
                                 <option value="keywords">Keywords</option>
                             </select>
                         </div>
-                        <div class="p-0.5 flex items-center bg-neutral-200 border border-neutral-300 shadow-sm rounded-lg *:px-3 *:py-1 *:rounded-lg *:cursor-pointer *:duration-100 font-semibold select-none">
+                        <div class="p-0.5 flex items-center bg-neutral-200 border border-neutral-300 shadow-sm rounded-lg *:px-3 *:py-1 *:rounded-lg *:cursor-pointer *:duration-100 font-bold select-none text-dirty-brown">
                             <input type="checkbox" id="tarchive-mode" class="peer" hidden>
-                            <label for="tarchive-mode" class="peer-checked:bg-off-white border border-transparent peer-checked:border-neutral-300 opacity-40 peer-checked:opacity-100">Archived</label>
+                            <label for="tarchive-mode" class="opacity-40 peer-checked:opacity-100">Show archived theses</label>
                         </div>
                     </div>
 
@@ -314,7 +310,7 @@ require_once 'data.php';
                                     <div class="*:relative *:flex *:flex-col flex flex-col gap-4">
                                         <span class="flex-row! gap-2 *:relative *:w-1/2 *:flex *:flex-col">
                                             <span>
-                                                <select name="course" id="course" required class="px-2 py-1.5 w-full rounded-md border-2 border-dirty-brown text-sm outline-none text-[#464644] valid:text-black">
+                                                <select name="course" id="course" class="px-2 py-1.5 w-full rounded-md border-2 border-dirty-brown text-sm outline-none text-[#464644] valid:text-black">
                                                     <option value="" disabled selected>Select here</option>
                                                     <option class="text-black" value="BSIT-NS">BSIT-NS</option>
                                                     <option class="text-black" value="BSCS-AD">BSCS-AD</option>
@@ -394,7 +390,6 @@ require_once 'data.php';
                                                         }
                                                     }
 
-                                                    // Append the new author input field
                                                     authorContainer.innerHTML += `
                                                         <span id="authorset${authorCount}">
                                                             <input type="text" name="author${authorCount}" id="author${authorCount}" required class="peer px-2 pr-8 py-1.5 w-full rounded-md border-2 border-dirty-brown text-sm outline-none" value="${authorValues[authorCount] || ''}">
@@ -407,12 +402,10 @@ require_once 'data.php';
                                                             </button>
                                                         </span>
                                                     `;
-
-                                                    // Reassign the values to the existing inputs (if any)
                                                     for (let i = 1; i <= usedNumbers.length; i++) {
                                                         const authorInput = document.getElementById(`author${i}`);
                                                         if (authorInput && authorValues[i]) {
-                                                            authorInput.value = authorValues[i]; // Restore previous values
+                                                            authorInput.value = authorValues[i]; 
                                                         }
                                                     }
                                                 }
@@ -427,7 +420,7 @@ require_once 'data.php';
                                     <!-- RIGHT COLUMN -->
                                     <div class="flex-1 *:relative *:flex *:flex-col flex flex-col gap-4">
                                         <span class="flex-1">
-                                            <textarea name="abstract" id="abstract" required class="peer resize-none px-2 py-2 w-full h-full rounded-md border-2 border-dirty-brown text-sm outline-none leading-4"></textarea>
+                                            <textarea name="abstract" id="abstract" class="peer resize-none px-2 py-2 w-full h-full rounded-md border-2 border-dirty-brown text-sm outline-none leading-4"></textarea>
                                             <label for="abstract" class="absolute top-2.5 left-2 px-1 py-0.5 bg-off-white leading-none flex gap-1 select-none opacity-70 peer-valid:-translate-y-4 peer-valid:text-xs peer-valid:opacity-100 peer-valid:font-semibold peer-focus:font-semibold peer-focus:-translate-y-4 peer-focus:text-xs peer-focus:opacity-100 duration-200">
                                                 <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor">
                                                     <path d="M280-280h280v-80H280v80Zm0-160h400v-80H280v80Zm0-160h400v-80H280v80Zm-80 480q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z" />
@@ -436,7 +429,7 @@ require_once 'data.php';
                                             </label>
                                         </span>
                                         <span>
-                                            <textarea name="keywords" id="keywords" required class="peer resize-none px-2 py-1.5 w-full h-16 rounded-md border-2 border-dirty-brown text-sm outline-none leading-4"></textarea>
+                                            <textarea name="keywords" id="keywords" class="peer resize-none px-2 py-1.5 w-full h-16 rounded-md border-2 border-dirty-brown text-sm outline-none leading-4"></textarea>
                                             <label for="keywords" class="absolute top-2.5 left-2 px-1 bg-off-white leading-none flex gap-1 select-none opacity-70 peer-valid:-translate-y-4 peer-valid:text-xs peer-valid:opacity-100 peer-valid:font-semibold peer-focus:font-semibold peer-focus:-translate-y-4 peer-focus:text-xs peer-focus:opacity-100 duration-200">
                                                 <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor">
                                                     <path d="m240-160 40-160H120l20-80h160l40-160H180l20-80h160l40-160h80l-40 160h160l40-160h80l-40 160h160l-20 80H660l-40 160h160l-20 80H600l-40 160h-80l40-160H360l-40 160h-80Zm140-240h160l40-160H420l-40 160Z" />
@@ -523,9 +516,9 @@ require_once 'data.php';
                                 <option value="email">Email</option>
                             </select>
                         </div>
-                        <div class="p-0.5 flex items-center bg-neutral-200 border border-neutral-300 shadow-sm rounded-lg *:px-3 *:py-1 *:rounded-lg *:cursor-pointer *:duration-100 font-semibold select-none">
+                        <div class="p-0.5 flex items-center bg-neutral-200 border border-neutral-300 shadow-sm rounded-lg *:px-3 *:py-1 *:rounded-lg *:cursor-pointer *:duration-100 font-bold select-none text-dirty-brown">
                             <input type="checkbox" id="uarchive-mode" class="peer" hidden>
-                            <label for="uarchive-mode" class="peer-checked:bg-off-white border border-transparent peer-checked:border-neutral-300 opacity-40 peer-checked:opacity-100">Archived</label>
+                            <label for="uarchive-mode" class="opacity-40 peer-checked:opacity-100">Show archived users</label>
                         </div>
                     </div>
 
@@ -542,7 +535,7 @@ require_once 'data.php';
                                 </button>
                                 <h1 class="py-5 text-2xl font-extrabold text-center select-none">Append User Data</h1>
 
-                                <form action="" class="w-full flex flex-col *:relative *:flex *:flex-col gap-4">
+                                <form action="cms.php" method="post" class="w-full flex flex-col *:relative *:flex *:flex-col gap-4">
                                     <span>
                                         <input type="text" name="username" id="username" required class="peer px-2 py-1.5 w-full rounded-md border-2 border-dirty-brown text-sm outline-none">
                                         <label for="username" class="absolute top-2.5 left-2 px-1 bg-off-white leading-none flex items-center gap-1 select-none opacity-70 peer-valid:-translate-y-4 peer-valid:text-xs peer-valid:opacity-100 peer-valid:font-semibold peer-foucs:font-semibold peer-focus:-translate-y-4 peer-focus:text-xs peer-focus:opacity-100 duration-200">
@@ -597,7 +590,7 @@ require_once 'data.php';
                                     </span>
                                     <div class="flex flex-row! items-center gap-2.5 *:relative *:flex-1">
                                         <span>
-                                            <select name="college" id="college" required class="px-2 py-1.5 w-full rounded-md border-2 border-dirty-brown text-sm outline-none text-[#464644] valid:text-black">
+                                            <select name="college" id="college" class="px-2 py-1.5 w-full rounded-md border-2 border-dirty-brown text-sm outline-none text-[#464644] valid:text-black">
                                                 <option value="" disabled selected>Select here</option>
                                                 <option class="text-black" value="CCIS">CCIS</option>
                                                 <option class="text-black" value="HSU">HSU</option>
@@ -610,7 +603,7 @@ require_once 'data.php';
                                             </label>
                                         </span>
                                         <span>
-                                            <input type="text" name="yearsection" id="yearsection" required class="peer px-2 py-1.5 w-full rounded-md border-2 border-dirty-brown text-sm outline-none">
+                                            <input type="text" name="yearsection" id="yearsection" class="peer px-2 py-1.5 w-full rounded-md border-2 border-dirty-brown text-sm outline-none">
                                             <label for="yearsection" class="absolute top-2.5 left-2 px-1 bg-off-white leading-none flex items-center gap-1 select-none opacity-70 peer-valid:-translate-y-4 peer-valid:text-xs peer-valid:opacity-100 peer-valid:font-semibold peer-foucs:font-semibold peer-focus:-translate-y-4 peer-focus:text-xs peer-focus:opacity-100 duration-200">
                                                 <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor">
                                                     <path d="M40-160v-160q0-34 23.5-57t56.5-23h131q20 0 38 10t29 27q29 39 71.5 61t90.5 22q49 0 91.5-22t70.5-61q13-17 30.5-27t36.5-10h131q34 0 57 23t23 57v160H640v-91q-35 25-75.5 38T480-200q-43 0-84-13.5T320-252v92H40Zm440-160q-38 0-72-17.5T351-386q-17-25-42.5-39.5T253-440q22-37 93-58.5T480-520q63 0 134 21.5t93 58.5q-29 0-55 14.5T609-386q-22 32-56 49t-73 17ZM160-440q-50 0-85-35t-35-85q0-51 35-85.5t85-34.5q51 0 85.5 34.5T280-560q0 50-34.5 85T160-440Zm640 0q-50 0-85-35t-35-85q0-51 35-85.5t85-34.5q51 0 85.5 34.5T920-560q0 50-34.5 85T800-440ZM480-560q-50 0-85-35t-35-85q0-51 35-85.5t85-34.5q51 0 85.5 34.5T600-680q0 50-34.5 85T480-560Z" />
@@ -647,7 +640,8 @@ require_once 'data.php';
                                         </div>
                                     </span>
                                     <span class="py-5 flex flex-col items-center justify-center gap-1 select-none">
-                                        <i class="text-sm max-big-phone:text-xs">You are currently assigning new data with an ID of <b id="new-usr-id"></b>.</i>
+                                        <input type="text" name="user-id" id="user-id" hidden>
+                                        <i class="text-sm max-big-phone:text-xs">You are currently assigning new data with an ID of <b id="usr-id"></b>.</i>
                                         <button type="submit" name="new-user" class="px-8 py-1 rounded-md bg-lgreen text-sm font-semibold hover:opacity-90 active:scale-95 duration-100 cursor-pointer">Submit</button>
                                     </span>
                                 </form>
@@ -799,7 +793,7 @@ require_once 'data.php';
         </div>
 
         <!-- ================================================== LOGS ================================================== -->
-        <div id="logs-content" class="hidden flex-1">
+        <div id="logs-content" class="hidden relative flex-1">
             <!-- FILTERS -->
             <div class="flex max-big-phone:flex-col max-big-phone:gap-2.5 items-center justify-between text-sm max-tablet:text-xs **:select-none">
                 <div class="p-0.5 flex items-center gap-2.5 bg-neutral-200 border border-neutral-300 shadow-sm rounded-lg">
@@ -817,13 +811,13 @@ require_once 'data.php';
                     <input type="radio" name="show-logs" id="user-logs" class="peer/user-logs" hidden>
                     <input type="radio" name="show-logs" id="thesis-logs" class="peer/thesis-logs" hidden>
                     <input type="radio" name="show-logs" id="visit-logs" class="peer/visit-logs" hidden>
-                    <label for="all-logs" class="peer-checked/all-logs:bg-off-white border border-transparent peer-checked/all-logs:border-neutral-300 peer-checked/all-logs:shadow-md">All <span class="text-neutral-500">24</span></label>
+                    <label for="all-logs" class="peer-checked/all-logs:bg-off-white border border-transparent peer-checked/all-logs:border-neutral-300 peer-checked/all-logs:shadow-md opacity-40 peer-checked/all-logs:opacity-100">All <span id="all-logs-count" class="text-neutral-500">0</span></label>
                     <span class="p-0! opacity-20 leading-none peer-checked/all-logs:opacity-0 peer-checked/user-logs:opacity-0">|</span>
-                    <label for="user-logs" class="peer-checked/user-logs:bg-off-white border border-transparent peer-checked/user-logs:border-neutral-300 peer-checked/user-logs:shadow-md">User <span class="text-neutral-500">24</span></label>
+                    <label for="user-logs" class="peer-checked/user-logs:bg-off-white border border-transparent peer-checked/user-logs:border-neutral-300 peer-checked/user-logs:shadow-md opacity-40 peer-checked/user-logs:opacity-100">User <span id="user-logs-count" class="text-neutral-500">0</span></label>
                     <span class="p-0! opacity-20 leading-none peer-checked/user-logs:opacity-0 peer-checked/thesis-logs:opacity-0">|</span>
-                    <label for="thesis-logs" class="peer-checked/thesis-logs:bg-off-white border border-transparent peer-checked/thesis-logs:border-neutral-300 peer-checked/thesis-logs:shadow-md">Thesis <span class="text-neutral-500">24</span></label>
+                    <label for="thesis-logs" class="peer-checked/thesis-logs:bg-off-white border border-transparent peer-checked/thesis-logs:border-neutral-300 peer-checked/thesis-logs:shadow-md opacity-40 peer-checked/thesis-logs:opacity-100">Thesis <span id="thesis-logs-count" class="text-neutral-500">0</span></label>
                     <span class="p-0! opacity-20 leading-none peer-checked/thesis-logs:opacity-0 peer-checked/visit-logs:opacity-0">|</span>
-                    <label for="visit-logs" class="peer-checked/visit-logs:bg-off-white border border-transparent peer-checked/visit-logs:border-neutral-300 peer-checked/visit-logs:shadow-md">Visit <span class="text-neutral-500">24</span></label>
+                    <label for="visit-logs" class="peer-checked/visit-logs:bg-off-white border border-transparent peer-checked/visit-logs:border-neutral-300 peer-checked/visit-logs:shadow-md opacity-40 peer-checked/visit-logs:opacity-100">Visit <span id="visit-logs-count" class="text-neutral-500">0</span></label>
                 </div>
             </div>
 
@@ -840,34 +834,229 @@ require_once 'data.php';
                 </thead>
                 <tbody id="logs-container" class="divide-y divide-neutral-300">
                 </tbody>
-                <script>
-                    let logs = { logs : [] };
-                    fetch('logs.json').then(res => res.json()).then(json => (logs = json, displayLogs())).catch(console.error);
-                    function displayLogs() {
-                        const logsContainer = document.getElementById("logs-container");
-                        let operationColor = {
-                            'added' : 'bg-[#bee3be] text-green-800',
-                            'modified' : 'bg-yellow-200 text-yellow-800',
-                            'archived' : 'bg-orange-200 text-orange-800',
-                            'retrieved' : 'bg-sky-200 text-sky-800',
-                            'deleted' : 'bg-[#f4cccc] text-red-800',
-                            'visited' : 'bg-neutral-300 text-neutral-700'
-                        }
-                        logsContainer.innerHTML = logs.logs.map(log => `
-                            <tr class="*:bg-light-dirty-brown *:py-2 *:overflow-hidden *:text-ellipsis *:whitespace-nowrap text-sm text-center">
-                                <td class="font-bold"><span class="px-5 py-0.5 rounded-full ${operationColor[log.operation] || ''}">${log.operation.charAt(0).toUpperCase() + log.operation.substr(1)}</span></td>
-                                <td>${new Date(log.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</td>
-                                <td>${log.details}</td>
-                                <td>${log.ref_id}</td>
-                                <td>${log.initiator}</td>
-                            </tr>`).join('');
+            </table>
+
+            <div class="absolute bottom-17.5 w-full flex flex-col items-center gap-1 *:w-min-30">
+                <div class="relative w-full flex max-tablet:flex-col items-center justify-between gap-2 max-big-phone:gap-1 text-sm max-tablet:text-xs">
+                    <div class="flex items-center italic opacity-80 select-none">
+                        <p>Showing table with <span id="lpage-info"></span> of results</p>
+                    </div>
+                    <div class="max-tablet:static absolute left-1/2 tablet:-translate-x-1/2 px-5 py-1 rounded-md flex items-center justify-center gap-2 bg-dirty-brown text-off-white shadow-md">
+                        <button class="cursor-pointer" onclick="firstLSet()"><svg class="size-5 max-tablet:size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor">
+                                <path d="M440-240 200-480l240-240 56 56-183 184 183 184-56 56Zm264 0L464-480l240-240 56 56-183 184 183 184-56 56Z" />
+                            </svg></button>
+                        <button class="cursor-pointer" onclick="previousLSet()"><svg class="size-5 max-tablet:size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor">
+                                <path d="M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z" />
+                            </svg></button>
+                        <select id="lsets-per-page" class="px-4 w-auto rounded-md bg-slgreen text-dirty-brown select-none outline-none">
+                            <option value="1">1</option>
+                        </select>
+                        <button class="cursor-pointer" onclick="nextLSet()"><svg class="size-5 max-tablet:size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor">
+                                <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z" />
+                            </svg></button>
+                        <button class="cursor-pointer" onclick="lastLSet()"><svg class="size-5 max-tablet:size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor">
+                                <path d="M383-480 200-664l56-56 240 240-240 240-56-56 183-184Zm264 0L464-664l56-56 240 240-240 240-56-56 183-184Z" />
+                            </svg></button>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                let logs = { logs: [] }, selectedLogType = 'all';
+                let selectedLogSet = 0, logsPerPage = 12;
+
+                fetch('logs.json')
+                    .then(res => res.json())
+                    .then(json => {
+                        logs = json;
+                        updateLogCounts();
+                        displayLogs();
+                        updateChart('7days')
+                    })
+                    .catch(console.error);
+
+                function displayLogs() {
+                    const logsContainer = document.getElementById("logs-container");
+                    const search = document.getElementById("search-logs").value.toLowerCase();
+                    const category = document.getElementById("logs-category").value;
+
+                    const operationColor = {
+                        added: 'bg-[#bee3be] text-green-800',
+                        modified: 'bg-yellow-200 text-yellow-800',
+                        archived: 'bg-orange-200 text-orange-800',
+                        retrieved: 'bg-sky-200 text-sky-800',
+                        deleted: 'bg-[#f4cccc] text-red-800',
+                        visited: 'bg-neutral-300 text-neutral-700'
+                    };
+
+                    const filter = {
+                        all: () => true,
+                        user: log => log.type === 'account' && log.operation !== 'visited',
+                        thesis: log => log.type === 'thesis' && log.operation !== 'visited',
+                        visit: log => log.operation === 'visited'
+                    };
+
+                    let filteredLogs = logs.logs.filter(filter[selectedLogType] || filter.all);
+
+                    if (search && category) {
+                        filteredLogs = filteredLogs.filter(log => {
+                            const value = log[category];
+                            if (!value) return false;
+                            return value.toLowerCase().includes(search);
+                        });
                     }
 
-                </script>
-            </table>
+                    filteredLogs.reverse();
+
+                    const totalLogSets = Math.ceil(filteredLogs.length / logsPerPage);
+                    selectedLogSet = Math.max(0, Math.min(selectedLogSet, totalLogSets - 1));
+
+                    const start = selectedLogSet * logsPerPage;
+                    const paginatedLogs = filteredLogs.slice(start, start + logsPerPage);
+
+                    logsContainer.innerHTML = paginatedLogs.length ? paginatedLogs.map(log => `
+                        <tr class="*:bg-light-dirty-brown *:py-2 *:overflow-hidden *:text-ellipsis *:whitespace-nowrap text-sm text-center">
+                            <td class="font-bold">
+                                <span class="px-5 py-0.5 rounded-full ${operationColor[log.operation] || ''}">
+                                    ${log.operation.charAt(0).toUpperCase() + log.operation.slice(1)}
+                                </span>
+                            </td>
+                            <td>${log.date}</td>
+                            <td>${log.details}</td>
+                            <td>${log.reference_id}</td>
+                            <td>${log.initiator}</td>
+                        </tr>
+                    `).join('') : "<tr><td colspan='5' class='text-center'>No results found.</td></tr>"
+
+                    document.getElementById("lpage-info").innerText =
+                        `${start + 1} - ${Math.min(start + logsPerPage, filteredLogs.length)} of ${filteredLogs.length}`;
+
+                    const lsetsSelect = document.getElementById("lsets-per-page");
+                    lsetsSelect.innerHTML = [...Array(totalLogSets)].map((_, i) =>
+                        `<option value="${i + 1}">${i + 1}</option>`).join("");
+                    lsetsSelect.value = selectedLogSet + 1;
+                }
+
+                function updateLogCounts() {
+                    const count = {
+                        all: logs.logs.length,
+                        user: logs.logs.filter(log => log.type === 'account' && log.operation !== 'visited').length,
+                        thesis: logs.logs.filter(log => log.type === 'thesis' && log.operation !== 'visited').length,
+                        visit: logs.logs.filter(log => log.operation === 'visited').length
+                    };
+
+                    document.getElementById('all-logs-count').textContent = count.all;
+                    document.getElementById('user-logs-count').textContent = count.user;
+                    document.getElementById('thesis-logs-count').textContent = count.thesis;
+                    document.getElementById('visit-logs-count').textContent = count.visit;
+                }
+
+
+                document.getElementById('search-logs').addEventListener('input', displayLogs);
+                document.getElementById('logs-category').addEventListener('change', displayLogs);
+
+                ['all', 'user', 'thesis', 'visit'].forEach(type => {
+                    const label = document.querySelector(`label[for="${type}-logs"]`);
+                    const radioId = `${type}-logs`;
+
+                    label.addEventListener('click', () => {
+                        selectedLogType = type;
+                        selectedLogSet = 0;
+                        document.querySelectorAll('input[name="show-logs"]').forEach(input => input.checked = false);
+                        document.getElementById(radioId).checked = true;
+                        displayLogs();
+                    });
+                });
+
+                ["first", "previous", "next", "last"].forEach((fn, i) => {
+                    window[fn + "LSet"] = () => {
+                        const lsetsSelect = document.getElementById("lsets-per-page");
+                        const totalSets = lsetsSelect.options.length;
+                        selectedLogSet = [0, Math.max(0, selectedLogSet - 1), Math.min(selectedLogSet + 1, totalSets - 1), totalSets - 1][i];
+                        displayLogs();
+                    };
+                });
+
+                document.getElementById("lsets-per-page").addEventListener("change", e => {
+                    selectedLogSet = parseInt(e.target.value) - 1;
+                    displayLogs();
+                });
+
+                const visitorsChart = document.getElementById("visitors-chart").getContext("2d");
+
+                const generateData = (range) => {
+                    const now = new Date();
+                    let labels = [], data = [];
+
+                    const filterLogs = (startDate, endDate) =>
+                    logs.logs.filter(log => {
+                        const logDate = new Date(log.date);
+                        return logDate >= startDate && logDate <= endDate;
+                    }).length;
+
+                    if (range === '7days') {
+                    labels = Array.from({ length: 7 }, (_, i) => {
+                        const d = new Date();
+                        d.setDate(now.getDate() - 6 + i);
+                        return d.toLocaleDateString('en-US', { weekday: 'short' });
+                    });
+                    data = labels.map((_, i) => {
+                        const d = new Date();
+                        d.setDate(now.getDate() - 6 + i);
+                        return filterLogs(new Date(d.setHours(0, 0, 0, 0)), new Date(d.setHours(23, 59, 59, 999)));
+                    });
+                    } else if (range === 'month') {
+                    const daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+                    labels = Array.from({ length: daysInMonth }, (_, i) => i + 1);
+                    data = labels.map(day =>
+                        filterLogs(
+                        new Date(now.getFullYear(), now.getMonth(), day),
+                        new Date(now.getFullYear(), now.getMonth(), day, 23, 59, 59)
+                        )
+                    );
+                    } else if (range === 'year') {
+                    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+                    labels = months;
+                    data = months.map((_, m) =>
+                        filterLogs(
+                        new Date(now.getFullYear(), m, 1),
+                        new Date(now.getFullYear(), m + 1, 0, 23, 59, 59)
+                        )
+                    );
+                    }
+
+                    return { labels, data };
+                };
+
+                const updateChart = (range) => {
+                    const { labels, data } = generateData(range);
+                    if (!window.chartInstance) {
+                    window.chartInstance = new Chart(visitorsChart, {
+                        type: 'bar',
+                        data: {
+                        labels,
+                        datasets: [{
+                            label: 'Visitors',
+                            data,
+                            backgroundColor: 'rgba(59, 130, 246, 0.5)',
+                        }]
+                        },
+                        options: {
+                        responsive: true,
+                        maintainAspectRatio: false, 
+                        scales: { y: { beginAtZero: true } }
+                        }
+                    });
+                    } else {
+                    window.chartInstance.data.labels = labels;
+                    window.chartInstance.data.datasets[0].data = data;
+                    window.chartInstance.update();
+                    }
+                };
+
+                document.getElementById('vchart-range').addEventListener('change', e => updateChart(e.target.value));
+            </script>
         </div>
-
-
 
         <!-- ================================================== ALERTS ================================================== -->
         <?php
@@ -896,7 +1085,19 @@ require_once 'data.php';
             }, '');
         }
 
-        fetch('data.json').then(res => res.json()).then(json => (data = json, displaySets())).catch(console.error);
+        const tc = document.getElementById('open-tcreator');
+        const uc = document.getElementById('open-ucreator');
+        const toggleCButtons = () => {
+            const isThesis = document.getElementById('thesestb').checked;
+            tc.classList.toggle('hidden!', !isThesis);
+            uc.classList.toggle('hidden!', isThesis);
+        };
+        toggleCButtons();
+        ['thesestb', 'userstb'].forEach(id =>
+            document.getElementById(id).addEventListener('change', toggleCButtons)
+        );
+
+        fetch('data.json').then(res => res.json()).then(json => (data = json, displaySets(), loadCharts())).catch(console.error);
 
         let data = {
                 theses: []
@@ -927,12 +1128,9 @@ require_once 'data.php';
             tarchive.disabled = selectedThesis.length === 0;
             tretrieve.disabled = selectedThesis.length === 0;
             tdelete.disabled = selectedThesis.length === 0;
-
-            console.log(selectedThesis);
         });
 
         function displaySets() {
-            loadCharts();
             const tcontainer = document.getElementById("theses-container"),
                 tpageInfo = document.getElementById("tpage-info");
             let filteredData = data.theses.filter(t => t.archived == tarchiveMode.checked && (!searchQuery || t[searchCategory]?.toLowerCase().includes(searchQuery.toLowerCase())));
@@ -991,7 +1189,7 @@ require_once 'data.php';
             const box = document.getElementById("tbulk-action-box");
             box.classList.toggle('hidden');
             if (!action) return;
-            document.getElementById("tba-msg").textContent = action.charAt(0).toUpperCase() + str.slice(1) + " selected theses?";
+            document.getElementById("tba-msg").textContent = action.charAt(0).toUpperCase() + action.substr(1) + " selected theses?";
             document.getElementById("tba-warning-msg").textContent = action == "delete" ? "This action cannot be reverted!" : "";
             document.getElementById("tba-selection").textContent = selectedThesis.map(id => id.toString().padStart(4, '0')).join(', ');
             document.getElementById("ba-data").value = selectedThesis.join('-');
@@ -1002,7 +1200,7 @@ require_once 'data.php';
             const box = document.getElementById("taction-box");
             box.classList.toggle('hidden');
             if (!action) return;
-            document.getElementById("ta-msg").innerHTML = action.charAt(0).toUpperCase() + str.slice(1) + " the thesis with an ID of <b>" + id.toString().padStart(4, '0') + "</b>?";
+            document.getElementById("ta-msg").innerHTML = action.charAt(0).toUpperCase() + action.substr(1) + " the thesis with an ID of <b>" + id.toString().padStart(4, '0') + "</b>?";
             document.getElementById("ta-warning-msg").textContent = action == "delete" ? "This action cannot be reverted!" : "";
             document.getElementById("a-data").value = id;
             document.getElementById("t-act").value = action;
@@ -1055,9 +1253,6 @@ require_once 'data.php';
             userArchive.disabled = selectedUsers.length === 0;
             userRetrieve.disabled = selectedUsers.length === 0;
             userDelete.disabled = selectedUsers.length === 0;
-
-            const lastUserId = userData.accounts.length ? Math.max(...userData.accounts.map(u => u.user_id)) : 0;
-            document.getElementById("new-usr-id").innerHTML = (lastUserId + 1).toString().padStart(4, '0');
 
             userContainer.innerHTML = filteredUserData.length ? filteredUserData.slice(userSelectedSet * usersPerPage, (userSelectedSet + 1) * usersPerPage).map(user => `
                 <tr class="*:bg-light-dirty-brown *:py-1 *:overflow-hidden *:text-ellipsis *:whitespace-nowrap text-sm">
@@ -1188,7 +1383,6 @@ require_once 'data.php';
                 const firstAuthorInput = document.getElementById('author1');
                 if (firstAuthorInput) {
                     firstAuthorInput.value = authors[0];
-                    console.log("First author set successfully:", firstAuthorInput.value);
                 }
 
                 for (let i = 1; i < authors.length; i++) {
@@ -1217,21 +1411,27 @@ require_once 'data.php';
                 document.getElementById(field).value = "";
             });
 
+            let lastUserId = data.accounts.length ? Math.max(...data.accounts.map(a => a.user_id)) : 0;
+            document.getElementById("usr-id").innerHTML = (lastUserId + 1).toString().padStart(4, '0');
+            document.getElementById("user-id").value = lastUserId + 1;
+
             if (!userId) return;
 
             let user = userData.accounts.find(u => u.user_id == userId);
 
             ['username', 'name', 'email', 'password', 'membership', 'college', 'yearsection', 'role'].forEach(field => document.getElementById(field).value = user[field]);
+            document.getElementById("usr-id").innerHTML = user.user_id.toString().padStart(4, '0');
+            document.getElementById("user-id").value = user.user_id;
         }
 
         // ================================================================================= CHARTS
-        const accountsChart = document.getElementById("accounts-chart");
-        const thesesChart = document.getElementById("thesis-chart");
+        const accountsChart = document.getElementById("accounts-chart").getContext("2d");
+        const thesesChart = document.getElementById("thesis-chart").getContext("2d");
                 
         function loadCharts() {
             let regular = 0, admin = 0, superadmin = 0, archived = 0;
             data.accounts.forEach(account => {
-                if (!account.archived) archived++;
+                if (account.archived == 1) archived++;
                 else if (account.role == "admin") admin++;
                 else if (account.role == "superadmin") superadmin++;
                 else if (account.role == "regular") regular++;
@@ -1245,10 +1445,10 @@ require_once 'data.php';
                     label: 'Account Types',
                     data: [regular, admin, superadmin, archived],
                     backgroundColor: [
-                        '#a3e635', // green
-                        '#60a5fa', // blue
-                        '#c084fc', // purple
-                        '#f87171'  // red
+                        '#017E3D', // RED
+                        '#F3C70D', // YELLOW
+                        '#D90A27', // GREEN
+                        '#A4047C'  // PURPLE
                     ],
                     borderWidth: 1
                     }]
@@ -1257,7 +1457,7 @@ require_once 'data.php';
 
             let infoTheses = 0, noInfoTheses = 0, archivedTheses = 0;
             data.theses.forEach(thesis => {
-                if (!thesis.archived) archivedTheses++;
+                if (thesis.archived == 1) archivedTheses++;
                 else if (thesis.abstract && thesis.keywords) infoTheses++;
                 else noInfoTheses++;
             });
@@ -1270,17 +1470,18 @@ require_once 'data.php';
                     label: 'Thesis Information',
                     data: [infoTheses, noInfoTheses, archivedTheses],
                     backgroundColor: [
-                        '#a3e635', // green
-                        '#60a5fa', // blue
-                        '#c084fc'  // purple
+                        '#017E3D', // GREEN
+                        '#F3C70D', // YELLOW
+                        '#A4047C'  // PURPLE
                     ],
                     borderWidth: 1
                     }]
                 }
             });
+
+            document.getElementById('accounts-count').textContent = `${data.accounts.length} accounts found`;
+            document.getElementById('theses-count').textContent = `${data.theses.length} theses found`;
         }
-        
-        
     </script>
 </body>
 

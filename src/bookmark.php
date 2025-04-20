@@ -3,10 +3,10 @@
 require_once 'config.php';
 if (isset($_POST['bm'])) {
     $thesisId = $_POST['thesis_id'];
-    $userEmail = $_POST['user_email'];
+    $userId = $_POST['user_id'];
 
-    $stmt = $conn->prepare('SELECT bookmarks FROM accounts WHERE email = ?');
-    $stmt->bind_param('s', $userEmail);
+    $stmt = $conn->prepare('SELECT bookmarks FROM accounts WHERE user_id = ?');
+    $stmt->bind_param('s', $userId);
     $stmt->execute();
     $row = $stmt->get_result()->fetch_assoc();
 
@@ -18,8 +18,8 @@ if (isset($_POST['bm'])) {
         $newBookmarks = $row['bookmarks'] . '-' . $thesisId;
     }
 
-    $update = $conn->prepare('UPDATE accounts SET bookmarks = ? WHERE email = ?');
-    $update->bind_param('ss', $newBookmarks, $userEmail);
+    $update = $conn->prepare('UPDATE accounts SET bookmarks = ? WHERE user_id = ?');
+    $update->bind_param('ss', $newBookmarks, $userId);
     $update->execute();
 }
 

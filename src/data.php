@@ -1,6 +1,6 @@
 <?php
 
-$theses_sql = "SELECT thesis_id, archived, visits, borrower, borrow_time, published_date, course, category, title, authors, abstract, keywords FROM theses";
+$theses_sql = "SELECT thesis_id, archived, visits, published_date, course, category, title, authors, abstract, keywords FROM theses";
 $theses_result = $conn->query($theses_sql);
 $theses = [];
 $accounts_sql = "SELECT user_id, date_joined, archived, role, membership, username, name, email, password, college, yearsection, bio, bookmarks, personalization FROM accounts";
@@ -19,6 +19,7 @@ while ($row = $accounts_result->fetch_assoc()) {
 }
 
 while ($row = $logs_result->fetch_assoc()) {
+    $row['date'] = date("F j, Y", strtotime($row['date']));
     $logs[] = $row;
 }
 

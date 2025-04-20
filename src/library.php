@@ -19,18 +19,37 @@
             $personalVisits[] = $view;
             $updatedVisits = implode('-', $personalVisits);
             setcookie('personal-visits', $updatedVisits, time() + 86400, "/");
+
+            $stmt = $conn->prepare('SELECT email FROM accounts where user_id = ?');
+            $stmt->bind_param('s', $_COOKIE['id']);
+            $stmt->execute();
+            $initiator = $stmt->get_result()->fetch_assoc()['email'];
+            $stmt->close();
     
             $stmt = $conn->prepare('UPDATE theses SET visits = visits + 1 WHERE thesis_id = ?');
             $stmt->bind_param('s', $view);
             $stmt->execute();
             $stmt->close();
 
-            $result = mysqli_query($conn, 'SELECT reference_id FROM logs WHERE reference_id LIKE "VIW#%" ORDER BY CAST(SUBSTRING_INDEX(reference_id, "#", -1) as UNSIGNED) LIMIT 1');
+            $result = mysqli_query($conn, 'SELECT reference_id FROM logs WHERE reference_id LIKE "VIW#%" ORDER BY CAST(SUBSTRING_INDEX(reference_id, "#", -1) AS UNSIGNED) DESC LIMIT 1');
             $row = mysqli_fetch_assoc($result);
 
+            if ($row && isset($row['reference_id'])) {
+                $lastId = (int)substr($row['reference_id'], 4);
+                $newId = 'VIW#' . str_pad($lastId + 1, 6, '0', STR_PAD_LEFT);
+            } else {
+                $newId = 'VIW#000001';
+            }
+
             $stmt = $conn->prepare('INSERT INTO logs (reference_id, type, operation, date, details, initiator) VALUES (?, ?, ?, ?, ?, ?)');
-            $stmt = $bind_param('ssssss', ($row ? $row : "VIW#000001"), 'thesis', 'visited', date('Y-m-d'), '', $_COOKIE['id']);
-            
+            $refType = 'thesis';
+            $operation = 'visited';
+            $date = date('Y-m-d');
+            $details = 'Viewed the details of Thesis [ID#' . $view . ']';
+
+            $stmt->bind_param('ssssss', $newId, $refType, $operation, $date, $details, $initiator);
+            $stmt->execute();
+            $stmt->close();
         }
     } else {
         setCookie('view', '', time() - 3600, "/");
@@ -99,13 +118,6 @@
             </ul>
         </nav>
         <menu class="flex flex-col gap-2">
-            <li><a href="bookmarks.php" class="flex items-center gap-8 pl-5 py-2 hover:opacity-60 duration-200 ease-linear">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="min-w-8 w-8">
-                    <path fill-rule="evenodd" d="M7.502 6h7.128A3.375 3.375 0 0 1 18 9.375v9.375a3 3 0 0 0 3-3V6.108c0-1.505-1.125-2.811-2.664-2.94a48.972 48.972 0 0 0-.673-.05A3 3 0 0 0 15 1.5h-1.5a3 3 0 0 0-2.663 1.618c-.225.015-.45.032-.673.05C8.662 3.295 7.554 4.542 7.502 6ZM13.5 3A1.5 1.5 0 0 0 12 4.5h4.5A1.5 1.5 0 0 0 15 3h-1.5Z" clip-rule="evenodd" />
-                    <path fill-rule="evenodd" d="M3 9.375C3 8.339 3.84 7.5 4.875 7.5h9.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-9.75A1.875 1.875 0 0 1 3 20.625V9.375ZM6 12a.75.75 0 0 1 .75-.75h.008a.75.75 0 0 1 .75.75v.008a.75.75 0 0 1-.75.75H6.75a.75.75 0 0 1-.75-.75V12Zm2.25 0a.75.75 0 0 1 .75-.75h3.75a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75ZM6 15a.75.75 0 0 1 .75-.75h.008a.75.75 0 0 1 .75.75v.008a.75.75 0 0 1-.75.75H6.75a.75.75 0 0 1-.75-.75V15Zm2.25 0a.75.75 0 0 1 .75-.75h3.75a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75ZM6 18a.75.75 0 0 1 .75-.75h.008a.75.75 0 0 1 .75.75v.008a.75.75 0 0 1-.75.75H6.75a.75.75 0 0 1-.75-.75V18Zm2.25 0a.75.75 0 0 1 .75-.75h3.75a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd" />
-                </svg>
-                <p class="text-lg overflow-hidden text-clip">Bookmarks</p>
-            </a></li>
             <li><a href="profile.php" class="flex items-center gap-8 pl-5 py-2 hover:opacity-60 duration-200 ease-linear">                  
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="min-w-8 w-8">
                     <path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" clip-rule="evenodd" />
@@ -145,9 +157,7 @@
             <hr class="my-5 w-full opacity-30 *:active:bg-neutral-300">
             <div class="w-full *:px-7.5 *:py-1 *:flex *:items-center *:gap-2 *:active:bg-neutral-300">
                 <a href="library.php" class="block w-full"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5"> <path d="M10.75 16.82A7.462 7.462 0 0 1 15 15.5c.71 0 1.396.098 2.046.282A.75.75 0 0 0 18 15.06v-11a.75.75 0 0 0-.546-.721A9.006 9.006 0 0 0 15 3a8.963 8.963 0 0 0-4.25 1.065V16.82ZM9.25 4.065A8.963 8.963 0 0 0 5 3c-.85 0-1.673.118-2.454.339A.75.75 0 0 0 2 4.06v11a.75.75 0 0 0 .954.721A7.506 7.506 0 0 1 5 15.5c1.579 0 3.042.487 4.25 1.32V4.065Z" /> </svg>Library</a>
-                <a href="bookmarks.php" class="block w-full"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5"> <path fill-rule="evenodd" d="M10 2c-1.716 0-3.408.106-5.07.31C3.806 2.45 3 3.414 3 4.517V17.25a.75.75 0 0 0 1.075.676L10 15.082l5.925 2.844A.75.75 0 0 0 17 17.25V4.517c0-1.103-.806-2.068-1.93-2.207A41.403 41.403 0 0 0 10 2Z" clip-rule="evenodd" /> </svg>Bookmarks</a>
                 <a href="profile.php" class="block w-full"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5"> <path fill-rule="evenodd" d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-5.5-2.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0ZM10 12a5.99 5.99 0 0 0-4.793 2.39A6.483 6.483 0 0 0 10 16.5a6.483 6.483 0 0 0 4.793-2.11A5.99 5.99 0 0 0 10 12Z" clip-rule="evenodd" /> </svg>Profile</a>
-               
             </div>
             <hr class="my-5 w-full opacity-30 *:active:bg-neutral-300">
             <div class="w-full *:px-7.5 *:py-1 *:flex *:items-center *:gap-2 *:active:bg-neutral-300">
@@ -431,7 +441,7 @@
             const isGrid = gridView.checked;
             const container = isGrid ? gridContainer : listContainer;
             const pageInfo = document.getElementById("page-info");
-            let bookmarks = data.accounts.find(acc => acc.email === getCookie('id'))?.bookmarks?.split('-') ?? [];
+            let bookmarks = data.accounts.find(acc => acc.user_id == getCookie('id'))?.bookmarks?.split('-') ?? [];
             container.innerHTML = "";
 
             let filteredData = data.theses?.filter(item =>
@@ -450,9 +460,12 @@
             tsetsSelect.value = prevValue <= totalSets ? prevValue : (totalSets > 0 ? totalSets : "1");
 
             let thesesSlice = filteredData.slice(selectedSet * thesesPerPage, (selectedSet + 1) * thesesPerPage);
+            const userBookmarks = (data.accounts.find(u => u.user_id === getCookie('id'))?.bookmarks || '').split('-');
+            const getBM = thesisId => userBookmarks.includes(String(thesisId)) ? '-bm' : '';
 
             container.innerHTML = thesesSlice.map(item => {
-                let darkColor = item.course == "BSCS-AD" ? "*:bg-violet-900" : item.course == "BSIT-NS" ? "*:bg-sky-900" : "*:bg-yellow-800";    
+                // let darkColor = item.course == "BSCS-AD" ? "*:bg-violet-900" : item.course == "BSIT-NS" ? "*:bg-sky-900" : "*:bg-yellow-800";
+                let darkColor = '';  
                 let singularColor = item.course == "BSCS-AD" ? "bg-purple-800" : item.course == "BSIT-NS" ? "bg-sky-700" : "bg-yellow-700";          
                 let textColor = item.course == "BSCS-AD" ? "text-violet-900" : item.course == "BSIT-NS" ? "text-sky-900" : "text-yellow-800"; 
                 let border = item.course == "BSCS-AD" ? "border-violet-900" : item.course == "BSIT-NS" ? "border-sky-900" : "border-yellow-800";          
@@ -463,11 +476,11 @@
                             <div class="absolute bottom-0 w-full h-35 max-tablet:h-30 max-phone:h-25 rounded-xl bg-neutral-100 group-hover:border ${border} drop-shadow-lg z-1"></div>
                             <div class="absolute bottom-0 w-full h-35 max-tablet:h-30 max-phone:h-25 rounded-xl bg-black/40 z-2 hidden"></div>
                             <button type="submit" name="view" value="${item.thesis_id}" class="relative z-3">
-                                <img src="resources/${item.course == "BSCS-AD" ? "book-cs" : item.course == "BSIT-NS" ? "book-it" : "book-others"}.svg" alt="" class="absolute top-0 cursor-pointer select-none hover:-translate-y-2 duration-200">
+                                <img src="resources/${(item.course == "BSCS-AD" ? "book-cs" : item.course == "BSIT-NS" ? "book-it" : "book-others") + getBM(item.thesis_id)}.svg" alt="" class="absolute top-0 cursor-pointer select-none hover:-translate-y-2 duration-200">
                             </button>
                             <div class="relative pt-12.5 max-tablet:pt-7.5 flex flex-col items-start gap-1 max-phone:gap-0.5 font-semibold max-tablet:text-sm max-phone:text-xs max-phone:leading-3 leading-4 z-3">
-                                <h3 class="text-dirty-brown">${item.title}</h3>
-                                <ul class="flex flex-wrap gap-0.5 max-big-phone:hidden text-xs *:px-2 *:rounded-full ${darkColor}">
+                                <h3 class="${textColor} font-bold">${item.title}</h3>
+                                <ul class="flex flex-wrap gap-0.5 max-big-phone:hidden text-xs *:px-2 *:rounded-full text-dirty-brown ${darkColor}">
                                     ${item.authors.split("-").map(author => `<li class="drop-shadow-lg">${author.trim()}</li>`).join("")}
                                 </ul>
                                 <ul class="absolute bottom-2.5 right-0 font-normal flex items-center gap-1 text-sm max-tablet:text-xs">
@@ -526,7 +539,7 @@
             const information = document.getElementById("information");
 
             let item = data.theses.find(item => item.thesis_id == thesis_id);
-            let account = data.accounts.find(account => account.email == getCookie('id'));
+            let account = data.accounts.find(account => account.user_id == getCookie('id'));
         
             let a = item.authors.split("-").map(x => {
                 x = x.trim();
@@ -564,7 +577,7 @@
                     <p class="absolute bottom-5 -right-2.5 max-big-phone:bottom-2.5 max-tablet:text-sm max-big-phone:text-xs">${item.visits != 0 ? item.visits + ' visit/s ' : ''}<span class="px-2 rounded-full font-semibold drop-shadow-lg ${darkColor}">${formatDate(item.published_date)}</span></p>
                     <form action="bookmark.php" method="post" id="bm-form" class="absolute top-5 -right-2.5 max-big-phone:top-2.5 max-big-phone:-right-2.5 *:select-none max-tablet:scale-80 max-big-phone:scale-60">
                         <input type="text" name="thesis_id" id="thesis_id" value="${item.thesis_id}" hidden>
-                        <input type="text" name="user_email" id="user_email" value="${getCookie('id')}" hidden>
+                        <input type="text" name="user_id" id="user_id" value="${getCookie('id')}" hidden>
                         <button type="submit" name="bm" value="none" class="cursor-pointer">
                             ${account.bookmarks.split('-').includes(item.thesis_id) ?
                             '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from MingCute Icon by MingCute Design - https://github.com/Richard9394/MingCute/blob/main/LICENSE --><g fill="none"><path d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"/><path fill="#eeeeee" d="M4 5a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v16.028c0 1.22-1.38 1.93-2.372 1.221L12 18.229l-5.628 4.02c-.993.71-2.372 0-2.372-1.22z"/></g></svg>'

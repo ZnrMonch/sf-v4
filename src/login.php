@@ -21,6 +21,7 @@ if (isset($_POST['login'])) {
 
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
+        $stmt->close();
         
         if (
             ($user['role'] === 'regular' && $user['password'] !== decrypt($password)) ||
@@ -28,15 +29,21 @@ if (isset($_POST['login'])) {
         ) {
             $_SESSION['log-error'] = 'Error: Incorrect password!';
         } else {
-            setcookie("id", $email, time() + (86400 * 30), "/");
-            setcookie("role", $user['role'], time() + (86400 * 30), "/");
+            $stmt = $conn->prepare("SELECT user_id FROM accounts WHERE email = ?");
+            $stmt->bind_param("s", $email);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $userId = $result->fetch_assoc()['user_id'] ?? null;
+            $stmt->close();
+            
+            setcookie("id", $userId, time() + (86400 * 30), "/");
+            setcookie("role", "regular", time() + (86400 * 30), "/");;
         }
         
     } else {
         $_SESSION['log-error'] = 'Error: Email does not exist!';
     }
 
-    $stmt->close();
     $_SESSION['activeForm'] = 'loginform';
     header("Location: access.php");
     exit();
@@ -75,8 +82,15 @@ if (isset($_POST['register'])) {
                 $stmt->bind_param("ssssss", date('Y-m-d'), $membership, $username, $name, $email, $password);
                 $stmt->execute();
                 $stmt->close();
+
+                $stmt = $conn->prepare("SELECT user_id FROM accounts WHERE email = ?");
+                $stmt->bind_param("s", $email);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $userId = $result->fetch_assoc()['user_id'] ?? null;
+                $stmt->close();
                 
-                setcookie("id", $email, time() + (86400 * 30), "/");
+                setcookie("id", $userId, time() + (86400 * 30), "/");
                 setcookie("role", "regular", time() + (86400 * 30), "/");
             }
         } else {
@@ -213,3 +227,51 @@ if (isset($_POST['change-pw'])) {
         exit();
     }
 }
+
+function logAction($conn, $operation, $itemType, $itemIds, $initiatorId) {
+    $initiatorEmail = '';
+    $lastRefId = '';
+
+    // Get initiator's email
+    $stmt = $conn->prepare("SELECT email FROM accounts WHERE user_id = ?");
+    $stmt->bind_param('i', $initiatorId);
+    $stmt->execute();
+    $stmt->bind_result($initiatorEmail);
+    $stmt->fetch();
+    $stmt->close();
+
+    // Ensure $itemIds is an array
+    if (!is_array($itemIds)) {
+        $itemIds = [$itemIds];
+    }
+
+    $prefix = $itemType === 'thesis' ? 'THS#' : 'ACT#';
+
+    foreach ($itemIds as $id) {
+        // Get last reference ID for prefix
+        $stmt = $conn->prepare("SELECT reference_id FROM logs WHERE reference_id LIKE ? ORDER BY CAST(SUBSTRING_INDEX(reference_id, '#', -1) AS UNSIGNED) DESC LIMIT 1");
+        $likePattern = $prefix . '%';
+        $stmt->bind_param('s', $likePattern);
+        $stmt->execute();
+        $stmt->bind_result($lastRefId);
+        $stmt->fetch();
+        $stmt->close();
+
+        if ($lastRefId) {
+            $lastNum = (int)substr($lastRefId, 4);
+            $newId = $prefix . str_pad($lastNum + 1, 6, '0', STR_PAD_LEFT);
+        } else {
+            $newId = $prefix . '000001';
+        }
+
+        // Build log details
+        $details = ucfirst($operation) . " " . ucfirst($itemType) . " with an ID of [ID#" . str_pad($id, 4, '0', STR_PAD_LEFT) . "].";
+
+        // Insert log entry
+        $stmt = $conn->prepare("INSERT INTO logs (reference_id, type, operation, date, details, initiator) VALUES (?, ?, ?, NOW(), ?, ?)");
+        $stmt->bind_param('sssss', $newId, $itemType, $operation, $details, $initiatorEmail);
+        $stmt->execute();
+        $stmt->close();
+    }
+}
+
